@@ -1,29 +1,54 @@
+import './index.css';
+import { MdEmail } from 'react-icons/md';
+import { IoCall } from 'react-icons/io5';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-
-import A from 'components/A';
-import LocaleToggle from 'containers/LocaleToggle';
-import Wrapper from './Wrapper';
-import messages from './messages';
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaYoutube,
+} from 'react-icons/fa';
+import logo from '../../images/logo3.png';
 
 function Footer() {
   return (
-    <Wrapper>
-      <section>
-        <FormattedMessage {...messages.licenseMessage} />
-      </section>
-      <section>
-        <LocaleToggle />
-      </section>
-      <section>
-        <FormattedMessage
-          {...messages.authorMessage}
-          values={{
-            author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
-          }}
-        />
-      </section>
-    </Wrapper>
+    <div className="footer">
+      <div className="footer-container">
+        <div className="container">
+          <div className="images-container">
+            <a href="http://localhost:3004/">
+              <img className="logo3" src={logo} alt="website-logo" />
+            </a>
+
+            <div className="icons-container">
+              <div className="circle-classes">
+                <FaFacebookF className="icon" />
+              </div>
+              <div className="circle-classes">
+                <FaTwitter className="icon" />
+              </div>
+              <div className="circle-classes">
+                <FaLinkedinIn className="icon" />
+              </div>
+              <div className="circle-classes">
+                <FaYoutube className="icon" />
+              </div>
+            </div>
+          </div>
+          <div className="reachus-container">
+            <h1 className="reachus">Reach Us</h1>
+            <div className="email">
+              <MdEmail className="icon2" />
+              <p className="email-address">suppport@airclass.tech</p>
+            </div>
+            <div className="email">
+              <IoCall className="icon2" />
+              <p className="email-address">1234567890</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

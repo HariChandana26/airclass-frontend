@@ -1,4 +1,4 @@
-import './masterclass.css';
+import './index.css';
 import React from 'react';
 import { BsPlayCircleFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
@@ -17,10 +17,10 @@ function Masterclass(props) {
       </div>
 
       <div className="course-details">
-        <h1 className="course-title">{coursedetails['masterclass-title']}</h1>
-        <p className="course-info">{coursedetails['masterclass-speaker']}</p>
-        <p className="course-info">{coursedetails['speaker-profession']}</p>
-        <p className="course-info">{coursedetails['speaker-college']}</p>
+        <h1 className="course-title">{coursedetails.masterclassTitle}</h1>
+        <p className="course-info">{coursedetails.masterclassSpeaker}</p>
+        <p className="course-info">{coursedetails.speakerProfession}</p>
+        <p className="course-info">{coursedetails.speakerCollege}</p>
       </div>
     </div>
   );

@@ -1,138 +1,94 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- */
+import './index.css';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+import Course from 'components/Course';
+import Masterclass from 'components/Masterclass';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
+import React from 'react';
+import { useSelector } from 'react-redux';
+// import Slider from 'react-slick';
 
-import React, { useEffect, memo } from 'react';
-import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+function Homepage() {
+  const courses = useSelector(state => state);
+  const { global } = courses;
+  const isHome = false;
 
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-import {
-  makeSelectRepos,
-  makeSelectLoading,
-  makeSelectError,
-} from 'containers/App/selectors';
-import H2 from 'components/H2';
-import ReposList from 'components/ReposList';
-import AtPrefix from './AtPrefix';
-import CenteredSection from './CenteredSection';
-import Form from './Form';
-import Input from './Input';
-import Section from './Section';
-import messages from './messages';
-import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-
-const key = 'home';
-
-export function HomePage({
-  username,
-  loading,
-  error,
-  repos,
-  onSubmitForm,
-  onChangeUsername,
-}) {
-  useInjectReducer({ key, reducer });
-  useInjectSaga({ key, saga });
-
-  useEffect(() => {
-    // When initial state username is not null, submit the form to load repos
-    if (username && username.trim().length > 0) onSubmitForm();
-  }, []);
-
-  const reposListProps = {
-    loading,
-    error,
-    repos,
-  };
+  const searchedallcoursesinfo = global.searchResultsAllCourses;
+  const searchedenrolledcoursesinfo = global.searchResultsEnrolledCourses;
+  const searchedmastercoursesinfo = global.searchResultsMasterClasses;
+  let noallresults = null;
+  let noenrolledresults = null;
+  let nomasterclassresults = null;
+  if (searchedallcoursesinfo.length === 0) {
+    noallresults = <h1 className="no-search-results">No results found</h1>;
+  }
+  if (searchedenrolledcoursesinfo.length === 0) {
+    noenrolledresults = <h1 className="no-search-results">No results found</h1>;
+  }
+  if (searchedmastercoursesinfo.length === 0) {
+    nomasterclassresults = (
+      <h1 className="no-search-results">No results found</h1>
+    );
+  }
 
   return (
-    <article>
-      <Helmet>
-        <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React.js Boilerplate application homepage"
-        />
-      </Helmet>
-      <div>
-        <CenteredSection>
-          <H2>
-            <FormattedMessage {...messages.startProjectHeader} />
-          </H2>
-          <p>
-            <FormattedMessage {...messages.startProjectMessage} />
-          </p>
-        </CenteredSection>
-        <Section>
-          <H2>
-            <FormattedMessage {...messages.trymeHeader} />
-          </H2>
-          <Form onSubmit={onSubmitForm}>
-            <label htmlFor="username">
-              <FormattedMessage {...messages.trymeMessage} />
-              <AtPrefix>
-                <FormattedMessage {...messages.trymeAtPrefix} />
-              </AtPrefix>
-              <Input
-                id="username"
-                type="text"
-                placeholder="mxstbr"
-                value={username}
-                onChange={onChangeUsername}
-              />
-            </label>
-          </Form>
-          <ReposList {...reposListProps} />
-        </Section>
+    <div className="page">
+      <Header isHome={isHome} />
+      <div className="body">
+        <div className="content">
+          <h3 className="displayname">Hi Hari Chandana Sapare,</h3>
+          <div className="courses-container">
+            <div className="courses-box">
+              <h1 className="courses">Courses</h1>
+            </div>
+          </div>
+          {noallresults}
+          <div className="courses-display">
+            <div className="courses-cards">
+              {searchedallcoursesinfo.map(eachItem => (
+                <Course key={eachItem.id} coursedetails={eachItem} isenroll />
+              ))}
+            </div>
+
+            <div className="arrow-container">
+              <MdOutlineArrowForwardIos className="arrow" />
+            </div>
+          </div>
+          <div className="courses-container">
+            <div className="courses-box">
+              <h1 className="courses">Enrolled Courses</h1>
+            </div>
+          </div>
+          {noenrolledresults}
+          <div className="courses-display">
+            <div className="courses-cards">
+              {searchedenrolledcoursesinfo.map(eachItem => (
+                <Course
+                  key={eachItem.id}
+                  coursedetails={eachItem}
+                  isenroll={false}
+                />
+              ))}
+            </div>
+            <div className="arrow-container">
+              <MdOutlineArrowForwardIos className="arrow" />
+            </div>
+          </div>
+          <div className="courses-container">
+            <div className="courses-box">
+              <h1 className="courses">Masterclass Series</h1>
+            </div>
+          </div>
+          {nomasterclassresults}
+          <div className="masterclass-container">
+            {searchedmastercoursesinfo.map(eachItem => (
+              <Masterclass key={eachItem.id} coursedetails={eachItem} />
+            ))}
+          </div>
+        </div>
       </div>
-    </article>
+      <Footer />
+    </div>
   );
 }
-
-HomePage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
-};
-
-const mapStateToProps = createStructuredSelector({
-  repos: makeSelectRepos(),
-  username: makeSelectUsername(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
-});
-
-export function mapDispatchToProps(dispatch) {
-  return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: evt => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
-    },
-  };
-}
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  withConnect,
-  memo,
-)(HomePage);
+export default Homepage;

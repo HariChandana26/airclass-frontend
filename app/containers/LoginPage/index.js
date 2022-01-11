@@ -1,4 +1,4 @@
-import './SignupPage.css';
+import './index.css';
 import React from 'react';
 import { BsFacebook } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
@@ -9,18 +9,18 @@ import logo from '../../images/logo2.png';
 function LoginPage() {
   return (
     <>
-      <div className="signup-container">
+      <div className="login-container">
         <div className="login">
           <div className="login-part1">
             <div className="login-part1-text">
-              <img className="logo" src={logo} alt="website-logo" />
-              <h1 className="sign-in-to">Sign up to</h1>
+              <img className="login-logo" src={logo} alt="website-logo" />
+              <h1 className="sign-in-to">Sign in to</h1>
               <h1 className="website-name">AIR CLASS</h1>
-              <p className="register-msg">If you already have an account</p>
+              <p className="register-msg">If you don’t have an account</p>
               <p className="register-msg">
                 You can{' '}
-                <NavLink className="nav-link" to="/login">
-                  <span className="register-here">Login here!</span>
+                <NavLink className="nav-link" to="/signup">
+                  <span className="register-here">Register here!</span>
                 </NavLink>
               </p>
             </div>
@@ -28,31 +28,23 @@ function LoginPage() {
           </div>
 
           <div className="login-part2">
-            <h1 className="sign-in">Sign Up</h1>
-            <input type="text" className="username" placeholder="Enter email" />
+            <h1 className="sign-in">Sign in</h1>
             <input
               type="text"
               className="username"
-              placeholder="Create Username"
-            />
-            <input
-              type="text"
-              className="username"
-              placeholder="Contact number"
+              placeholder="enter email or username"
             />
             <input
               type="password"
               className="username"
               placeholder="Password"
             />
-            <input
-              type="password"
-              className="username"
-              placeholder="Confirm Password"
-            />
-            <button type="button" className="username login-btn">
-              Register
-            </button>
+            <NavLink className=" nav-link" to="/homepage">
+              <button type="button" className="username login-btn">
+                Login
+              </button>
+            </NavLink>
+
             <p className="continue-with">or continue with</p>
             <div className="login-icons">
               <BsFacebook className="facebook-icon" />
