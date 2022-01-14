@@ -3,10 +3,26 @@ import React from 'react';
 import { BsFacebook } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
+import { URL } from '../App/constants';
 
 function LoginPage() {
+  const loginUser = () => {
+    axios
+      .post(`${URL}/v1/auth /register`, {
+        name: 'fake name',
+        email: 'fake1@example.com',
+        password: 'password1',
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
   return (
     <>
       <div className="login-container">
@@ -40,7 +56,11 @@ function LoginPage() {
               placeholder="Password"
             />
             <NavLink className=" nav-link" to="/homepage">
-              <button type="button" className="username login-btn">
+              <button
+                type="button"
+                className="username login-btn"
+                onClick={loginUser}
+              >
                 Login
               </button>
             </NavLink>

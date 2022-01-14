@@ -58,6 +58,7 @@
     background:#3667D3;
     color:white;
     display: inline-block;
+
 }
 .enrolled{
     margin-top:12px;
@@ -72,4 +73,8 @@ border:1px solid #3667D3;
     background:transparent;
     font-weight:600;
     
+}
+.nav-link{
+  font-size: small;
+  text-decoration-style: none;
 }

@@ -6,27 +6,26 @@ import Masterclass from 'components/Masterclass';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import React from 'react';
 import { useSelector } from 'react-redux';
-// import Slider from 'react-slick';
 
 function Homepage() {
-  const courses = useSelector(state => state);
-  const { global } = courses;
+  const initialState = useSelector(state => state);
+  const { global } = initialState;
   const isHome = false;
 
-  const searchedallcoursesinfo = global.searchResultsAllCourses;
-  const searchedenrolledcoursesinfo = global.searchResultsEnrolledCourses;
-  const searchedmastercoursesinfo = global.searchResultsMasterClasses;
-  let noallresults = null;
-  let noenrolledresults = null;
-  let nomasterclassresults = null;
-  if (searchedallcoursesinfo.length === 0) {
-    noallresults = <h1 className="no-search-results">No results found</h1>;
+  const searchedAllCoursesInfo = global.searchResultsAllCourses;
+  const searchedEnrolledCoursesInfo = global.searchResultsEnrolledCourses;
+  const searchedMasterclassInfo = global.searchResultsMasterClasses;
+  let noAllResults = null;
+  let noEnrolledResults = null;
+  let noMasterclassResults = null;
+  if (searchedAllCoursesInfo.length === 0) {
+    noAllResults = <h1 className="no-search-results">No results found</h1>;
   }
-  if (searchedenrolledcoursesinfo.length === 0) {
-    noenrolledresults = <h1 className="no-search-results">No results found</h1>;
+  if (searchedEnrolledCoursesInfo.length === 0) {
+    noEnrolledResults = <h1 className="no-search-results">No results found</h1>;
   }
-  if (searchedmastercoursesinfo.length === 0) {
-    nomasterclassresults = (
+  if (searchedMasterclassInfo.length === 0) {
+    noMasterclassResults = (
       <h1 className="no-search-results">No results found</h1>
     );
   }
@@ -42,10 +41,11 @@ function Homepage() {
               <h1 className="courses">Courses</h1>
             </div>
           </div>
-          {noallresults}
+          {noAllResults}
+
           <div className="courses-display">
             <div className="courses-cards">
-              {searchedallcoursesinfo.map(eachItem => (
+              {searchedAllCoursesInfo.map(eachItem => (
                 <Course key={eachItem.id} coursedetails={eachItem} isenroll />
               ))}
             </div>
@@ -59,10 +59,10 @@ function Homepage() {
               <h1 className="courses">Enrolled Courses</h1>
             </div>
           </div>
-          {noenrolledresults}
+          {noEnrolledResults}
           <div className="courses-display">
             <div className="courses-cards">
-              {searchedenrolledcoursesinfo.map(eachItem => (
+              {searchedEnrolledCoursesInfo.map(eachItem => (
                 <Course
                   key={eachItem.id}
                   coursedetails={eachItem}
@@ -79,9 +79,9 @@ function Homepage() {
               <h1 className="courses">Masterclass Series</h1>
             </div>
           </div>
-          {nomasterclassresults}
+          {noMasterclassResults}
           <div className="masterclass-container">
-            {searchedmastercoursesinfo.map(eachItem => (
+            {searchedMasterclassInfo.map(eachItem => (
               <Masterclass key={eachItem.id} coursedetails={eachItem} />
             ))}
           </div>

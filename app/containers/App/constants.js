@@ -13,3 +13,4 @@ export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
 export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
 export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
 export const ENROLL_COURSE = 'boilerplate/App/ENROLL_COURSE';
+export const URL = 'http://192.168.0.108:5001';

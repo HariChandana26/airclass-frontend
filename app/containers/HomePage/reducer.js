@@ -12,30 +12,51 @@ import produce from 'immer';
 
 // The initial state of the App
 export const initialState = {
-  initialallcoursesinfo: [
+  initialAllCoursesInfo: [
     {
       id: 1,
       courseTitle: 'Artificial inteligence',
       courseInfo:
         'Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
     },
     {
       id: 2,
       courseTitle: 'Web development',
       courseInfo:
         'Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
     },
     {
       id: 3,
       courseTitle: 'Machine learning',
       courseInfo:
         'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
+    },
+    {
+      id: 4,
+      courseTitle: 'Virtual Reality',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
+    {
+      id: 5,
+      courseTitle: 'Frontend development',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
+    {
+      id: 6,
+      courseTitle: 'Backend development',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
     },
   ],
-  initialenrolledcourseinfo: [
+  initialEnrolledCourseInfo: [
     {
       id: 1,
       courseTitle: 'Computer Programming',
@@ -56,53 +77,74 @@ export const initialState = {
     },
   ],
 
-  masterclassinfo: [
+  masterclassInfo: [
     {
       id: 1,
-      'masterclass-title': 'Understanding 5G',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      masterclassTitle: 'Understanding 5G',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
     {
       id: 2,
-      'masterclass-title': 'Product Mindest',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      masterclassTitle: 'Product Mindest',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
     {
       id: 3,
-      'masterclass-title': 'Coding',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      masterclassTitle: 'Coding',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
   ],
-  searchResultsallcourses: [
+  searchResultsAllCourses: [
     {
       id: 1,
       courseTitle: 'Artificial inteligence',
       courseInfo:
         'Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
     },
     {
       id: 2,
       courseTitle: 'Web development',
       courseInfo:
         'Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
     },
     {
       id: 3,
       courseTitle: 'Machine learning',
       courseInfo:
         'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
+    },
+    {
+      id: 4,
+      courseTitle: 'Virtual Reality',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
+    {
+      id: 5,
+      courseTitle: 'Frontend development',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
+    {
+      id: 6,
+      courseTitle: 'Backend development',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
     },
   ],
-  searchResultsenrolledCourses: [
+  searchResultsEnrolledCourses: [
     {
       id: 1,
       courseTitle: 'Computer Programming',
@@ -125,31 +167,31 @@ export const initialState = {
   searchResultsMasterClasses: [
     {
       id: 1,
-      'masterclass-title': 'Understanding 5G',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      masterclassTitle: 'Understanding 5G',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
     {
       id: 2,
-      'masterclass-title': 'Product Mindest',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      masterclassTitle: 'Product Mindest',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
     {
       id: 3,
-      'masterclass-title': 'Coding',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      masterclassTitle: 'Coding',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
   ],
 };
 
 /* eslint-disable default-case, no-param-reassign */
 /*
-const appReducer = (state = initialState.initialallcoursesinfo, action) =>
+const appReducer = (state = initialState.initialAllCoursesInfo, action) =>
   produce(state, draft => {
     switch (action.type) {
       case 'ENROLL_COURSE': {
@@ -166,7 +208,7 @@ const appReducer = (state = initialState.initialallcoursesinfo, action) =>
   });
 
 const enrolledReducer = (
-  state = initialState.initialenrolledcourseinfo,
+  state = initialState.initialEnrolledCourseInfo,
   action
 ) =>
   produce(state, draft => {
@@ -181,7 +223,7 @@ const enrolledReducer = (
       }
     }
   });
-const masterclassReducer = (state = initialState.masterclassinfo, action) =>
+const masterclassReducer = (state = initialState.masterclassInfo, action) =>
   produce(state, draft => {
     switch (action.type) {
       case '': {
@@ -194,62 +236,65 @@ const wholeReducer = (state = initialState, action) =>
     switch (action.type) {
       case 'ENROLL_COURSE':
         {
-          const a = state.initialallcoursesinfo.map(el => {
+          const newAllCoursesInfo = state.initialAllCoursesInfo.map(el => {
             if (el.id === action.courseinfo.id) {
               return { ...el, isenrolled: true };
             }
             return el;
           });
-          const newcourse = {
-            id: state.initialenrolledcourseinfo.length + 1,
+          const newCourse = {
+            id: state.initialEnrolledCourseInfo.length + 1,
             courseTitle: action.courseinfo.courseTitle,
             courseInfo: action.courseinfo.courseInfo,
           };
 
-          const b = [...state.initialenrolledcourseinfo, newcourse];
-          draft.initialallcoursesinfo = a;
-          draft.initialenrolledcourseinfo = b;
-          draft.searchResultsallcourses = a;
-          draft.searchResultsenrolledCourses = b;
+          const newEnrolledCoursesInfo = [
+            ...state.initialEnrolledCourseInfo,
+            newCourse,
+          ];
+          draft.initialAllCoursesInfo = newAllCoursesInfo;
+          draft.initialEnrolledCourseInfo = newEnrolledCoursesInfo;
+          draft.searchResultsAllCourses = newAllCoursesInfo;
+          draft.searchResultsEnrolledCourses = newEnrolledCoursesInfo;
         }
         break;
 
       case 'SEARCH_COURSE': {
-        const searchedallCourses = state.initialallcoursesinfo.filter(
+        const searchedAllCourses = state.initialAllCoursesInfo.filter(
           eachItem =>
             eachItem.courseTitle
               .toLowerCase()
               .includes(action.searchinfo.toLowerCase()),
         );
-        const searchedenrolledCourses = state.initialenrolledcourseinfo.filter(
+        const searchedEnrolledCourses = state.initialEnrolledCourseInfo.filter(
           eachItem =>
             eachItem.courseTitle
               .toLowerCase()
               .includes(action.searchinfo.toLowerCase()),
         );
-        const searchedmasterClassess = state.masterclassinfo.filter(eachItem =>
-          eachItem['masterclass-title']
+        const searchedMasterClassess = state.masterclassInfo.filter(eachItem =>
+          eachItem.masterclassTitle
             .toLowerCase()
             .includes(action.searchinfo.toLowerCase()),
         );
         /*
         return {
           ...state,
-          searchResultsallcourses: searchedallCourses,
-          searchResultsenrolledCourses: searchedenrolledCourses,
+          searchResultsAllCourses: searchedAllCourses,
+          searchResultsEnrolledCourses: searchedEnrolledCourses,
         };
         */
-        draft.searchResultsallcourses = searchedallCourses;
-        draft.searchResultsenrolledCourses = searchedenrolledCourses;
-        draft.searchResultsMasterClasses = searchedmasterClassess;
+        draft.searchResultsAllCourses = searchedAllCourses;
+        draft.searchResultsEnrolledCourses = searchedEnrolledCourses;
+        draft.searchResultsMasterClasses = searchedMasterClassess;
       }
     }
   });
 /*
 const reducers = combineReducers({
-  initialallcoursesinfo: appReducer,
-  initialenrolledcourseinfo: enrolledReducer,
-  masterclassinfo: masterclassReducer,
+  initialAllCoursesInfo: appReducer,
+  initialEnrolledCourseInfo: enrolledReducer,
+  masterclassInfo: masterclassReducer,
 });
 */
 export default wholeReducer;

@@ -2,14 +2,14 @@ import './index.css';
 import React, { useState } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../images/logo2.png';
 import discussion from '../../images/discussion3.png';
 
 function Header(props) {
-  const firstname = 'Hari Chandana';
-  const lastname = 'Sapare';
-  const initial = firstname.slice(0, 1) + lastname.slice(0, 1);
+  const initialState = useSelector(state => state);
+  const { global } = initialState;
+
   const { isHome } = props;
   const [searchInput, setsearchInput] = useState('');
   const dispatch = useDispatch();
@@ -50,11 +50,9 @@ function Header(props) {
             </a>
           )}
           <div className="user-details-container">
-            <p className="name">
-              {firstname} {lastname}
-            </p>
+            <p className="name">{global.loggedinUsername}</p>
             <div className="initial-container">
-              <p className="initial">{initial}</p>
+              <p className="initial">{global.loggedinUserInitial}</p>
             </div>
           </div>
         </div>

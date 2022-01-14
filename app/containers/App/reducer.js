@@ -9,9 +9,73 @@
 
 import produce from 'immer';
 // import { combineReducers } from 'redux';
+const detailedCourseInfo = {
+  id: 1,
+  courseTitle: 'Computer Programming',
+  courseDescription:
+    'Competitive Programming helps you become a great Programmer and crack coding interviews and competitons. In this program you will learn Competitive Programming helps you become a great Programmer and crack coding interviews and competitons. In this program you will learn',
+  courseContents: [
+    {
+      id: 1,
+      classTitle: 'Introduction to Computer Programming',
+      classDuration: '20min',
+      classVideo: 'https://www.youtube.com/embed/E7wJTI-1dvQ',
+      classNotes: [
+        'The Rest parameter should be the last parameter',
+        'The Rest parameter should be the last parameter',
+      ],
+      classComments: [
+        {
+          initial: 'BK',
+          username: 'Bhanu kiran',
+          comment: 'this video lecture is very good',
+        },
+      ],
+      classLiked: false,
+    },
+    {
+      id: 2,
+      classTitle: 'Details of Computer Programming',
+      classDuration: '20min',
+      classVideo: 'https://www.youtube.com/embed/E7wJTI-1dvQ',
+      classNotes: [
+        'The Rest parameter should be the last parameter',
+        'The Rest parameter should be the last parameter',
+      ],
+      classComments: [
+        {
+          initial: 'HS',
+          username: 'Hari Chandana Sapare',
+          comment: 'this video lecture is very good',
+        },
+      ],
+      classLiked: false,
+    },
+    {
+      id: 3,
+      classTitle: 'Introduction to Computer Programming',
+      classDuration: '20min',
+      classVideo: 'https://www.youtube.com/embed/E7wJTI-1dvQ',
+      classNotes: [
+        'The Rest parameter should be the last parameter',
+        'The Rest parameter should be the last parameter',
+      ],
+      classComments: [
+        {
+          initial: 'HS',
+          username: 'Hari Chandana Sapare',
+          comment: 'this video lecture is very good',
+        },
+      ],
+      classLiked: false,
+    },
+  ],
+};
 
 // The initial state of the App
 export const initialState = {
+  loggedinUsername: 'Hari Chandana Sapare',
+  loggedinUserInitial: 'HS',
   initialAllCoursesInfo: [
     {
       id: 1,
@@ -32,6 +96,13 @@ export const initialState = {
       courseTitle: 'Machine learning',
       courseInfo:
         'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
+    {
+      id: 4,
+      courseTitle: 'Virtual Reality',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
       isEnrolled: false,
     },
   ],
@@ -101,6 +172,13 @@ export const initialState = {
         'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
       isEnrolled: false,
     },
+    {
+      id: 4,
+      courseTitle: 'Virtual Reality',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
   ],
   searchResultsEnrolledCourses: [
     {
@@ -145,6 +223,69 @@ export const initialState = {
       speakerCollege: 'IIT Madras',
     },
   ],
+  detailedCourseInfo: {
+    id: 1,
+    courseTitle: 'Computer Programming',
+    courseDescription:
+      'Competitive Programming helps you become a great Programmer and crack coding interviews and competitons. In this program you will learn Competitive Programming helps you become a great Programmer and crack coding interviews and competitons. In this program you will learn',
+    courseContents: [
+      {
+        id: 1,
+        classTitle: 'Introduction to Computer Programming',
+        classDuration: '20min',
+        classVideo: 'https://www.youtube.com/embed/E7wJTI-1dvQ',
+        classNotes: [
+          'The Rest parameter should be the last parameter',
+          'The Rest parameter should be the last parameter',
+        ],
+        classComments: [
+          {
+            initial: 'HS',
+            username: 'Hari Chandana Sapare',
+            comment: 'this video lecture is very good',
+          },
+        ],
+        classLiked: false,
+      },
+      {
+        id: 2,
+        classTitle: 'Details of Computer Programming',
+        classDuration: '10min',
+        classVideo: 'https://www.youtube.com/embed/QFaFIcGhPoM',
+        classNotes: [
+          'React makes it painless to create interactive UIs',
+          'React makes it painless to create interactive UIs',
+        ],
+        classComments: [
+          {
+            initial: 'HS',
+            username: 'Hari Chandana Sapare',
+            comment: 'this video lecture is very good',
+          },
+        ],
+        classLiked: false,
+      },
+      {
+        id: 3,
+        classTitle: 'Introduction to Computer Programming',
+        classDuration: '20min',
+        classVideo: 'https://www.youtube.com/embed/E7wJTI-1dvQ',
+        classNotes: [
+          'The Rest parameter should be the last parameter',
+          'The Rest parameter should be the last parameter',
+        ],
+        classComments: [
+          {
+            initial: 'HS',
+            username: 'Hari Chandana Sapare',
+            comment: 'this video lecture is very good',
+          },
+        ],
+        classLiked: false,
+      },
+    ],
+  },
+  selectedClassInfo: detailedCourseInfo.courseContents[0],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -217,34 +358,110 @@ const wholeReducer = (state = initialState, action) =>
         }
         break;
 
-      case 'SEARCH_COURSE': {
-        const searchedAllCourses = state.initialAllCoursesInfo.filter(
-          eachItem =>
-            eachItem.courseTitle
-              .toLowerCase()
-              .includes(action.searchinfo.toLowerCase()),
-        );
-        const searchedEnrolledCourses = state.initialEnrolledCourseInfo.filter(
-          eachItem =>
-            eachItem.courseTitle
-              .toLowerCase()
-              .includes(action.searchinfo.toLowerCase()),
-        );
-        const searchedMasterClassess = state.masterclassInfo.filter(eachItem =>
-          eachItem.masterclassTitle
-            .toLowerCase()
-            .includes(action.searchinfo.toLowerCase()),
-        );
-        /*
+      case 'SEARCH_COURSE':
+        {
+          const searchedAllCourses = state.initialAllCoursesInfo.filter(
+            eachItem =>
+              eachItem.courseTitle
+                .toLowerCase()
+                .includes(action.searchinfo.toLowerCase()),
+          );
+          const searchedEnrolledCourses = state.initialEnrolledCourseInfo.filter(
+            eachItem =>
+              eachItem.courseTitle
+                .toLowerCase()
+                .includes(action.searchinfo.toLowerCase()),
+          );
+          const searchedMasterClassess = state.masterclassInfo.filter(
+            eachItem =>
+              eachItem.masterclassTitle
+                .toLowerCase()
+                .includes(action.searchinfo.toLowerCase()),
+          );
+          /*
         return {
           ...state,
           searchResultsAllCourses: searchedAllCourses,
           searchResultsEnrolledCourses: searchedEnrolledCourses,
         };
         */
-        draft.searchResultsAllCourses = searchedAllCourses;
-        draft.searchResultsEnrolledCourses = searchedEnrolledCourses;
-        draft.searchResultsMasterClasses = searchedMasterClassess;
+          draft.searchResultsAllCourses = searchedAllCourses;
+          draft.searchResultsEnrolledCourses = searchedEnrolledCourses;
+          draft.searchResultsMasterClasses = searchedMasterClassess;
+        }
+        break;
+      case 'ADD_COURSE':
+        {
+          const searchResults = state.initialAllCoursesInfo.filter(
+            el =>
+              el.courseTitle.toLowerCase() ===
+              action.courseinfo[0].toLowerCase(),
+          );
+          if (searchResults.length !== 0) {
+            // alert('course already added');
+          } else {
+            const newCourse = {
+              id: state.initialAllCoursesInfo.length + 1,
+              courseTitle: action.courseinfo[0],
+              courseInfo: action.courseinfo[1],
+            };
+
+            const newAllCoursesInfo = [
+              ...state.initialAllCoursesInfo,
+              newCourse,
+            ];
+            draft.initialAllCoursesInfo = newAllCoursesInfo;
+
+            draft.searchResultsAllCourses = newAllCoursesInfo;
+            // alert('Course added successfuly');
+          }
+        }
+        break;
+      case 'ADD_MASTERCLASS':
+        {
+          const searchResults = state.masterclassInfo.filter(
+            el =>
+              el.masterclassTitle.toLowerCase() ===
+              action.courseinfo[0].toLowerCase(),
+          );
+          if (searchResults.length !== 0) {
+            // alert('Masterclass already added');
+          } else {
+            const newCourse = {
+              id: state.masterclassInfo.length + 1,
+              masterclassTitle: action.courseinfo[0],
+              masterclassSpeaker: action.courseinfo[1],
+              speakerProfession: action.courseinfo[2],
+              speakerCollege: action.courseinfo[3],
+            };
+
+            const newMasterclassInfo = [...state.masterclassInfo, newCourse];
+            draft.masterclassInfo = newMasterclassInfo;
+
+            draft.searchResultsMasterClasses = newMasterclassInfo;
+            // alert('Masterclass added successfuly');
+          }
+        }
+        break;
+      case 'PLAY_SELECTED_CLASS':
+        draft.selectedClassInfo = action.selectedClass;
+
+        break;
+      case 'ADD_COMMENT':
+        {
+          const newComment = {
+            initial: state.loggedinUserInitial,
+            username: state.loggedinUsername,
+            comment: action.newComment,
+          };
+          draft.selectedClassInfo.classComments = [
+            ...draft.selectedClassInfo.classComments,
+            newComment,
+          ];
+        }
+        break;
+      case 'LIKE_CLASS': {
+        draft.selectedClassInfo.classLiked = true;
       }
     }
   });

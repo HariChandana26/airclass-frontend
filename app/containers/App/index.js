@@ -8,11 +8,13 @@
 
 import React from 'react';
 
-import HomePage from 'containers/HomePage';
+// import HomePage from 'containers/HomePage';
+import HomepageMentor from 'containers/HomepageMentor';
 import LoginPage from 'containers/LoginPage';
 import SignupPage from 'containers/SignupPage';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import CoursePage from 'containers/CoursePage';
 import configureStore from '../../configureStore';
 
 export default function App() {
@@ -26,7 +28,8 @@ export default function App() {
             <Route path="/" component={LoginPage} exact />
             <Route path="/signup" component={SignupPage} />
             <Route path="/login" component={LoginPage} />
-            <Route path="/homepage" component={HomePage} />
+            <Route path="/homepage" component={HomepageMentor} />
+            <Route path="/coursepage" component={CoursePage} />
             <Route component={Error} />
           </Switch>
         </div>
