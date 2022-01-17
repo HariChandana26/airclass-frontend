@@ -26,8 +26,8 @@ const detailedCourseInfo = {
       ],
       classComments: [
         {
-          initial: 'BK',
-          username: 'Bhanu kiran',
+          initial: 'SH',
+          username: 'Hari Chandana',
           comment: 'this video lecture is very good',
         },
       ],

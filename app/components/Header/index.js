@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import logo from '../../images/logo2.png';
 import discussion from '../../images/discussion3.png';
 
@@ -45,9 +46,9 @@ function Header(props) {
         <div className="header-box">
           <img className="msg-icon" src={discussion} alt="discussion-logo" />
           {isHome && (
-            <a href="http://localhost:3004/" className="home">
-              Home
-            </a>
+            <NavLink className="nav-link-home" to="/homepage">
+              <p className="home">Home</p>
+            </NavLink>
           )}
           <div className="user-details-container">
             <p className="name">{global.loggedinUsername}</p>

@@ -11,11 +11,7 @@ import { URL } from '../App/constants';
 function LoginPage() {
   const loginUser = () => {
     axios
-      .post(`${URL}/v1/auth /register`, {
-        name: 'fake name',
-        email: 'fake1@example.com',
-        password: 'password1',
-      })
+      .post(`${URL}/v1/auth/register`)
       .then(function(response) {
         console.log(response);
       })

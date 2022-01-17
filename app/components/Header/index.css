@@ -134,6 +134,9 @@ margin-left:4px;
     font-weight:600;
     letter-spacing: 1px;
   }
+  .nav-link-home{
+    text-decoration: none;
+  }
   @media screen and (max-width: 1020px) {
 .header {
     height: 60px;

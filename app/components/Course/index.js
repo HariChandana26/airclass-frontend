@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import courseimg from '../../images/course-img.png';
+// import { useSelector } from 'react-redux';
 
 function Course(props) {
+  // const courses = useSelector(state => state);
+  // const { global } = courses;
   const { coursedetails, isenroll } = props;
   const dispatch = useDispatch();
   const enrollCourse = task =>
@@ -13,6 +16,13 @@ function Course(props) {
       type: 'ENROLL_COURSE',
       courseinfo: task,
     });
+  /*
+    const courseSelected =()=>
+    dispatch({
+      type: 'SELECT_COURSE',
+      selectedCourse: coursedetails,
+    });
+    */
   let enrollbtn;
   const status = coursedetails.isenrolled;
   if (isenroll) {
