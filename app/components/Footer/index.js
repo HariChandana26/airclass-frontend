@@ -16,9 +16,7 @@ function Footer() {
       <div className="footer-container">
         <div className="container">
           <div className="images-container">
-            <a href="http://localhost:3004/">
-              <img className="logo3" src={logo} alt="website-logo" />
-            </a>
+            <img className="logo3" src={logo} alt="website-logo" />
 
             <div className="icons-container">
               <div className="circle-classes">

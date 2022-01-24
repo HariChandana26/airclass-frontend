@@ -26,25 +26,28 @@ function Header(props) {
   return (
     <header className="header">
       <div className="header-container">
-        <div className="logo-search">
-          <a href="http://localhost:4001">
-            <img className="header-logo" src={logo} alt="website-logo" />
-          </a>
-          <div className="searchbox">
-            <IoIosSearch className="search-logo" />
-            <input
-              placeholder="search"
-              className="input"
-              type="search"
-              value={searchInput}
-              onChange={updateSearchValue}
-              onKeyUp={() => searchCourse(searchInput)}
-            />
-          </div>
+        <div className={isHome ? 'logo-search-home' : 'logo-search'}>
+          <img className="header-logo" src={logo} alt="website-logo" />
+          {!isHome && (
+            <div className="searchbox">
+              <IoIosSearch className="search-logo" />
+              <input
+                placeholder="search"
+                className="input"
+                type="search"
+                value={searchInput}
+                onChange={updateSearchValue}
+                onKeyUp={() => searchCourse(searchInput)}
+              />
+            </div>
+          )}
         </div>
 
         <div className="header-box">
-          <img className="msg-icon" src={discussion} alt="discussion-logo" />
+          <NavLink className="profilepage-link" to="/discussionforum">
+            <img className="msg-icon" src={discussion} alt="discussion-logo" />
+          </NavLink>
+
           {isHome && (
             <NavLink className="nav-link-home" to="/homepage">
               <p className="home">Home</p>
@@ -52,9 +55,11 @@ function Header(props) {
           )}
           <div className="user-details-container">
             <p className="name">{global.loggedinUsername}</p>
-            <div className="initial-container">
-              <p className="initial">{global.loggedinUserInitial}</p>
-            </div>
+            <NavLink className="profilepage-link" to="/profilepage">
+              <div className="initial-container">
+                <p className="initial">{global.loggedinUserInitial}</p>
+              </div>
+            </NavLink>
           </div>
         </div>
       </div>

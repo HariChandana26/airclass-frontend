@@ -15,7 +15,7 @@ justify-content:space-between;
     align-items:center;
     justify-content:space-around;
     height:100%;
-    min-width:50%;
+
 }
 .logo{
     width:150px;
@@ -101,4 +101,13 @@ padding:0px;
 }
 .google-icon{
     font-size:30px;
+}
+@media screen and (max-width:1024px){
+    .login-icons{
+        width:20%;
+    }
+    .signup-container{
+        height:140vh;
+        padding:0px 0px 30px 0px;
+    }
 }

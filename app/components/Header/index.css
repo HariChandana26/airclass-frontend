@@ -137,9 +137,18 @@ margin-left:4px;
   .nav-link-home{
     text-decoration: none;
   }
+  .profilepage-link{
+    text-decoration:none;
+  }
   @media screen and (max-width: 1020px) {
 .header {
     height: 60px;
+}
+.logo-search{
+  width:48%;
+}
+.searchbox{
+  width:70%;
 }
   }
   @media screen and (max-width: 768px) {
@@ -149,10 +158,54 @@ margin-left:4px;
   .header-container{
       width:90%;
   }
-  .logo{
-      width:60px;
-  }
+ 
   .searchbox{
-    height: 32px;   
+    height: 40px;  
+    margin-left: 20px; 
+  }
+  .input{
+    height:40px;
+  }
+  .logo-search{
+  width:68%;
+}
+
+.header-logo{
+  width:70px;
+}
+
+
+}
+@media screen and (max-width:600px){
+  .logo-search{
+    width:80%;
+  }
+  .header-logo{
+    width:50px;
+  }
+  .header-container{
+    width:95%;
+  }
+  .initial-container {
+    width:32px;
+    height:32px;
+  }
+  .initial{
+    font-size:12px;
+  }
+  .msg-icon{
+    height:36px;
+  }
+  .logo{
+    width:60px;
+}
+  .searchbox{
+    height:30px;
+  }
+  .input{
+    height:30px;
+  }
+  .user-details-container{
+    margin-left:4px;
   }
 }

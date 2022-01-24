@@ -31,10 +31,6 @@
     white-space: pre-wrap;
     font-weight: 600;
     color: rgb(82, 96, 109);
-    display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;  
-  overflow: hidden;
     line-height:1.2;
 }
 .labelInputGroup{
@@ -60,4 +56,17 @@
 }
 .addcourse{
     width:200px;
+}
+.uploadImage{
+margin-bottom:16px;
+}
+@media screen and (max-width:425px){
+    .addcourseContainer{
+        padding:12px;
+    }
+}
+@media screen and (max-width:425px){
+    .coursetitleInput,.courseinfoInput{
+width:85%;
+    }
 }

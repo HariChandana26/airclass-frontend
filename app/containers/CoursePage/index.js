@@ -7,11 +7,12 @@ import React, { useState } from 'react';
 import { ImCross } from 'react-icons/im';
 import { useSelector } from 'react-redux';
 import VideoSection from 'components/VideoSection';
+import { NavLink } from 'react-router-dom';
 
 function CoursePage() {
   const initialState = useSelector(state => state);
   const { global } = initialState;
-  const { detailedCourseInfo } = global;
+  const { selectedCourseInfo } = global;
   const { selectedClassInfo } = global;
 
   const [isSidebarVisible, setisSidebarVisible] = useState(true);
@@ -32,21 +33,24 @@ function CoursePage() {
       <Header isHome />
       <div className="description-container">
         <div className="description-text-container">
-          <h1 className="course-title1">{detailedCourseInfo.courseTitle}</h1>
+          <h1 className="course-title1">{selectedCourseInfo.courseTitle}</h1>
           <p className="course-description">
-            {detailedCourseInfo.courseDescription}
+            {selectedCourseInfo.courseDescription}
           </p>
         </div>
       </div>
       <div className="course-contents">
         <div className={courseSidebar}>
           <div className="contents-group">
-            <BiArrowBack className="back-arrow" />
+            <NavLink className="nav-link" to="/homepage">
+              <BiArrowBack className="back-arrow" />
+            </NavLink>
+
             <h1 className="contents">Contents</h1>
             <ImCross className="cross-icon" onClick={displaySidebar} />
           </div>
           <div className="video-info">
-            {detailedCourseInfo.courseContents.map(eachItem => (
+            {selectedCourseInfo.courseContents.map(eachItem => (
               <CourseContent
                 key={eachItem.id}
                 classContent={eachItem}
@@ -55,7 +59,10 @@ function CoursePage() {
             ))}
           </div>
         </div>
-        <VideoSection videoContent={selectedClassInfo} />
+        <VideoSection
+          videoContent={selectedClassInfo}
+          displaySidebar={displaySidebar}
+        />
       </div>
     </>
   );

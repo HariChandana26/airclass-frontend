@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import './index.css';
 import CommentsList from 'components/CommentsList';
-import { AiOutlineMenuFold } from 'react-icons/ai';
+import { AiOutlineMenuFold, AiFillLike } from 'react-icons/ai';
+
 import { BiLike } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 function VideoSection(props) {
-  const { videoContent } = props;
+  const { videoContent, displaySidebar } = props;
 
   const [styleNotes, setStyleNotes] = useState('notes');
   const [styleComments, setStyleComments] = useState('comments-hide');
@@ -16,20 +18,24 @@ function VideoSection(props) {
   const [styleCommentsContainer, setStyleCommentsContainer] = useState(
     'comments-container-hide',
   );
+
   const [inputValue, setInputValue] = useState('');
   const newCommentsArray = videoContent.classComments;
 
   const dispatch = useDispatch();
-  const addComment = () =>
+  const addComment = () => {
     dispatch({
       type: 'ADD_COMMENT',
       newComment: inputValue,
     });
+    clearCommentInput();
+  };
   const likeClass = () =>
     dispatch({
       type: 'LIKE_CLASS',
-      classLiked: videoContent,
+      classLikedInfo: videoContent,
     });
+
   const updateInputValue = event => {
     setInputValue(event.target.value);
   };
@@ -45,12 +51,21 @@ function VideoSection(props) {
     setStyleNotesContainer('notes-container');
     setStyleCommentsContainer('comments-container-hide');
   };
+  const displaySidebarMenu = () => {
+    displaySidebar();
+  };
+  const clearCommentInput = () => {
+    setInputValue('');
+  };
 
   return (
     <div className="video-content">
-      <div className="title-box">
+      <div className="title-box-course">
         <div className="menu-icon-box">
-          <AiOutlineMenuFold className="menu-icon" />
+          <AiOutlineMenuFold
+            className="menu-icon"
+            onClick={displaySidebarMenu}
+          />
         </div>
 
         <h1 className="title">{videoContent.classTitle}</h1>
@@ -58,16 +73,17 @@ function VideoSection(props) {
       <div className="coursepage-content">
         <div className="video-display">
           <div className="video-player">
-            <iframe
-              src={videoContent.classVideo}
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              title="video"
-              width="100%"
-              height="100%"
-              className="video"
-            />
+            <div className="wise-iframe-wrapper">
+              <iframe
+                src={videoContent.classVideo}
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                title="video"
+                width="100%"
+                height="100%"
+              />
+            </div>
           </div>
           <div className="like-section">
             <button
@@ -75,7 +91,11 @@ function VideoSection(props) {
               className="like-box"
               onClick={() => likeClass()}
             >
-              <BiLike className="like-icon" />
+              {videoContent.classLiked ? (
+                <AiFillLike className="liked-icon" />
+              ) : (
+                <BiLike className="like-icon" />
+              )}
               <h1 className="like">Like</h1>
             </button>
           </div>
@@ -134,6 +154,7 @@ function VideoSection(props) {
 
 VideoSection.propTypes = {
   videoContent: PropTypes.object.isRequired,
+  displaySidebar: PropTypes.func.isRequired,
 };
 
 export default VideoSection;

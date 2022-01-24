@@ -1,22 +1,50 @@
 import './index.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { BsFacebook } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
 import { URL } from '../App/constants';
 
+import { setUserSession } from '../../utils/common';
+
 function LoginPage() {
+  const [errorMsg, setError] = useState(null);
+  const history = useHistory();
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const updateEmail = event => {
+    setEmailValue(event.target.value);
+  };
+  const updatePassword = event => {
+    setPasswordValue(event.target.value);
+  };
   const loginUser = () => {
-    axios
-      .post(`${URL}/v1/auth/register`)
+    const formdata = new FormData();
+    formdata.append('email', emailValue);
+    formdata.append('password', passwordValue);
+    axios({
+      method: 'POST',
+      url: `${URL}/v1/auth/login`,
+      data: {
+        email: emailValue,
+        password: passwordValue,
+      },
+    })
       .then(function(response) {
-        console.log(response);
+        if (response.statusText === 'OK' && response.status === 200) {
+          setUserSession(response.data.token, response.data.user);
+          history.push('/homepage');
+        }
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(error => {
+        if (error.response.status === 401)
+          setError(error.response.data.message);
+        else if (error.response.status === 400)
+          setError(error.response.data.message);
+        else setError('Something went wrong. Please try again later.');
       });
   };
   return (
@@ -28,7 +56,9 @@ function LoginPage() {
               <img className="login-logo" src={logo} alt="website-logo" />
               <h1 className="sign-in-to">Sign in to</h1>
               <h1 className="website-name">AIR CLASS</h1>
-              <p className="register-msg">If you don’t have an account</p>
+              <p className="register-msg">
+                If you don’t have an account register
+              </p>
               <p className="register-msg">
                 You can{' '}
                 <NavLink className="nav-link" to="/signup">
@@ -45,21 +75,31 @@ function LoginPage() {
               type="text"
               className="username"
               placeholder="enter email or username"
+              value={emailValue}
+              onChange={updateEmail}
             />
             <input
               type="password"
               className="username"
               placeholder="Password"
+              value={passwordValue}
+              onChange={updatePassword}
             />
-            <NavLink className=" nav-link" to="/homepage">
-              <button
-                type="button"
-                className="username login-btn"
-                onClick={loginUser}
-              >
-                Login
-              </button>
-            </NavLink>
+            {errorMsg && (
+              <>
+                <small style={{ color: 'red' }}>{errorMsg}</small>
+                <br />
+              </>
+            )}
+            {/* <NavLink className=" nav-link-login" to="/homepage"> */}
+            <button
+              type="button"
+              className="username login-btn"
+              onClick={loginUser}
+            >
+              Login
+            </button>
+            {/* </NavLink> */}
 
             <p className="continue-with">or continue with</p>
             <div className="login-icons">
