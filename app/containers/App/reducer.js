@@ -417,7 +417,64 @@ const detailedAllCourseInfo = [
     ],
   },
 ];
-
+const detailedMasterClassInfo = [
+  {
+    id: 1,
+    masterclassImage: understanding5GImg,
+    masterclassTitle: 'Understanding 5G',
+    masterclassSpeaker: 'Rakesh Mishra',
+    speakerProfession: 'Co-Founder Uhana',
+    speakerCollege: 'IIT Madras',
+    classVideo: 'https://www.youtube.com/embed/_CTUs_2hq6Y',
+    classNotes: ['5G is the latest generation of mobile internet connectivity'],
+    classComments: [
+      {
+        initial: 'HS',
+        username: 'Hari Chandana Sapare',
+        comment: 'this video lecture is very good',
+      },
+    ],
+    classLiked: false,
+  },
+  {
+    id: 2,
+    masterclassImage:
+      'https://res.cloudinary.com/due4dmz2b/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https%3A%2F%2Fd15dkfioxfhy94.cloudfront.net%2Ftenxiitian_prod%2Fprograms%2Fmaster-class%2Fpriyatham_bollimpalli%2Fvideo_thumb.png',
+    masterclassTitle: 'Product Mindest',
+    masterclassSpeaker: 'Priyatham Bollimpalli',
+    speakerProfession: 'Micorsoft',
+    speakerCollege: 'IIT Guwahati',
+    classVideo: 'https://www.youtube.com/embed/EEBQUn313BA',
+    classNotes: ['5G is the latest generation of mobile internet connectivity'],
+    classComments: [
+      {
+        initial: 'HS',
+        username: 'Hari Chandana Sapare',
+        comment: 'this video lecture is very good',
+      },
+    ],
+    classLiked: false,
+  },
+  {
+    id: 3,
+    masterclassImage:
+      'https://res.cloudinary.com/due4dmz2b/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https%3A%2F%2Fd1tgh8fmlzexmh.cloudfront.net%2Fotg_prod%2Fmedia%2Fmaster-classes%2FMasterclass_with_Hari_TN_2X.png',
+    masterclassTitle: 'Coding',
+    masterclassSpeaker: 'hari TN',
+    speakerProfession: 'Co-Founder Bigbasket',
+    speakerCollege: 'IIM CULCATTA',
+    classVideo: 'https://www.youtube.com/embed/HIj8wU_rGIU',
+    classNotes: ['5G is the latest generation of mobile internet connectivity'],
+    classComments: [
+      {
+        initial: 'HS',
+        username: 'Hari Chandana Sapare',
+        comment: 'this video lecture is very good',
+      },
+    ],
+    classLiked: false,
+  },
+];
 // The initial state of the App
 export const initialState = {
   isLoading: true,
@@ -435,66 +492,13 @@ export const initialState = {
   initialAllCoursesInfo: detailedAllCourseInfo,
   initialEnrolledCourseInfo: [],
 
-  masterclassInfo: [
-    {
-      id: 1,
-      masterclassImage: understanding5GImg,
-      masterclassTitle: 'Understanding 5G',
-      masterclassSpeaker: 'Rakesh Mishra',
-      speakerProfession: 'Co-Founder Uhana',
-      speakerCollege: 'IIT Madras',
-    },
-    {
-      id: 2,
-      masterclassImage:
-        'https://res.cloudinary.com/due4dmz2b/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https%3A%2F%2Fd15dkfioxfhy94.cloudfront.net%2Ftenxiitian_prod%2Fprograms%2Fmaster-class%2Fpriyatham_bollimpalli%2Fvideo_thumb.png',
-      masterclassTitle: 'Product Mindest',
-      masterclassSpeaker: 'Priyatham Bollimpalli',
-      speakerProfession: 'Micorsoft',
-      speakerCollege: 'IIT Guwahati',
-    },
-    {
-      id: 3,
-      masterclassImage:
-        'https://res.cloudinary.com/due4dmz2b/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https%3A%2F%2Fd1tgh8fmlzexmh.cloudfront.net%2Fotg_prod%2Fmedia%2Fmaster-classes%2FMasterclass_with_Hari_TN_2X.png',
-      masterclassTitle: 'Coding',
-      masterclassSpeaker: 'hari TN',
-      speakerProfession: 'Co-Founder Bigbasket',
-      speakerCollege: 'IIM CULCATTA',
-    },
-  ],
+  masterclassInfo: detailedMasterClassInfo,
   searchResultsAllCourses: detailedAllCourseInfo,
   searchResultsEnrolledCourses: [],
-  searchResultsMasterClasses: [
-    {
-      id: 1,
-      masterclassImage: understanding5GImg,
-      masterclassTitle: 'Understanding 5G',
-      masterclassSpeaker: 'Rakesh Mishra',
-      speakerProfession: 'Co-Founder Uhana',
-      speakerCollege: 'IIT Madras',
-    },
-    {
-      id: 2,
-      masterclassImage:
-        'https://res.cloudinary.com/due4dmz2b/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https%3A%2F%2Fd15dkfioxfhy94.cloudfront.net%2Ftenxiitian_prod%2Fprograms%2Fmaster-class%2Fpriyatham_bollimpalli%2Fvideo_thumb.png',
-      masterclassTitle: 'Product Mindest',
-      masterclassSpeaker: 'Priyatham Bollimpalli',
-      speakerProfession: 'Micorsoft',
-      speakerCollege: 'IIT Guwahati',
-    },
-    {
-      id: 3,
-      masterclassImage:
-        'https://res.cloudinary.com/due4dmz2b/image/fetch/dpr_auto,w_auto,f_auto,q_auto/https%3A%2F%2Fd1tgh8fmlzexmh.cloudfront.net%2Fotg_prod%2Fmedia%2Fmaster-classes%2FMasterclass_with_Hari_TN_2X.png',
-      masterclassTitle: 'Coding',
-      masterclassSpeaker: 'hari TN',
-      speakerProfession: 'Co-Founder Bigbasket',
-      speakerCollege: 'IIM CULCATTA',
-    },
-  ],
+  searchResultsMasterClasses: detailedMasterClassInfo,
   selectedCourseInfo: detailedAllCourseInfo[0],
   selectedClassInfo: detailedAllCourseInfo[0].courseContents[0],
+  selectedMasterclassInfo: detailedMasterClassInfo[0],
   discussionList: [
     {
       id: 1,
@@ -665,6 +669,11 @@ const wholeReducer = (state = initialState, action) =>
         draft.selectedClassInfo = action.selectedClass;
 
         break;
+      case 'PLAY_SELECTED_MASTERCLASS': {
+        draft.selectedMasterclassInfo = action.selectedMasterclass;
+
+        break;
+      }
       case 'UPDATE_SELECTED_COURSE':
         {
           const filterCourse = detailedAllCourseInfo.filter(
@@ -742,19 +751,19 @@ const wholeReducer = (state = initialState, action) =>
         }
         break;
       case 'USER_LOGGEDIN':
-        {
+        
           draft.loggedinUsername = action.userinfo.name;
           draft.loggedinUserEmail = action.userinfo.email;
           draft.loggedinUserRole = action.userinfo.role;
           draft.loggedinUserId = action.userinfo.id;
-        }
+        
         break;
       case 'FETCH_ALL_COURSES':
-        {
+        
           draft.allCoursesInfo = action.coursesinfo;
           draft.initialAllCoursesInfo = action.coursesinfo;
           // console.log(draft.allCoursesInfo)
-        }
+        
         break;
       default:
         break;

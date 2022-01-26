@@ -7,13 +7,14 @@ import VideoSection from 'components/VideoSection';
 function MasterclassPage() {
   const initialState = useSelector(state => state);
   const { global } = initialState;
-  const { selectedClassInfo } = global;
+  const { selectedMasterclassInfo } = global;
 
   return (
     <>
       <Header isHome />
-
-      <VideoSection videoContent={selectedClassInfo} />
+      <div className="masterclass-lecture">
+        <VideoSection videoContent={selectedMasterclassInfo} />
+      </div>
     </>
   );
 }

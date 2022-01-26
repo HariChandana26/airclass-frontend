@@ -3,12 +3,24 @@ import React from 'react';
 import { BsPlayCircleFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 
 function Masterclass(props) {
   const { coursedetails } = props;
+  const dispatch = useDispatch();
+  const playSelectedMasterclass = () =>{
+    dispatch({
+      type: 'PLAY_SELECTED_MASTERCLASS',
+      selectedMasterclass: coursedetails,
+    });
+  }
   return (
     <NavLink className="navLinkMasterclass" to="/masterclasspage">
-      <div className="course-container">
+      <div onClick={()=>playSelectedMasterclass()} 
+      tabIndex={0}
+      role="button"
+      onKeyDown={() => playSelectedMasterclass()}
+      className="course-container">
         <div className="masterclass-image">
           <img
             alt="course"
