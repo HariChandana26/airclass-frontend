@@ -4,8 +4,11 @@ import { IoIosSearch } from 'react-icons/io';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu';
 import logo from '../../images/logo2.png';
 import discussion from '../../images/discussion3.png';
+import '@szhsin/react-menu/dist/index.css';
+import '@szhsin/react-menu/dist/transitions/slide.css';
 
 function Header(props) {
   const initialState = useSelector(state => state);
@@ -55,11 +58,24 @@ function Header(props) {
           )}
           <div className="user-details-container">
             <p className="name">{global.loggedinUsername}</p>
-            <NavLink className="profilepage-link" to="/profilepage">
-              <div className="initial-container">
-                <p className="initial">{global.loggedinUserInitial}</p>
-              </div>
-            </NavLink>
+
+            <Menu
+              menuButton={
+                <MenuButton>
+                  <div className="initial-container">
+                    <p className="initial">{global.loggedinUserInitial}</p>
+                  </div>
+                </MenuButton>
+              }
+              transition
+            >
+              <NavLink className="profilepage-link" to="/profilepage">
+                <MenuItem>PROFILE</MenuItem>
+              </NavLink>
+              <NavLink className="profilepage-link" to="/login">
+                <MenuItem>LOGOUT</MenuItem>
+              </NavLink>
+            </Menu>
           </div>
         </div>
       </div>

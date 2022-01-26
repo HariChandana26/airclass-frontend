@@ -3,12 +3,13 @@
     height:100vh;
     display:flex;
     justify-content:center;
-    padding:60px 0px 40px 0px;
+    align-items:center;
 }
 .login{
     display:flex;
 justify-content:space-between;
     width:80%;
+    height:80%;
 }
 .login-part1{
     display:flex;

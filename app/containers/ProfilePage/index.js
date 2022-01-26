@@ -19,7 +19,7 @@ function ProfilePage() {
           <div className="profile-container1">
             <div className="user-details-container2 user-details-container">
               <div className="initial-container initial-container1">
-                <p className="initial initial1">{global.loggedinUserInitial}</p>
+                <p className="initial initial3">{global.loggedinUserInitial}</p>
               </div>
               <div className="username-container">
                 <p className="profile-name">{global.loggedinUsername}</p>

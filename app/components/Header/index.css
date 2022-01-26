@@ -139,6 +139,17 @@ margin-left:4px;
   }
   .profilepage-link{
     text-decoration:none;
+    border:none;
+    color: rgb(56, 63, 72);
+  }
+  .szh-menu-button {
+    border: none;
+    background: none;
+  }
+  .szh-menu__item {
+
+    font-weight: 600;
+    color: rgb(56,63,72);
   }
   @media screen and (max-width: 1020px) {
 .header {
@@ -150,6 +161,7 @@ margin-left:4px;
 .searchbox{
   width:70%;
 }
+
   }
   @media screen and (max-width: 768px) {
   .name{

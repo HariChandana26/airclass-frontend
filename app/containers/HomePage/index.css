@@ -53,8 +53,9 @@
   }
   .courses-cards{
     display:flex;
+    /* flex-wrap:wrap; */
     overflow-x: scroll;
-    scrollbar-width: none;
+    scrollbar-width: none; 
     padding-bottom:8px;   
   }
   .courses-cards::-webkit-scrollbar {
@@ -73,8 +74,10 @@
   }
   .masterclass-container{
     display:flex;
+    overflow-x: scroll;
+    scrollbar-width: none;
   }
-  
+/*   
   .slider{
     display:flex;
     justify-content:flex-start;
@@ -105,7 +108,7 @@
     margin: auto;
   }
   .slick-slide {
-    /*text-align: center;*/
+    /*text-align: center;
     position: relative;
   }
   .slick-slide:focus {
@@ -133,7 +136,11 @@
   .slick-prev:before,
   .slick-next:before {
     color: #777777;
-  }
+  } */
+
+ .slick-slide {
+   width:280px !important;
+ } 
  @media screen and (max-width:1024px){
    .body{
     margin-top:60px !important;
@@ -141,4 +148,10 @@
    .content{
      width:92% !important;
    }
+ }
+ @media screen and (max-width:768px){
+  /* .courses-cards{
+    align-items:center;
+    justify-content:center;
+  } */
  }

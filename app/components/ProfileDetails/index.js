@@ -10,12 +10,12 @@ function ProfileDetails() {
   const [mobilenumber, setMobileNumber] = useState(
     global.loggedinUserMobileNumber,
   );
-  const [dateofbirth, setDateofBirth] = useState(
-    global.loggedinUserDateofBirth,
-  );
-  const [occupation, setOccupation] = useState(global.loggedinUserOccupation);
+  // const [dateofbirth, setDateofBirth] = useState(
+  //   global.loggedinUserDateofBirth,
+  // );
+  // const [occupation, setOccupation] = useState(global.loggedinUserOccupation);
   const updateProfileDetails = (
-    task = [email, mobilenumber, dateofbirth, occupation],
+    task = [email, mobilenumber],
   ) => {
     dispatch({
       type: 'UPDATE_PROFILE',
@@ -28,31 +28,31 @@ function ProfileDetails() {
   const updateMobileNumber = event => {
     setMobileNumber(event.target.value);
   };
-  const updateDateofBirth = event => {
-    setDateofBirth(event.target.value);
-  };
-  const updateOccupation = event => {
-    setOccupation(event.target.value);
-  };
+  // const updateDateofBirth = event => {
+  //   setDateofBirth(event.target.value);
+  // };
+  // const updateOccupation = event => {
+  //   setOccupation(event.target.value);
+  // };
   return (
     <>
       <div className="details-container">
         <div className="firstname">
-          <h1 className="input-title">Firstname</h1>
+          <h1 className="input-title">Name</h1>
           <input
             type="text"
             className="profile-input"
-            value={global.loggedinUserFirstname}
+            value={global.loggedinUsername}
           />
         </div>
-        <div className="firstname">
+        {/* <div className="firstname">
           <h1 className="input-title">Lastname</h1>
           <input
             type="text"
             className="profile-input"
             value={global.loggedinUserLastname}
           />
-        </div>
+        </div> */}
 
         <div className="firstname">
           <h1 className="input-title">Email</h1>
@@ -72,7 +72,7 @@ function ProfileDetails() {
             onChange={updateMobileNumber}
           />
         </div>
-        <div className="firstname">
+        {/* <div className="firstname">
           <h1 className="input-title">Date of Birth</h1>
           <input
             type="date"
@@ -89,7 +89,7 @@ function ProfileDetails() {
             defaultValue={occupation}
             onChange={updateOccupation}
           />
-        </div>
+        </div> */}
       </div>
       <button
         type="button"

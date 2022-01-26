@@ -3,19 +3,20 @@
     height:100vh;
     display:flex;
     justify-content:center;
-    padding:100px 0px 40px 0px;
+    align-items:center;
 }
 .login{
     display:flex;
 justify-content:space-between;
     width:80%;
+    height:80%;
+   
 }
 .login-part1{
     display:flex;
     align-items:center;
     justify-content:space-around;
     height:100%;
-  
 }
 .login-logo{
     width:150px;

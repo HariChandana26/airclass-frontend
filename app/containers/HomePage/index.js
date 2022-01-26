@@ -5,60 +5,103 @@ import Course from 'components/Course';
 import Masterclass from 'components/Masterclass';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import React from 'react';
+// import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Slider from 'react-slick';
+// import axios from 'axios';
+// import Slider from 'react-slick';
 // import { Redirect } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+// import { URL } from '../App/constants';
 
 function Homepage() {
   // if (!authorized) {
   //   return <Redirect to="/login" />;
   // }
-  const config = {
-    dots: true,
-    infinite: false,
-    lazyLoad: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  // const dispatch = useDispatch();
 
-  const settings = config;
+  // useEffect(() => {
+  // const getCourses= async()=>{
+  //   let response = await axios({
+  //     method: 'GET',
+  //     url: `${URL}/v1/courses`,
+  //   })
+  //   console.log(response)
+  //   try{
+  //   if (response.statusText === 'OK' && response.status === 200) {
+  //     console.log(response)
+  //     const resData = await response
+  //     // console.log(resData)
+  //     // console.log(resData.data.courses)
+  //     dispatch({
+  //       type: 'FETCH_ALL_COURSES',
+  //       coursesinfo: resData.data.courses,
+  //     });
+  //   }
+  // }catch(error){
+  //   console.log(error)
+  //   if (error.response.status === 401)
+  //   setError(error.response.data.message);
+  // else if (error.response.status === 400)
+  //   setError(error.response.data.message);
+  // else setError('Something went wrong. Please try again later.');
+  // }
+  // }
+  //   getCourses();
+
+  //   },[]);
+  // const config = {
+  //   dots: true,
+  //   infinite: false,
+  //   lazyLoad: true,
+  //   speed: 500,
+  //   slidesToShow: 4,
+  //   slidesToScroll: 4,
+  //   initialSlide: 0,
+  //   responsive: [
+  //     {
+  //       breakpoint: 1024,
+  //       settings: {
+  //         slidesToShow: 3,
+  //         slidesToScroll: 3,
+  //         infinite: true,
+  //         dots: true,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 600,
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 2,
+  //         initialSlide: 2,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  // };
+
+  // const settings = config;
   const initialState = useSelector(state => state);
   const { global } = initialState;
   const isHome = false;
 
   const searchedAllCoursesInfo = global.searchResultsAllCourses;
+  // const searchedAllCoursesInfo = global.allCoursesInfo
+  // let searchedAllCoursesInfo=[];
   const searchedEnrolledCoursesInfo = global.searchResultsEnrolledCourses;
   const searchedMasterclassInfo = global.searchResultsMasterClasses;
+
+  // const [searchInput, setsearchInput] = useState(searchedAllCoursesInfo);
+  // useEffect(()=>{
+  //    searchedAllCoursesInfo = global.searchResultsAllCourses;
+  //   //setsearchInput(searchedAllCoursesInfo)
+  // })
   let noAllResults = null;
   let noEnrolledResults = null;
   let noMasterclassResults = null;
@@ -81,26 +124,24 @@ function Homepage() {
       <Header isHome={isHome} />
       <div className="body">
         <div className="content">
-          <h3 className="displayname">Hi Hari Chandana Sapare,</h3>
+          <h3 className="displayname">Hi {global.loggedinUsername},</h3>
           <div className="courses-container">
             <div className="courses-box">
               <h1 className="courses">Courses</h1>
             </div>
           </div>
           {noAllResults}
-          <Slider {...settings}>
-            {searchedAllCoursesInfo.map(eachItem => (
-              <Course key={eachItem.id} coursedetails={eachItem} isenroll />
-            ))}
-            {searchedAllCoursesInfo.map(eachItem => (
-              <Course key={eachItem.id} coursedetails={eachItem} isenroll />
-            ))}
-          </Slider>
+          <div className="courses-display">
+            <div className="courses-cards">
+              {searchedAllCoursesInfo.map(eachItem => (
+                <Course key={eachItem.id} coursedetails={eachItem} isenroll />
+              ))}
+            </div>
 
-          <div className="arrow-container">
-            <MdOutlineArrowForwardIos className="arrow" />
+            <div className="arrow-container">
+              <MdOutlineArrowForwardIos className="arrow" />
+            </div>
           </div>
-
           <div className="courses-container">
             <div className="courses-box">
               <h1 className="courses">Enrolled Courses</h1>

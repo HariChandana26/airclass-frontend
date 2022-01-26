@@ -9,7 +9,7 @@ function DiscussionSolution(props) {
       <div className="discussion-box">
         <div className="user-details">
           <div className="initial-container2">
-            <p className="initial">{solutionslist.discussionOwnerInitial}</p>
+            <p className="initial4">{solutionslist.discussionOwnerInitial}</p>
           </div>
           <p className="name2">{solutionslist.discussionOwnerName}</p>
         </div>

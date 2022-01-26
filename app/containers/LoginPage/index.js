@@ -4,6 +4,7 @@ import { BsFacebook } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import { NavLink, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
 import { URL } from '../App/constants';
@@ -21,6 +22,8 @@ function LoginPage() {
   const updatePassword = event => {
     setPasswordValue(event.target.value);
   };
+  const dispatch = useDispatch();
+
   const loginUser = () => {
     const formdata = new FormData();
     formdata.append('email', emailValue);
@@ -37,6 +40,10 @@ function LoginPage() {
         if (response.statusText === 'OK' && response.status === 200) {
           setUserSession(response.data.token, response.data.user);
           history.push('/homepage');
+          dispatch({
+            type: 'USER_LOGGEDIN',
+            userinfo: response.data.user,
+          });
         }
       })
       .catch(error => {
