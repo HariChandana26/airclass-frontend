@@ -756,6 +756,7 @@ const wholeReducer = (state = initialState, action) =>
           draft.loggedinUserEmail = action.userinfo.email;
           draft.loggedinUserRole = action.userinfo.role;
           draft.loggedinUserId = action.userinfo.id;
+          draft.loggedinUserInitial = action.userinfo.initialName;
         
         break;
       case 'FETCH_ALL_COURSES':

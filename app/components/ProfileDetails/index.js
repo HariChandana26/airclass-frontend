@@ -10,6 +10,8 @@ function ProfileDetails() {
   const [mobilenumber, setMobileNumber] = useState(
     global.loggedinUserMobileNumber,
   );
+  const [success, setSuccess]=useState('');
+  const [error, setError]=useState('');
   // const [dateofbirth, setDateofBirth] = useState(
   //   global.loggedinUserDateofBirth,
   // );
@@ -17,10 +19,18 @@ function ProfileDetails() {
   const updateProfileDetails = (
     task = [email, mobilenumber],
   ) => {
+    // if(email==global.loggedinUserEmail || mobilenumber==global.loggedinUserMobileNumber){
+    //   setError("Please update details")
+    //   setSuccess("");
+    // }
+    // else{
     dispatch({
       type: 'UPDATE_PROFILE',
       profileinfo: task,
     });
+    setSuccess("Profile updated successfully");
+    //setError("");
+    
   };
   const updateEmail = event => {
     setEmail(event.target.value);
@@ -91,6 +101,18 @@ function ProfileDetails() {
           />
         </div> */}
       </div>
+      {success && (
+          <>
+            <p style={{ color: 'green' }}>{success}</p>
+            <br />
+          </>
+        )}
+        {error && (
+        <>
+          <br /> <p style={{ color: 'red' }}>{error}</p>
+          <br />
+        </>
+      )}
       <button
         type="button"
         className="addCourse update-btn"

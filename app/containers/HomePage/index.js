@@ -4,28 +4,27 @@ import Footer from 'components/Footer';
 import Course from 'components/Course';
 import Masterclass from 'components/Masterclass';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
-import React from 'react';
-// import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-// import axios from 'axios';
-// import Slider from 'react-slick';
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import Slider from 'react-slick';
 // import { Redirect } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-// import { URL } from '../App/constants';
+import { URL } from '../App/constants';
 
 function Homepage() {
   // if (!authorized) {
   //   return <Redirect to="/login" />;
   // }
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
+  const dispatch = useDispatch(); 
+ 
+  // useEffect(() => { 
   // const getCourses= async()=>{
   //   let response = await axios({
   //     method: 'GET',
   //     url: `${URL}/v1/courses`,
-  //   })
+  //   }) 
   //   console.log(response)
   //   try{
   //   if (response.statusText === 'OK' && response.status === 200) {
@@ -48,56 +47,56 @@ function Homepage() {
   // }
   // }
   //   getCourses();
-
+  
   //   },[]);
-  // const config = {
-  //   dots: true,
-  //   infinite: false,
-  //   lazyLoad: true,
-  //   speed: 500,
-  //   slidesToShow: 4,
-  //   slidesToScroll: 4,
-  //   initialSlide: 0,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1024,
-  //       settings: {
-  //         slidesToShow: 3,
-  //         slidesToScroll: 3,
-  //         infinite: true,
-  //         dots: true,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 600,
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 2,
-  //         initialSlide: 2,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 480,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //   ],
-  // };
+  const config = {
+    dots: true,
+    infinite: false,
+    lazyLoad: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
-  // const settings = config;
+  const settings = config;
   const initialState = useSelector(state => state);
   const { global } = initialState;
   const isHome = false;
 
   const searchedAllCoursesInfo = global.searchResultsAllCourses;
-  // const searchedAllCoursesInfo = global.allCoursesInfo
-  // let searchedAllCoursesInfo=[];
+  //const searchedAllCoursesInfo = global.allCoursesInfo
+  //let searchedAllCoursesInfo=[];
   const searchedEnrolledCoursesInfo = global.searchResultsEnrolledCourses;
   const searchedMasterclassInfo = global.searchResultsMasterClasses;
 
-  // const [searchInput, setsearchInput] = useState(searchedAllCoursesInfo);
+  //const [searchInput, setsearchInput] = useState(searchedAllCoursesInfo);
   // useEffect(()=>{
   //    searchedAllCoursesInfo = global.searchResultsAllCourses;
   //   //setsearchInput(searchedAllCoursesInfo)
@@ -133,15 +132,16 @@ function Homepage() {
           {noAllResults}
           <div className="courses-display">
             <div className="courses-cards">
-              {searchedAllCoursesInfo.map(eachItem => (
-                <Course key={eachItem.id} coursedetails={eachItem} isenroll />
-              ))}
-            </div>
-
-            <div className="arrow-container">
-              <MdOutlineArrowForwardIos className="arrow" />
-            </div>
+            {searchedAllCoursesInfo.map(eachItem => (
+              <Course key={eachItem.id} coursedetails={eachItem} isenroll />
+            ))}
+    
           </div>
+
+          <div className="arrow-container">
+            <MdOutlineArrowForwardIos className="arrow" />
+          </div>
+</div>
           <div className="courses-container">
             <div className="courses-box">
               <h1 className="courses">Enrolled Courses</h1>
