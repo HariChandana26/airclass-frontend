@@ -17,38 +17,37 @@ function Homepage() {
   // if (!authorized) {
   //   return <Redirect to="/login" />;
   // }
+  const initialState = useSelector(state => state);
+  const { global } = initialState;
   const dispatch = useDispatch(); 
- 
-  // useEffect(() => { 
-  // const getCourses= async()=>{
-  //   let response = await axios({
-  //     method: 'GET',
-  //     url: `${URL}/v1/courses`,
-  //   }) 
-  //   console.log(response)
-  //   try{
-  //   if (response.statusText === 'OK' && response.status === 200) {
-  //     console.log(response)
-  //     const resData = await response
-  //     // console.log(resData)
-  //     // console.log(resData.data.courses)
-  //     dispatch({
-  //       type: 'FETCH_ALL_COURSES',
-  //       coursesinfo: resData.data.courses,
-  //     });
-  //   }
-  // }catch(error){
-  //   console.log(error)
-  //   if (error.response.status === 401)
-  //   setError(error.response.data.message);
-  // else if (error.response.status === 400)
-  //   setError(error.response.data.message);
-  // else setError('Something went wrong. Please try again later.');
-  // }
-  // }
-  //   getCourses();
+  let enrolledCourses;
+  useEffect(() => { 
+  const getCourses= async()=>{
+    let response = await axios({
+      method: 'GET',
+      url: `${URL}/v1/courses`,
+    }) 
+    try{
+    if (response.statusText === 'OK' && response.status === 200) {
+      const resData = await response
+      dispatch({
+        type: 'FETCH_ALL_COURSES',
+        coursesinfo: resData.data.courses,
+      });
+      
+    }
+  }catch(error){
+    console.log(error)
+    if (error.response.status === 401)
+    setError(error.response.data.message);
+  else if (error.response.status === 400)
+    setError(error.response.data.message);
+  else setError('Something went wrong. Please try again later.');
+  }
+  }
+    getCourses();
   
-  //   },[]);
+    },[global.loggedinUserPurchased]);
   const config = {
     dots: true,
     infinite: false,
@@ -86,16 +85,14 @@ function Homepage() {
   };
 
   const settings = config;
-  const initialState = useSelector(state => state);
-  const { global } = initialState;
+ 
   const isHome = false;
 
-  const searchedAllCoursesInfo = global.searchResultsAllCourses;
-  //const searchedAllCoursesInfo = global.allCoursesInfo
+ // const searchedAllCoursesInfo = global.searchResultsAllCourses;
+  const searchedAllCoursesInfo = global.allCoursesInfo
   //let searchedAllCoursesInfo=[];
   const searchedEnrolledCoursesInfo = global.searchResultsEnrolledCourses;
   const searchedMasterclassInfo = global.searchResultsMasterClasses;
-
   //const [searchInput, setsearchInput] = useState(searchedAllCoursesInfo);
   // useEffect(()=>{
   //    searchedAllCoursesInfo = global.searchResultsAllCourses;
@@ -133,8 +130,8 @@ function Homepage() {
           <div className="courses-display">
             <div className="courses-cards">
             {searchedAllCoursesInfo.map(eachItem => (
-              <Course key={eachItem.id} coursedetails={eachItem} isenroll />
-            ))}
+              <Course key={eachItem._id} coursedetails={eachItem} enrolledCourses={global.loggedinUserPurchased} isenroll />)
+)}
     
           </div>
 
@@ -152,7 +149,7 @@ function Homepage() {
             <div className="courses-cards">
               {searchedEnrolledCoursesInfo.map(eachItem => (
                 <Course
-                  key={eachItem.id}
+                  key={eachItem._id}
                   coursedetails={eachItem}
                   isenroll={false}
                 />
@@ -169,9 +166,12 @@ function Homepage() {
           </div>
           {noMasterclassResults}
           <div className="masterclass-container">
-            {searchedMasterclassInfo.map(eachItem => (
-              <Masterclass key={eachItem.id} coursedetails={eachItem} />
-            ))}
+            {searchedMasterclassInfo.map(eachItem => 
+              (
+                <Masterclass key={eachItem.id} coursedetails={eachItem} />
+            )
+             
+            )}
           </div>
         </div>
       </div>

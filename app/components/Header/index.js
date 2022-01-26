@@ -21,11 +21,13 @@ function Header(props) {
     setsearchInput(event.target.value);
   };
 
-  const searchCourse = () =>
+  const searchCourse = () =>{
+  console.log("in search1")
     dispatch({
       type: 'SEARCH_COURSE',
       searchinfo: searchInput,
     });
+  }
   return (
     <header className="header">
       <div className="header-container">

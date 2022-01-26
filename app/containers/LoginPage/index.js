@@ -38,7 +38,7 @@ function LoginPage() {
     })
       .then(function(response) {
         if (response.statusText === 'OK' && response.status === 200) {
-          setUserSession(response.data.token, response.data.user);
+          
           history.push('/homepage');
           dispatch({
             type: 'USER_LOGGEDIN',
@@ -46,11 +46,17 @@ function LoginPage() {
           });
         }
       })
-      .catch(error => {
-        if (error.response.status === 401)
-          setError(error.response.data.message);
-        else if (error.response.status === 400)
-          setError(error.response.data.message);
+      .catch(function(error)  {
+        console.log(error)
+        // if (error.response.status === 401)
+        //   setError(error.response.data.message);
+        // else if (error.response.status === 400)
+        //   setError(error.response.data.message);
+        // else setError('Something went wrong. Please try again later.');
+        if (error.code === 401)
+          setError(error.message);
+        else if (error.status === 400)
+          setError(error.message);
         else setError('Something went wrong. Please try again later.');
       });
   };

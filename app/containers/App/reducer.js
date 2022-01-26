@@ -17,6 +17,8 @@ import frontendImg from '../../images/frontendImg.png';
 import backendImg from '../../images/backendImg.png';
 import virtualRealityImg from '../../images/virtualRealityImg.png';
 import dataScienceImg from '../../images/dataScienceImg.png';
+import axios from 'axios';
+import { URL } from '../App/constants';
 
 // import { combineReducers } from 'redux';
 const detailedAllCourseInfo = [
@@ -480,12 +482,13 @@ export const initialState = {
   isLoading: true,
   allCoursesInfo: [],
   loggedinUserRole: 'user',
-  loggedinUserId: '1',
+  loggedinUserId: '61f123f3e594244b30725cec',
   loggedinUsername: 'Hari Chandana Sapare',
   loggedinUserFirstname: 'Hari Chandana',
   loggedinUserLastname: 'Sapare',
   loggedinUserInitial: 'HS',
   loggedinUserEmail: 'sapareharichandana@gmail.com',
+  loggedinUserPurchased:[],
   loggedinUserMobileNumber: '1234567890',
   loggedinUserDateofBirth: '00/00/0000',
   loggedinUserOccupation: 'Student',
@@ -585,27 +588,44 @@ const wholeReducer = (state = initialState, action) =>
     switch (action.type) {
       case 'ENROLL_COURSE':
         {
-          const newAllCoursesInfo = state.initialAllCoursesInfo.map(el => {
-            if (el.id === action.courseinfo.id) {
-              return { ...el, isenrolled: true };
-            }
-            return el;
-          });
-          const newEnrolledCourse = action.courseinfo;
+          // const enrolledcourseinfo = state.allCoursesInfo.filter(el => {
+          //   console.log(el);
+          //   {el._id === action.enrolledcourseid}
+        
+           
+          // });
 
-          const newEnrolledCoursesInfo = [
-            ...state.initialEnrolledCourseInfo,
-            newEnrolledCourse,
-          ];
-          draft.initialAllCoursesInfo = newAllCoursesInfo;
-          draft.initialEnrolledCourseInfo = newEnrolledCoursesInfo;
-          draft.searchResultsAllCourses = newAllCoursesInfo;
-          draft.searchResultsEnrolledCourses = newEnrolledCoursesInfo;
+          // const newEnrolledCoursesInfo = [
+          //   ...state.initialEnrolledCourseInfo,
+          //   newEnrolledCourse,
+          // ];
+          //draft.initialAllCoursesInfo = newAllCoursesInfo;
+          const getCourseInfo= async()=>{
+            let response = await  axios({
+            method: 'GET',
+            url: `${URL}/v1/courses/courseSingle/${action.enrolledcourseid}`,
+          })
+          try{
+              if (response.statusText === 'OK' && response.status === 200) {
+                draft.initialEnrolledCourseInfo =[response.data.course]
+              }
+            }
+            catch(error){
+              console.log(error)
+            };
+          }
+          
+           draft.initialEnrolledCourseInfo =[...draft.initialEnrolledCourseInfo, action.enrolledcourse];
+          // //draft.searchResultsAllCourses = newAllCoursesInfo;
+           draft.searchResultsEnrolledCourses = [...draft.searchResultsEnrolledCourses, action.enrolledcourse];
+           draft.loggedinUserPurchased=[...draft.loggedinUserPurchased,action.enrolledcourse._id]
         }
+    
         break;
 
       case 'SEARCH_COURSE':
         {
+          console.log("in search")
           const searchedAllCourses = state.initialAllCoursesInfo.filter(
             eachItem =>
               eachItem.courseTitle
@@ -625,7 +645,7 @@ const wholeReducer = (state = initialState, action) =>
                 .includes(action.searchinfo.toLowerCase()),
           );
           draft.searchResultsAllCourses = searchedAllCourses;
-          // draft.allCoursesInfo = searchedAllCourses;
+           draft.allCoursesInfo = searchedAllCourses;
           draft.searchResultsEnrolledCourses = searchedEnrolledCourses;
           draft.searchResultsMasterClasses = searchedMasterClassess;
           // console.log(draft.allCoursesInfo)
@@ -669,11 +689,10 @@ const wholeReducer = (state = initialState, action) =>
         draft.selectedClassInfo = action.selectedClass;
 
         break;
-      case 'PLAY_SELECTED_MASTERCLASS': {
+      case 'PLAY_SELECTED_MASTERCLASS': 
         draft.selectedMasterclassInfo = action.selectedMasterclass;
-
-        break;
-      }
+      
+      break;
       case 'UPDATE_SELECTED_COURSE':
         {
           const filterCourse = detailedAllCourseInfo.filter(
@@ -750,21 +769,35 @@ const wholeReducer = (state = initialState, action) =>
           draft.discussionList = [...draft.discussionList, newDiscussion];
         }
         break;
-      case 'USER_LOGGEDIN':
-        
+      case 'USER_LOGGEDIN':{
+    
           draft.loggedinUsername = action.userinfo.name;
           draft.loggedinUserEmail = action.userinfo.email;
           draft.loggedinUserRole = action.userinfo.role;
           draft.loggedinUserId = action.userinfo.id;
           draft.loggedinUserInitial = action.userinfo.initialName;
-        
+          draft.loggedinUserPurchased=action.userinfo.purchasedCourse;
+          draft.initialEnrolledCourseInfo=action.userinfo.purchasedCourse;
+          draft.searchedEnrolledCourses=action.userinfo.purchasedCourse;
+         
+          }
         break;
       case 'FETCH_ALL_COURSES':
         
           draft.allCoursesInfo = action.coursesinfo;
           draft.initialAllCoursesInfo = action.coursesinfo;
-          // console.log(draft.allCoursesInfo)
-        
+           console.log(draft.allCoursesInfo)
+           console.log(draft.loggedinUserPurchased)
+          const enrolledCourses=draft.allCoursesInfo.filter(el=>{
+            console.log(el)
+            if( draft.loggedinUserPurchased.includes(el._id)){
+            return el;
+            }
+           })
+           
+           draft.initialEnrolledCourseInfo=enrolledCourses;
+           draft.searchResultsEnrolledCourses=enrolledCourses;
+           console.log(draft.searchedEnrolledCourses)
         break;
       default:
         break;
