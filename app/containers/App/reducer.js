@@ -41,7 +41,7 @@ const detailedAllCourseInfo = [
           'Competitive Programming is a mental sport which enables you to code a given problem under provided constraints',
           'To jump in competitive programming you can follow an approach of project-based learning in which, once you know the syntax of the language and basic fundamentals, you can create multiple challenging projects and after making a lot of projects you will realize how logics work in development and that will help you to increase programming ability',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'XY',
             username: 'XXXX YYYYYYYYY',
@@ -59,7 +59,7 @@ const detailedAllCourseInfo = [
           'Algorithm should be clear and unambiguous. Each of its steps should be clear in all aspects and must lead to only one meaning.',
           'If an algorithm says to take inputs, it should be well-defined inputs.',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -77,7 +77,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -107,7 +107,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana',
@@ -125,7 +125,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -143,7 +143,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -173,7 +173,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana',
@@ -191,7 +191,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -209,7 +209,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -239,7 +239,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana',
@@ -257,7 +257,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -275,7 +275,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -305,7 +305,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana',
@@ -323,7 +323,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -341,7 +341,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -371,7 +371,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana',
@@ -389,7 +389,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -407,7 +407,7 @@ const detailedAllCourseInfo = [
           'The Rest parameter should be the last parameter',
           'The Rest parameter should be the last parameter',
         ],
-        classComments: [
+        comments: [
           {
             initial: 'HS',
             username: 'Hari Chandana Sapare',
@@ -429,7 +429,7 @@ const detailedMasterClassInfo = [
     speakerCollege: 'IIT Madras',
     classVideo: 'https://www.youtube.com/embed/_CTUs_2hq6Y',
     classNotes: ['5G is the latest generation of mobile internet connectivity'],
-    classComments: [
+    comments: [
       {
         initial: 'HS',
         username: 'Hari Chandana Sapare',
@@ -448,7 +448,7 @@ const detailedMasterClassInfo = [
     speakerCollege: 'IIT Guwahati',
     classVideo: 'https://www.youtube.com/embed/EEBQUn313BA',
     classNotes: ['5G is the latest generation of mobile internet connectivity'],
-    classComments: [
+    comments: [
       {
         initial: 'HS',
         username: 'Hari Chandana Sapare',
@@ -467,7 +467,7 @@ const detailedMasterClassInfo = [
     speakerCollege: 'IIM CULCATTA',
     classVideo: 'https://www.youtube.com/embed/HIj8wU_rGIU',
     classNotes: ['5G is the latest generation of mobile internet connectivity'],
-    classComments: [
+    comments: [
       {
         initial: 'HS',
         username: 'Hari Chandana Sapare',
@@ -504,7 +504,7 @@ export const initialState = {
         classTitle: "Introduction to Competitive Programming",
         classLiked: 0,
         classNotes: [],
-        classComments: [],
+        comments: [],
         classVideo: "https://www.youtube.com/embed/pV6i3PucDMA",
         classDuration: "20min",
         _id: "61f1d8fe114c333330203b51",
@@ -747,8 +747,8 @@ const wholeReducer = (state = initialState, action) =>
             username: state.loggedinUsername,
             comment: action.newComment,
           };
-          draft.selectedClassInfo.classComments = [
-            ...draft.selectedClassInfo.classComments,
+          draft.selectedClassInfo.comments = [
+            ...draft.selectedClassInfo.comments,
             newComment,
           ];
         }

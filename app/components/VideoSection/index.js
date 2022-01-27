@@ -20,7 +20,7 @@ function VideoSection(props) {
   );
 
   const [inputValue, setInputValue] = useState('');
-  const newCommentsArray = videoContent.classComments;
+  const newCommentsArray = videoContent.comments;
 
   const dispatch = useDispatch();
   const addComment = () => {
@@ -122,9 +122,11 @@ function VideoSection(props) {
           </div>
           <div className={styleNotesContainer}>
             <ul className="notes-list">
-              {/* {videoContent.classNotes.map(eachItem => (
+
+              {videoContent.notes && videoContent.notes.map(eachItem => (
                 <li className="notes-text">{eachItem}</li>
-              ))} */}
+              ))}
+
             </ul>
           </div>
           <div className={styleCommentsContainer}>
@@ -142,9 +144,9 @@ function VideoSection(props) {
             >
               Comment
             </button>
-            {/* {newCommentsArray.map(eachItem => (
+            {newCommentsArray && newCommentsArray.map(eachItem => (
               <CommentsList commentsItem={eachItem} />
-            ))} */}
+            ))}
           </div>
         </div>
       </div>

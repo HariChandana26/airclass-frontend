@@ -10,6 +10,7 @@ import VideoSection from 'components/VideoSection';
 import { NavLink } from 'react-router-dom';
 
 function CoursePage() {
+  console.log("in course page")
   const initialState = useSelector(state => state);
   const { global } = initialState;
   const { selectedCourseInfo } = global;
@@ -38,7 +39,7 @@ function CoursePage() {
         <div className="description-text-container">
           <h1 className="course-title1">{selectedCourseInfo[0].courseID.courseTitle}</h1>
           <p className="course-description">
-            {selectedCourseInfo[0].courseID.description}
+            {selectedCourseInfo[0].courseID.courseDescription}
           </p>
         </div>
       </div>
