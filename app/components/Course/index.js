@@ -66,10 +66,29 @@ let  filterCourse=[];
   //   });
 
   const updateSelectedCourse = () => {
-    dispatch({
-      type: 'UPDATE_SELECTED_COURSE',
-      courseinfo: coursedetails,
-    });
+    const getSelectedCourseInfo= async()=>{
+      let response = await  axios({
+      method: 'GET',
+      url: `${URL}/v1/contents/${coursedetails._id}`,
+    })
+    try{
+        if (response.statusText === 'OK' && response.status === 200) {
+          console.log("course response")
+          console.log(response)
+          dispatch({
+            type: 'UPDATE_SELECTED_COURSE',
+            courseinfo: response.data,
+          });
+       //const enrolledCourses = global.searchResultsEnrolledCourses;
+        }
+      }
+      catch(error){
+        console.log(error)
+      };
+    }
+
+    getSelectedCourseInfo();
+    
   };
 
   let enrollbtn;

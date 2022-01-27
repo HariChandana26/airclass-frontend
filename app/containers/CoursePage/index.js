@@ -14,6 +14,9 @@ function CoursePage() {
   const { global } = initialState;
   const { selectedCourseInfo } = global;
   const { selectedClassInfo } = global;
+  console.log("selectedCourseInfo")
+  console.log(selectedCourseInfo)
+  // const {selectedCourseTitile} =global;
 
   const [isSidebarVisible, setisSidebarVisible] = useState(true);
   const [courseSidebar, setCourseSidebar] = useState('course-sidebar-display');
@@ -33,9 +36,9 @@ function CoursePage() {
       <Header isHome />
       <div className="description-container">
         <div className="description-text-container">
-          <h1 className="course-title1">{selectedCourseInfo.courseTitle}</h1>
+          <h1 className="course-title1">{selectedCourseInfo[0].courseID.courseTitle}</h1>
           <p className="course-description">
-            {selectedCourseInfo.courseDescription}
+            {selectedCourseInfo[0].courseID.description}
           </p>
         </div>
       </div>
@@ -50,7 +53,7 @@ function CoursePage() {
             <ImCross className="cross-icon" onClick={displaySidebar} />
           </div>
           <div className="video-info">
-            {selectedCourseInfo.courseContents.map(eachItem => (
+            {selectedCourseInfo.map(eachItem => (
               <CourseContent
                 key={eachItem.id}
                 classContent={eachItem}

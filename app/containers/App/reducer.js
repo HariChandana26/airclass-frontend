@@ -499,8 +499,32 @@ export const initialState = {
   searchResultsAllCourses: detailedAllCourseInfo,
   searchResultsEnrolledCourses: [],
   searchResultsMasterClasses: detailedMasterClassInfo,
-  selectedCourseInfo: detailedAllCourseInfo[0],
-  selectedClassInfo: detailedAllCourseInfo[0].courseContents[0],
+  selectedCourseInfo: [
+    {
+        classTitle: "Introduction to Competitive Programming",
+        classLiked: 0,
+        classNotes: [],
+        classComments: [],
+        classVideo: "https://www.youtube.com/embed/pV6i3PucDMA",
+        classDuration: "20min",
+        _id: "61f1d8fe114c333330203b51",
+        courseID: {
+          description: "Competitive Programming helps you become a great Programmer and crack coding interviews and competitons. In this program you will learn Competitive Programming helps you become a great Programmer and crack coding interviews and competitons. In this program you will learn",
+            courseContents: [],
+          price: "1000",
+            courseImage: "https://admiring-ritchie-224d41.netlify.app/81a3666bb7497f4bf6a67c189e4ba378.png",
+            enrolledUsers: 1,
+            watchHours: 50,
+          _id: "61f1d8d3114c333330203b42",
+            courseTitle: "Backend Development",
+            courseInfo: "Build robust, scalable and secure backend APIs using the most sought after technologies in web development. Design and architect backends for data intensive and real time applications and deploy them on cloud.",
+            timestamp: "2022-01-26T23:27:15.672Z",
+            __v: 0
+        },
+        "timestamp": "2022-01-26T23:27:58.439Z",
+        "__v": 0
+    }],
+  selectedClassInfo: {},
   selectedMasterclassInfo: detailedMasterClassInfo[0],
   discussionList: [
     {
@@ -686,7 +710,12 @@ const wholeReducer = (state = initialState, action) =>
         }
         break;
       case 'PLAY_SELECTED_CLASS':
+        console.log("action.selectedClass")
+        console.log(action.selectedClass)
         draft.selectedClassInfo = action.selectedClass;
+        console.log("draft.selectedClassInfo")
+        console.log(draft.selectedClassInfo)
+
 
         break;
       case 'PLAY_SELECTED_MASTERCLASS': 
@@ -695,13 +724,19 @@ const wholeReducer = (state = initialState, action) =>
       break;
       case 'UPDATE_SELECTED_COURSE':
         {
-          const filterCourse = detailedAllCourseInfo.filter(
-            eachItem => eachItem.id === action.courseinfo.id,
-          );
-          const [courseinfo] = filterCourse;
-          const [coursecontents] = courseinfo.courseContents;
-          draft.selectedCourseInfo = courseinfo;
-          draft.selectedClassInfo = coursecontents;
+          // const filterCourse = detailedAllCourseInfo.filter(
+          //   eachItem => eachItem.id === action.courseinfo.id,
+          // );
+          // const [courseinfo] = filterCourse;
+          // const [coursecontents] = courseinfo.courseContents;
+          console.log("action.courseinfo")
+          console.log(action.courseinfo)
+          draft.selectedCourseInfo = action.courseinfo;
+          draft.selectedClassInfo = action.courseinfo[0];
+          console.log("courses selected");
+          console.log(draft.selectedCourseInfo);
+          console.log("class selected");
+          console.log(draft.selectedClassInfo);
         }
         break;
 

@@ -13,4 +13,4 @@ export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
 export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
 export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
 export const ENROLL_COURSE = 'boilerplate/App/ENROLL_COURSE';
-export const URL = 'http://localhost:5001';
+export const URL = 'https://boiling-bastion-58634.herokuapp.com';

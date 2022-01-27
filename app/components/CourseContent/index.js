@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 
 function CourseContent(props) {
   const { classContent } = props;
-
+console.log("classContent")
+console.log(classContent)
   const dispatch = useDispatch();
   const playSelectedClass = () =>
     dispatch({

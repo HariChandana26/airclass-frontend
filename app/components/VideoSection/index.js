@@ -122,9 +122,9 @@ function VideoSection(props) {
           </div>
           <div className={styleNotesContainer}>
             <ul className="notes-list">
-              {videoContent.classNotes.map(eachItem => (
+              {/* {videoContent.classNotes.map(eachItem => (
                 <li className="notes-text">{eachItem}</li>
-              ))}
+              ))} */}
             </ul>
           </div>
           <div className={styleCommentsContainer}>
@@ -142,9 +142,9 @@ function VideoSection(props) {
             >
               Comment
             </button>
-            {newCommentsArray.map(eachItem => (
+            {/* {newCommentsArray.map(eachItem => (
               <CommentsList commentsItem={eachItem} />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
