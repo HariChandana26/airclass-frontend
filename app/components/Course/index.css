@@ -21,11 +21,10 @@
     width: 250px;
 }
 .course-image{
-  height:140px;
+    height:140px;
     width: 250px;
     border-radius: 8px 8px 0px 0px;
     object-fit: cover;
- 
 }
 .course-title{
     margin-bottom:8px;

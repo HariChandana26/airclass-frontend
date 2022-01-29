@@ -3,7 +3,6 @@
     flex-direction:column;
     align-items:center;
     padding:20px;
-
 }
 .coursetitleInput{
     width: 74%;
@@ -58,7 +57,7 @@
     width:200px;
 }
 .uploadImage{
-margin-bottom:16px;
+    margin-bottom:16px;
 }
 @media screen and (max-width:425px){
     .addcourseContainer{
@@ -67,6 +66,6 @@ margin-bottom:16px;
 }
 @media screen and (max-width:425px){
     .coursetitleInput,.courseinfoInput{
-width:85%;
+        width:85%;
     }
 }

@@ -4,50 +4,40 @@ import Footer from 'components/Footer';
 import Course from 'components/Course';
 import Masterclass from 'components/Masterclass';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import Slider from 'react-slick';
 // import { Redirect } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import axios from 'axios';
+import Loader from 'components/Loader';
 import { URL } from '../App/constants';
 
 function Homepage() {
-  // if (!authorized) {
-  //   return <Redirect to="/login" />;
-  // }
   const initialState = useSelector(state => state);
   const { global } = initialState;
-  const dispatch = useDispatch(); 
-  let enrolledCourses;
-  useEffect(() => { 
-  const getCourses= async()=>{
-    let response = await axios({
-      method: 'GET',
-      url: `${URL}/v1/courses`,
-    }) 
-    try{
-    if (response.statusText === 'OK' && response.status === 200) {
-      const resData = await response
-      dispatch({
-        type: 'FETCH_ALL_COURSES',
-        coursesinfo: resData.data.courses,
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getCourses = async () => {
+      const response = await axios({
+        method: 'GET',
+        url: `${URL}/v1/courses`,
       });
-      
-    }
-  }catch(error){
-    console.log(error)
-    if (error.response.status === 401)
-    setError(error.response.data.message);
-  else if (error.response.status === 400)
-    setError(error.response.data.message);
-  else setError('Something went wrong. Please try again later.');
-  }
-  }
+      try {
+        if (response.statusText === 'OK' && response.status === 200) {
+          const resData = await response;
+          dispatch({
+            type: 'FETCH_ALL_COURSES',
+            coursesinfo: resData.data.courses,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getCourses();
-  
-    },[global.loggedinUserPurchased]);
+  }, [global.loggedinUserPurchased]);
   const config = {
     dots: true,
     infinite: false,
@@ -85,19 +75,12 @@ function Homepage() {
   };
 
   const settings = config;
- 
+
   const isHome = false;
 
- // const searchedAllCoursesInfo = global.searchResultsAllCourses;
-  const searchedAllCoursesInfo = global.allCoursesInfo
-  //let searchedAllCoursesInfo=[];
+  const searchedAllCoursesInfo = global.allCoursesInfo;
   const searchedEnrolledCoursesInfo = global.searchResultsEnrolledCourses;
   const searchedMasterclassInfo = global.searchResultsMasterClasses;
-  //const [searchInput, setsearchInput] = useState(searchedAllCoursesInfo);
-  // useEffect(()=>{
-  //    searchedAllCoursesInfo = global.searchResultsAllCourses;
-  //   //setsearchInput(searchedAllCoursesInfo)
-  // })
   let noAllResults = null;
   let noEnrolledResults = null;
   let noMasterclassResults = null;
@@ -114,7 +97,6 @@ function Homepage() {
       <h1 className="no-search-results">No results found</h1>
     );
   }
-
   return (
     <div className="page">
       <Header isHome={isHome} />
@@ -129,16 +111,20 @@ function Homepage() {
           {noAllResults}
           <div className="courses-display">
             <div className="courses-cards">
-            {searchedAllCoursesInfo.map(eachItem => (
-              <Course key={eachItem._id} coursedetails={eachItem} enrolledCourses={global.loggedinUserPurchased} isenroll />)
-)}
-    
-          </div>
+              {searchedAllCoursesInfo.map(eachItem => (
+                <Course
+                  key={eachItem._id}
+                  coursedetails={eachItem}
+                  enrolledCourses={global.loggedinUserPurchased}
+                  isenroll
+                />
+              ))}
+            </div>
 
-          <div className="arrow-container">
-            <MdOutlineArrowForwardIos className="arrow" />
+            <div className="arrow-container">
+              <MdOutlineArrowForwardIos className="arrow" />
+            </div>
           </div>
-</div>
           <div className="courses-container">
             <div className="courses-box">
               <h1 className="courses">Enrolled Courses</h1>
@@ -166,12 +152,9 @@ function Homepage() {
           </div>
           {noMasterclassResults}
           <div className="masterclass-container">
-            {searchedMasterclassInfo.map(eachItem => 
-              (
-                <Masterclass key={eachItem.id} coursedetails={eachItem} />
-            )
-             
-            )}
+            {searchedMasterclassInfo.map(eachItem => (
+              <Masterclass key={eachItem.id} coursedetails={eachItem} />
+            ))}
           </div>
         </div>
       </div>

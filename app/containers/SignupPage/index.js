@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
-
 import { URL } from '../App/constants';
 
 function SignupPage() {
@@ -36,8 +35,6 @@ function SignupPage() {
     })
       .then(function(response) {
         if (response.statusText === 'Created' && response.status === 201) {
-          // setUserSession(response.data.token, response.data.user);
-          // history.push('/homepage');
           setSuccess('Registered successfully. Please login');
           setError('');
         }

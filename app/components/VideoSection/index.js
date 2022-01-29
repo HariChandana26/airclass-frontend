@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import CommentsList from 'components/CommentsList';
 import { AiOutlineMenuFold, AiFillLike } from 'react-icons/ai';
 
 import { BiLike } from 'react-icons/bi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { URL } from '../../containers/App/constants';
 
 function VideoSection(props) {
+  const dispatch = useDispatch();
+  const initialState = useSelector(state => state);
+  const { global } = initialState;
+  const { commentsList } = global;
   const { videoContent, displaySidebar } = props;
-
   const [styleNotes, setStyleNotes] = useState('notes');
   const [styleComments, setStyleComments] = useState('comments-hide');
   const [styleNotesContainer, setStyleNotesContainer] = useState(
@@ -18,16 +23,48 @@ function VideoSection(props) {
   const [styleCommentsContainer, setStyleCommentsContainer] = useState(
     'comments-container-hide',
   );
-
   const [inputValue, setInputValue] = useState('');
-  const newCommentsArray = videoContent.comments;
-
-  const dispatch = useDispatch();
-  const addComment = () => {
-    dispatch({
-      type: 'ADD_COMMENT',
-      newComment: inputValue,
+  useEffect(() => {
+    const getComments = async () => {
+      if (videoContent._id) {
+        const response2 = await axios({
+          method: 'GET',
+          url: `${URL}/v1/comments/${videoContent._id}`,
+        });
+        try {
+          if (response2.statusText === 'OK' && response2.status === 200) {
+            dispatch({
+              type: 'GET_COMMENTS',
+              commentsinfo: response2.data,
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    getComments();
+  }, [videoContent]);
+  const clearCommentInput = () => {
+    setInputValue('');
+  };
+  const addComment = async () => {
+    const response = await axios({
+      method: 'POST',
+      url: `${URL}/v1/comments/create_newComment/${videoContent._id}`,
+      data: {
+        comment: inputValue,
+        userID: global.loggedinUserId,
+        name: global.loggedinUsername,
+        initialName: global.loggedinUserInitial,
+      },
     });
+    try {
+      dispatch({
+        type: 'ADD_COMMENT',
+        commentsinfo: response.data,
+      });
+    } catch (error) {}
     clearCommentInput();
   };
   const likeClass = () =>
@@ -54,10 +91,6 @@ function VideoSection(props) {
   const displaySidebarMenu = () => {
     displaySidebar();
   };
-  const clearCommentInput = () => {
-    setInputValue('');
-  };
-
   return (
     <div className="video-content">
       <div className="title-box-course">
@@ -122,11 +155,10 @@ function VideoSection(props) {
           </div>
           <div className={styleNotesContainer}>
             <ul className="notes-list">
-
-              {videoContent.notes && videoContent.notes.map(eachItem => (
-                <li className="notes-text">{eachItem}</li>
-              ))}
-
+              {videoContent.notes &&
+                videoContent.notes.map(eachItem => (
+                  <li className="notes-text">{eachItem}</li>
+                ))}
             </ul>
           </div>
           <div className={styleCommentsContainer}>
@@ -144,9 +176,10 @@ function VideoSection(props) {
             >
               Comment
             </button>
-            {newCommentsArray && newCommentsArray.map(eachItem => (
-              <CommentsList commentsItem={eachItem} />
-            ))}
+            {commentsList &&
+              commentsList.map(eachItem => (
+                <CommentsList key={eachItem._id} commentsItem={eachItem} />
+              ))}
           </div>
         </div>
       </div>

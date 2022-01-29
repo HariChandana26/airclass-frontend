@@ -9,8 +9,6 @@ import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
 import { URL } from '../App/constants';
 
-import { setUserSession } from '../../utils/common';
-
 function LoginPage() {
   const [errorMsg, setError] = useState(null);
   const history = useHistory();
@@ -25,9 +23,6 @@ function LoginPage() {
   const dispatch = useDispatch();
 
   const loginUser = () => {
-    const formdata = new FormData();
-    formdata.append('email', emailValue);
-    formdata.append('password', passwordValue);
     axios({
       method: 'POST',
       url: `${URL}/v1/auth/login`,
@@ -38,7 +33,6 @@ function LoginPage() {
     })
       .then(function(response) {
         if (response.statusText === 'OK' && response.status === 200) {
-          
           history.push('/homepage');
           dispatch({
             type: 'USER_LOGGEDIN',
@@ -46,18 +40,18 @@ function LoginPage() {
           });
         }
       })
-      .catch(function(error)  {
-        console.log(error)
-        // if (error.response.status === 401)
-        //   setError(error.response.data.message);
-        // else if (error.response.status === 400)
-        //   setError(error.response.data.message);
-        // else setError('Something went wrong. Please try again later.');
-        if (error.code === 401)
-          setError(error.message);
-        else if (error.status === 400)
-          setError(error.message);
+      .catch(function(error) {
+        console.log(error);
+        if (error.response.status === 401)
+          setError(error.response.data.message);
+        else if (error.response.status === 400)
+          setError(error.response.data.message);
         else setError('Something went wrong. Please try again later.');
+        // if (error.code === 401)
+        //   setError(error.message);
+        // else if (error.status === 400)
+        //   setError(error.message);
+        // else setError('Something went wrong. Please try again later.');
       });
   };
   return (
@@ -104,7 +98,6 @@ function LoginPage() {
                 <br />
               </>
             )}
-            {/* <NavLink className=" nav-link-login" to="/homepage"> */}
             <button
               type="button"
               className="username login-btn"
@@ -112,7 +105,6 @@ function LoginPage() {
             >
               Login
             </button>
-            {/* </NavLink> */}
 
             <p className="continue-with">or continue with</p>
             <div className="login-icons">
