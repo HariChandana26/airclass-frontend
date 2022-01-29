@@ -3,7 +3,6 @@ import CourseContent from 'components/CourseContent';
 import Header from 'components/Header';
 import { BiArrowBack } from 'react-icons/bi';
 import React, { useState } from 'react';
-
 import { ImCross } from 'react-icons/im';
 import { useSelector } from 'react-redux';
 import VideoSection from 'components/VideoSection';
@@ -14,7 +13,6 @@ function CoursePage() {
   const { global } = initialState;
   const { selectedCourseInfo } = global;
   const { selectedClassInfo } = global;
-
   const [isSidebarVisible, setisSidebarVisible] = useState(true);
   const [courseSidebar, setCourseSidebar] = useState('course-sidebar-display');
   const [menuBox, setMenuBox] = useState(false);
@@ -33,9 +31,11 @@ function CoursePage() {
       <Header isHome />
       <div className="description-container">
         <div className="description-text-container">
-          <h1 className="course-title1">{selectedCourseInfo.courseTitle}</h1>
+          <h1 className="course-title1">
+            {selectedCourseInfo[0].courseID.courseTitle}
+          </h1>
           <p className="course-description">
-            {selectedCourseInfo.courseDescription}
+            {selectedCourseInfo[0].courseID.courseDescription}
           </p>
         </div>
       </div>
@@ -50,9 +50,9 @@ function CoursePage() {
             <ImCross className="cross-icon" onClick={displaySidebar} />
           </div>
           <div className="video-info">
-            {selectedCourseInfo.courseContents.map(eachItem => (
+            {selectedCourseInfo.map(eachItem => (
               <CourseContent
-                key={eachItem.id}
+                key={eachItem._id}
                 classContent={eachItem}
                 className="video-selected"
               />

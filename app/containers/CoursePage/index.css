@@ -232,16 +232,16 @@ width:100%;
     padding:10px 20px 30px 20px;
 }
 .comments-container-hide{
-    display:none;
+        display:none;
 }
 .comment-input{
     width:100%;
-border:none;
-border-bottom:1px solid #494a4d;
-font-size:14px;
-font-weight:500;
-color:black;
-outline:none;
+    border:none;
+    border-bottom:1px solid #494a4d;
+    font-size:14px;
+    font-weight:500;
+    color:black;
+        outline:none;
 }
 .comment-button{
     width: 88px;
@@ -264,45 +264,36 @@ outline:none;
         margin-top:60px !important;
         padding:4px;
         display: flex;
-    flex-direction: column;
-   justify-content:center;
-    align-items:center;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
     }
     .description-text-container{
-        
       padding:8px;
       width:60%;
     }
-   
-    
     .title{
         font-size:16px;
         font-weight:500;
     }
-    
-    
-   .cross-icon{
-       
-   }
     .course-sidebar{
         visibility: visible;
         position: absolute;
-z-index: 100;
-max-width:380px;
-min-width:300px;
-background-color:#1B2B50;
-padding:20px;
-
-    }
+        z-index: 100;
+        max-width:380px;
+        min-width:300px;
+        background-color:#1B2B50;
+        padding:20px;
+  }
     .course-sidebar-display{
-visibility: hidden;
-width:0px;
-display: none;
+        visibility: hidden;
+        width:0px;
+        display: none;
     }
     .video{
         max-height:700px;
         max-width:900px;
-  min-height:300px;
+        min-height:300px;
     }
     .video-display{
         padding:24px 0px 20px 0px;
@@ -312,29 +303,23 @@ display: none;
         flex-direction:column;
         width:85%;
         padding:0px 8px 4px 8px;
-    }
-    
-    }
+    }  
+}
 .collapsible-sidebar-menu{
     display:flex;
     width:100%;
 }
 @media screen and (max-width: 768px) {
-   
     .video{
         max-height:400px;
         max-width:600px;  
-    }
-    .course-sidebar{
-       
     }
     .title-box{
         height:50px;
     }
     .menu-icon-box{
-       width:30px;
-   height:30px;
-         
+        width:30px;
+        height:30px;         
      }
      .home{
          margin:0 8px 0 8px;

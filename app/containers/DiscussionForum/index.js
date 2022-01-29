@@ -40,7 +40,6 @@ function DiscussionForum() {
                       type="button"
                       className="closeBtn"
                       onClick={() => {
-                        // console.log('modal closed ');
                         close();
                       }}
                     >

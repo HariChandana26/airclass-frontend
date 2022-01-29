@@ -12,13 +12,10 @@ function AddCoursePopup() {
   const [success, setSuccess] = useState('');
   const maxNumber = 1;
   const onChange = imageList => {
-    // data for submit
-    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
   const addCourse = (task = [images, coursetitleValue, courseinfoValue]) => {
     if (!images || !coursetitleValue || !courseinfoValue) {
-      // alert('enter required details');
       setError('Enter Required details');
       setSuccess('');
     } else {

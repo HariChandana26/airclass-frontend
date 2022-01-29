@@ -45,11 +45,10 @@
     
   }
 .courses-display{
-  display:flex;
+    display:flex;
 }
   .courses-box{
-    border-bottom: 1px solid rgba(123, 135, 148, 0.24);
-    
+    border-bottom: 1px solid rgba(123, 135, 148, 0.24); 
   }
   .courses-cards{
     display:flex;
