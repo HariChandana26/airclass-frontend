@@ -4,7 +4,7 @@ import Footer from 'components/Footer';
 import Course from 'components/Course';
 import Masterclass from 'components/Masterclass';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Slider from 'react-slick';
 // import { Redirect } from 'react-router-dom';
@@ -12,31 +12,31 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import LoadingSpinnerComponent from 'components/LoadingIndicator';
-import { URL } from '../App/constants';
 import { trackPromise } from 'react-promise-tracker';
 import { usePromiseTracker } from "react-promise-tracker";
+import { URL } from '../App/constants';
 
 function Homepage() {
   const initialState = useSelector(state => state);
   const { global } = initialState;
   const dispatch = useDispatch();
   useEffect(() => {
-    const getCourses =  () => {
+    const getCourses = () => {
       trackPromise(
-       axios.get(`${URL}/v1/courses`)
-      .then(function(response) {
-        if (response.statusText === 'OK' && response.status === 200) {
-          const resData = response;
-          dispatch({
-            type: 'FETCH_ALL_COURSES',
-            coursesinfo: resData.data.courses,
-          });
-        }
-      }).catch(function(error) {
-        console.log(error);
-      }))
+        axios.get(`${URL}/v1/courses`)
+          .then(function(response) {
+            if (response.statusText === 'OK' && response.status === 200) {
+              const resData = response;
+              dispatch({
+                type: 'FETCH_ALL_COURSES',
+                coursesinfo: resData.data.courses,
+              });
+            }
+          }).catch(function(error) {
+            console.log(error);
+          }))
     };
-      
+
     getCourses();
   }, []);
   const config = {
@@ -78,7 +78,7 @@ function Homepage() {
   const settings = config;
 
   const isHome = false;
-  const { promiseInProgress } = usePromiseTracker()
+  const { promiseInProgress } = usePromiseTracker();
   const searchedAllCoursesInfo = global.allCoursesInfo;
   const searchedEnrolledCoursesInfo = global.searchResultsEnrolledCourses;
   const searchedMasterclassInfo = global.searchResultsMasterClasses;
@@ -101,72 +101,69 @@ function Homepage() {
   return (
     <div className="page">
       <Header isHome={isHome} />
-      
+
       <div className="body">
-       
         <div className="content">
-        {promiseInProgress ? <LoadingSpinnerComponent/>: 
-        <div>
-          
-          <h3 className="displayname">Hi {global.loggedinUsername},</h3>
-          <div className="courses-container">
-            <div className="courses-box">
-              <h1 className="courses">Courses</h1>
-            </div>
-          </div>
-          {noAllResults}
-          <div className="courses-display">
-            <div className="courses-cards">
-              {searchedAllCoursesInfo.map(eachItem => (
-                <Course
-                  key={eachItem._id}
-                  coursedetails={eachItem}
-                  enrolledCourses={global.loggedinUserPurchased}
-                  isenroll
-                />
-              ))}
-            </div>
+          {promiseInProgress ? <LoadingSpinnerComponent/>: 
+            <div>
+              <h3 className="displayname">Hi {global.loggedinUsername},</h3>
+              <div className="courses-container">
+                <div className="courses-box">
+                  <h1 className="courses">Courses</h1>
+                </div>
+              </div>
+              {noAllResults}
+              <div className="courses-display">
+                <div className="courses-cards">
+                  {searchedAllCoursesInfo.map(eachItem => (
+                    <Course
+                      key={eachItem._id}
+                      coursedetails={eachItem}
+                      enrolledCourses={global.loggedinUserPurchased}
+                      isenroll
+                    />
+                  ))}
+                </div>
 
-            <div className="arrow-container">
-              <MdOutlineArrowForwardIos className="arrow" />
+                <div className="arrow-container">
+                  <MdOutlineArrowForwardIos className="arrow" />
+                </div>
+              </div>
+              <div className="courses-container">
+                <div className="courses-box">
+                  <h1 className="courses">Enrolled Courses</h1>
+                </div>
+              </div>
+              {noEnrolledResults}
+              <div className="courses-display">
+                <div className="courses-cards">
+                  {searchedEnrolledCoursesInfo.map(eachItem => (
+                    <Course
+                      key={eachItem._id}
+                      coursedetails={eachItem}
+                      isenroll={false}
+                    />
+                  ))}
+                </div>
+                <div className="arrow-container">
+                  <MdOutlineArrowForwardIos className="arrow" />
+                </div>
+              </div>
+              <div className="courses-container">
+                <div className="courses-box">
+                  <h1 className="courses">Masterclass Series</h1>
+                </div>
+              </div>
+              {noMasterclassResults}
+              <div className="masterclass-container">
+                {searchedMasterclassInfo.map(eachItem => (
+                  <Masterclass key={eachItem.id} coursedetails={eachItem} />
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="courses-container">
-            <div className="courses-box">
-              <h1 className="courses">Enrolled Courses</h1>
-            </div>
-          </div>
-          {noEnrolledResults}
-          <div className="courses-display">
-            <div className="courses-cards">
-              {searchedEnrolledCoursesInfo.map(eachItem => (
-                <Course
-                  key={eachItem._id}
-                  coursedetails={eachItem}
-                  isenroll={false}
-                />
-              ))}
-            </div>
-            <div className="arrow-container">
-              <MdOutlineArrowForwardIos className="arrow" />
-            </div>
-          </div>
-          <div className="courses-container">
-            <div className="courses-box">
-              <h1 className="courses">Masterclass Series</h1>
-            </div>
-          </div>
-          {noMasterclassResults}
-          <div className="masterclass-container">
-            {searchedMasterclassInfo.map(eachItem => (
-              <Masterclass key={eachItem.id} coursedetails={eachItem} />
-            ))}
-          </div>
-
+          }
         </div>
-}
       </div>
-    </div>
       <Footer />
     </div>
   );

@@ -1,10 +1,8 @@
 import './index.css';
 import React, { useState } from 'react';
-import {useSelector,  useDispatch } from 'react-redux';
-import { URL } from '../../containers/App/constants';
-import { trackPromise } from 'react-promise-tracker';
-import { usePromiseTracker } from "react-promise-tracker";
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { URL } from '../../containers/App/constants';
 
 function AddDiscussionPopup() {
   const dispatch = useDispatch();
@@ -25,21 +23,27 @@ function AddDiscussionPopup() {
       setError('Enter Required details');
       setSuccess('');
     } else {
-      axios.post(`${URL}/v1/discussions/create_newDiscussion/${global.loggedinUserId}`,{   
-    discussionTitle: discussiontitleValue,
-    discussionInfo: discussioninfoValue,
-    name: global.loggedinUsername,
-    initialName: global.loggedinUserInitial
-      }).then(function(response){
-        dispatch({
-          type: 'ADD_DISCUSSION',
-          discussioninfo: response.data,
+      axios
+        .post(
+          `${URL}/v1/discussions/create_newDiscussion/${global.loggedinUserId}`,
+          {
+            discussionTitle: discussiontitleValue,
+            discussionInfo: discussioninfoValue,
+            name: global.loggedinUsername,
+            initialName: global.loggedinUserInitial,
+          },
+        )
+        .then(function(response) {
+          dispatch({
+            type: 'ADD_DISCUSSION',
+            discussioninfo: response.data,
+          });
+          setSuccess('Discussion posted successfully');
+          setError('');
+        })
+        .catch(function(err) {
+          console.log(err);
         });
-        setSuccess('Discussion posted successfully');
-      setError('');
-      }).catch(function(error){
-        console.log(error)
-      }) 
     }
   };
 
