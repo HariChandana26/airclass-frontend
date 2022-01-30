@@ -76,6 +76,10 @@
     overflow-x: scroll;
     scrollbar-width: none ;
   }
+  .homepage-loader{
+    min-height:100vh;
+    align-self:center;
+  }
 /*   
   .slider{
     display:flex;

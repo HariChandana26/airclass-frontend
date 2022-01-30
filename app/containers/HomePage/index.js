@@ -11,33 +11,34 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
-import Loader from 'components/Loader';
+import LoadingSpinnerComponent from 'components/LoadingIndicator';
 import { URL } from '../App/constants';
+import { trackPromise } from 'react-promise-tracker';
+import { usePromiseTracker } from "react-promise-tracker";
 
 function Homepage() {
   const initialState = useSelector(state => state);
   const { global } = initialState;
   const dispatch = useDispatch();
   useEffect(() => {
-    const getCourses = async () => {
-      const response = await axios({
-        method: 'GET',
-        url: `${URL}/v1/courses`,
-      });
-      try {
+    const getCourses =  () => {
+      trackPromise(
+       axios.get(`${URL}/v1/courses`)
+      .then(function(response) {
         if (response.statusText === 'OK' && response.status === 200) {
-          const resData = await response;
+          const resData = response;
           dispatch({
             type: 'FETCH_ALL_COURSES',
             coursesinfo: resData.data.courses,
           });
         }
-      } catch (error) {
+      }).catch(function(error) {
         console.log(error);
-      }
+      }))
     };
+      
     getCourses();
-  }, [global.loggedinUserPurchased]);
+  }, []);
   const config = {
     dots: true,
     infinite: false,
@@ -77,7 +78,7 @@ function Homepage() {
   const settings = config;
 
   const isHome = false;
-
+  const { promiseInProgress } = usePromiseTracker()
   const searchedAllCoursesInfo = global.allCoursesInfo;
   const searchedEnrolledCoursesInfo = global.searchResultsEnrolledCourses;
   const searchedMasterclassInfo = global.searchResultsMasterClasses;
@@ -100,8 +101,13 @@ function Homepage() {
   return (
     <div className="page">
       <Header isHome={isHome} />
+      
       <div className="body">
+       
         <div className="content">
+        {promiseInProgress ? <LoadingSpinnerComponent/>: 
+        <div>
+          
           <h3 className="displayname">Hi {global.loggedinUsername},</h3>
           <div className="courses-container">
             <div className="courses-box">
@@ -156,8 +162,11 @@ function Homepage() {
               <Masterclass key={eachItem.id} coursedetails={eachItem} />
             ))}
           </div>
+
         </div>
+}
       </div>
+    </div>
       <Footer />
     </div>
   );

@@ -20,6 +20,7 @@ import ProfilePage from 'containers/ProfilePage';
 import DiscussionForum from 'containers/DiscussionForum';
 import DiscussionSolutionsPage from 'containers/DiscussionSolutionsPage';
 import configureStore from '../../configureStore';
+import LoadingSpinnerComponent  from 'components/Loader'
 
 export default function App() {
   const store = configureStore();
@@ -51,7 +52,9 @@ export default function App() {
             path="/discussionsolutions"
             component={DiscussionSolutionsPage}
           />
+          
         </Switch>
+        
 
         {/* <div> 
           <Switch>

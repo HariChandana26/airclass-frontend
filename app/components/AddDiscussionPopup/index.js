@@ -1,9 +1,15 @@
 import './index.css';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import {useSelector,  useDispatch } from 'react-redux';
+import { URL } from '../../containers/App/constants';
+import { trackPromise } from 'react-promise-tracker';
+import { usePromiseTracker } from "react-promise-tracker";
+import axios from 'axios';
 
 function AddDiscussionPopup() {
   const dispatch = useDispatch();
+  const initialState = useSelector(state => state);
+  const { global } = initialState;
   const [discussiontitleValue, setdiscussiontitleValue] = useState('');
   const [discussioninfoValue, setdiscussioninfoValue] = useState('');
   const [error, setError] = useState('');
@@ -14,19 +20,26 @@ function AddDiscussionPopup() {
   const updateInfoInput = event => {
     setdiscussioninfoValue(event.target.value);
   };
-  const addDiscussion = (
-    task = [discussiontitleValue, discussioninfoValue],
-  ) => {
+  const addDiscussion = () => {
     if (!discussiontitleValue || !discussioninfoValue) {
       setError('Enter Required details');
       setSuccess('');
     } else {
-      dispatch({
-        type: 'ADD_DISCUSSION',
-        discussioninfo: task,
-      });
-      setSuccess('Discussion posted successfully');
+      axios.post(`${URL}/v1/discussions/create_newDiscussion/${global.loggedinUserId}`,{   
+    discussionTitle: discussiontitleValue,
+    discussionInfo: discussioninfoValue,
+    name: global.loggedinUsername,
+    initialName: global.loggedinUserInitial
+      }).then(function(response){
+        dispatch({
+          type: 'ADD_DISCUSSION',
+          discussioninfo: response.data,
+        });
+        setSuccess('Discussion posted successfully');
       setError('');
+      }).catch(function(error){
+        console.log(error)
+      }) 
     }
   };
 

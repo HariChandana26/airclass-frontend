@@ -240,6 +240,11 @@
         width:90% !important;
       }
     }
+    @media screen and (max-width:1440px){
+      .popup-content{
+        width:80% !important;
+      }
+    }
     @media screen and (max-width:432px){
       .courses{
        font-size:16px;

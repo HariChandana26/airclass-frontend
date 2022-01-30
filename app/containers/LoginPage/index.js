@@ -8,6 +8,9 @@ import { useDispatch } from 'react-redux';
 import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
 import { URL } from '../App/constants';
+import { trackPromise } from 'react-promise-tracker';
+import { usePromiseTracker } from "react-promise-tracker";
+import LoadingSpinnerComponent from 'components/LoadingIndicator';
 
 function LoginPage() {
   const [errorMsg, setError] = useState(null);
@@ -23,13 +26,10 @@ function LoginPage() {
   const dispatch = useDispatch();
 
   const loginUser = () => {
-    axios({
-      method: 'POST',
-      url: `${URL}/v1/auth/login`,
-      data: {
+    trackPromise(
+    axios.post(`${URL}/v1/auth/login`,{
         email: emailValue,
         password: passwordValue,
-      },
     })
       .then(function(response) {
         if (response.statusText === 'OK' && response.status === 200) {
@@ -47,14 +47,12 @@ function LoginPage() {
         else if (error.response.status === 400)
           setError(error.response.data.message);
         else setError('Something went wrong. Please try again later.');
-        // if (error.code === 401)
-        //   setError(error.message);
-        // else if (error.status === 400)
-        //   setError(error.message);
-        // else setError('Something went wrong. Please try again later.');
-      });
+      })
+    )
   };
+  const { promiseInProgress } = usePromiseTracker()
   return (
+    promiseInProgress ? <LoadingSpinnerComponent/>: 
     <>
       <div className="login-container">
         <div className="login">
@@ -101,7 +99,7 @@ function LoginPage() {
             <button
               type="button"
               className="username login-btn"
-              onClick={loginUser}
+              onClick={()=>loginUser()}
             >
               Login
             </button>
