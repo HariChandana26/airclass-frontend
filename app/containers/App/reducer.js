@@ -208,6 +208,11 @@ export const initialState = {
       },
     ],
   },
+  discussionList:[],
+  selectedDiscussion: [],
+  selectedDiscussion: {},
+  discussionSolutions: [],
+  selectedDiscussionSolutions:{}
 };
 
 const wholeReducer = (state = initialState, action) =>
@@ -336,16 +341,23 @@ const wholeReducer = (state = initialState, action) =>
           draft.selectedDiscussionSolutions = solution;
         }
         break;
+        case 'UPDATE_SELECTED_DISCUSSION':{
+          const selectedDiscussionDetails=action.discussioninfo[0]
+          const solutions=action.discussioninfo[1]
+          draft.selectedDiscussion=selectedDiscussionDetails
+          draft.selectedDiscussionSolutions=solutions
+        }
+        break;
       case 'ADD_SOLUTION':
         {
           const newSolution = {
-            id: state.selectedDiscussionSolutions.solutions.length + 1,
-            discussionOwnerName: draft.loggedinUsername,
-            discussionOwnerInitial: draft.loggedinUserInitial,
-            discussionSolution: action.solutioninfo,
+            _id: action.solutioninfo._id,
+            name: action.solutioninfo.name,
+            initialName: action.solutioninfo.initialName,
+            discussionReply: action.solutioninfo.discussionReply,
           };
-          draft.selectedDiscussionSolutions.solutions = [
-            ...draft.selectedDiscussionSolutions.solutions,
+          draft.selectedDiscussionSolutions = [
+            ...draft.selectedDiscussionSolutions,
             newSolution,
           ];
         }
@@ -353,11 +365,11 @@ const wholeReducer = (state = initialState, action) =>
       case 'ADD_DISCUSSION':
         {
           const newDiscussion = {
-            id: state.discussionList.length + 1,
-            discussionTitle: action.discussioninfo[0],
-            discussionInfo: action.discussioninfo[1],
-            discussionOwnerName: draft.loggedinUsername,
-            discussionOwnerInitial: draft.loggedinUserInitial,
+            _id: action.discussioninfo._id,
+            discussionTitle: action.discussioninfo.discussionTitle,
+            discussionInfo: action.discussioninfo.discussionInfo,
+            name: action.discussioninfo.name,
+            initialName: action.discussioninfo.initialName,
           };
           draft.discussionList = [...draft.discussionList, newDiscussion];
         }
@@ -383,6 +395,10 @@ const wholeReducer = (state = initialState, action) =>
           });
           draft.initialEnrolledCourseInfo = enrolledCourses;
           draft.searchResultsEnrolledCourses = enrolledCourses;
+        }
+        break;
+        case 'FETCH_ALL_DISCUSSIONS':{
+          draft.discussionList=action.discussioninfo;
         }
         break;
       case 'GET_COMMENTS':

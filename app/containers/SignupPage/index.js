@@ -7,6 +7,9 @@ import axios from 'axios';
 import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
 import { URL } from '../App/constants';
+import { trackPromise } from 'react-promise-tracker';
+import { usePromiseTracker } from "react-promise-tracker";
+import LoadingSpinnerComponent from 'components/LoadingIndicator';
 
 function SignupPage() {
   const [errorMsg, setError] = useState(null);
@@ -23,32 +26,40 @@ function SignupPage() {
   const updatePassword = event => {
     setPasswordValue(event.target.value);
   };
+  const sleep=(milliseconds) =>{
+    let timeStart = new Date().getTime();
+    while (true) {
+        let elapsedTime = new Date().getTime() - timeStart;
+        if (elapsedTime > milliseconds) {
+            break;
+        }
+    }
+}
   const RegisterUser = () => {
-    axios({
-      method: 'POST',
-      url: `${URL}/v1/auth/register`,
-      data: {
+    trackPromise(
+    axios.post(`${URL}/v1/auth/register`,{
         name: nameValue,
         email: emailValue,
         password: passwordValue,
-      },
-    })
+      })
       .then(function(response) {
         if (response.statusText === 'Created' && response.status === 201) {
           setSuccess('Registered successfully. Please login');
           setError('');
         }
       })
-      .catch(error => {
+      .catch(function(error) {
         if (error.response.status === 401)
           setError(error.response.data.message);
         else if (error.response.status === 400)
           setError(error.response.data.message);
         else setError('Something went wrong. Please try again later.');
         setSuccess('');
-      });
+      }))
   };
+  const { promiseInProgress } = usePromiseTracker()
   return (
+    promiseInProgress ? <LoadingSpinnerComponent/>: 
     <>
       <div className="signup-container">
         <div className="login">

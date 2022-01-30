@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './index.css';
 import CommentsList from 'components/CommentsList';
 import { AiOutlineMenuFold, AiFillLike } from 'react-icons/ai';
-
 import { BiLike } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,6 +12,8 @@ function VideoSection(props) {
   const dispatch = useDispatch();
   const initialState = useSelector(state => state);
   const { global } = initialState;
+  const [errorMsg, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const { commentsList } = global;
   const { videoContent, displaySidebar } = props;
   const [styleNotes, setStyleNotes] = useState('notes');
@@ -49,6 +50,11 @@ function VideoSection(props) {
     setInputValue('');
   };
   const addComment = async () => {
+    if(!inputValue){
+      setError('Enter your Comment')
+      setSuccess('')
+    }
+    else{
     const response = await axios({
       method: 'POST',
       url: `${URL}/v1/comments/create_newComment/${videoContent._id}`,
@@ -64,7 +70,12 @@ function VideoSection(props) {
         type: 'ADD_COMMENT',
         commentsinfo: response.data,
       });
-    } catch (error) {}
+      setError('')
+      setSuccess('Comment added successfully')
+    } catch (error) {
+      console.log(error)
+    }
+  }
     clearCommentInput();
   };
   const likeClass = () =>
@@ -75,6 +86,7 @@ function VideoSection(props) {
 
   const updateInputValue = event => {
     setInputValue(event.target.value);
+    setSuccess('')
   };
   const changeStyleComments = () => {
     setStyleComments('comments');
@@ -157,7 +169,7 @@ function VideoSection(props) {
             <ul className="notes-list">
               {videoContent.notes &&
                 videoContent.notes.map(eachItem => (
-                  <li className="notes-text">{eachItem}</li>
+                  <li key={eachItem} className="notes-text">{eachItem}</li>
                 ))}
             </ul>
           </div>
@@ -169,6 +181,18 @@ function VideoSection(props) {
               value={inputValue}
               onChange={updateInputValue}
             />
+            {success && (
+              <>
+                <small style={{ color: 'green' }}>{success}</small>
+                <br />
+              </>
+            )}
+            {errorMsg && (
+              <>
+                <small style={{ color: 'red' }}>{errorMsg}</small>
+                <br /> <br />
+              </>
+            )}
             <button
               type="button"
               className="comment-button"

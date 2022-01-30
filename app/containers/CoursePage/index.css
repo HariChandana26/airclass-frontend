@@ -242,6 +242,7 @@ width:100%;
     font-weight:500;
     color:black;
         outline:none;
+        margin-bottom:20px;
 }
 .comment-button{
     width: 88px;
@@ -253,7 +254,6 @@ width:100%;
     color:white;
     text-transform:white;
     align-self:flex-end;
-    margin-top:8px;
 }
 .video{
     height:600px;
