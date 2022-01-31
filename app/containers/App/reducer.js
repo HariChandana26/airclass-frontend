@@ -8,6 +8,8 @@
  */
 
 import produce from 'immer';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import understanding5GImg from '../../images/understanding-5G.png';
 
 const detailedMasterClassInfo = [
@@ -69,150 +71,38 @@ const detailedMasterClassInfo = [
   },
 ];
 // The initial state of the App
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 export const initialState = {
-  isLoading: true,
   allCoursesInfo: [],
   loggedinUserRole: 'user',
-  loggedinUserId: '61f123f3e594244b30725cec',
-  loggedinUsername: 'Hari Chandana Sapare',
-  loggedinUserFirstname: 'Hari Chandana',
-  loggedinUserLastname: 'Sapare',
-  loggedinUserInitial: 'HS',
-  loggedinUserEmail: 'sapareharichandana@gmail.com',
+  loggedinUserId: '',
+  loggedinUsername: '',
+  loggedinUserFirstname: '',
+  loggedinUserLastname: '',
+  loggedinUserInitial: '',
+  loggedinUserEmail: '',
   loggedinUserPurchased: [],
-  loggedinUserMobileNumber: '1234567890',
-  loggedinUserDateofBirth: '00/00/0000',
-  loggedinUserOccupation: 'Student',
+  loggedinUserMobileNumber: '',
+  loggedinUserDateofBirth: '',
+  loggedinUserOccupation: '',
   initialAllCoursesInfo: [],
   initialEnrolledCourseInfo: [],
-
   masterclassInfo: detailedMasterClassInfo,
   searchResultsAllCourses: [],
   searchResultsEnrolledCourses: [],
   searchResultsMasterClasses: detailedMasterClassInfo,
-  selectedCourseInfo: [
-    {
-      classTitle: 'Introduction to Competitive Programming',
-      classLiked: 0,
-      classNotes: [],
-      comments: [],
-      classVideo: 'https://www.youtube.com/embed/pV6i3PucDMA',
-      classDuration: '20min',
-      _id: '61f1d8fe114c333330203b51',
-      courseID: {
-        description:
-          'Competitive Programming helps you become a great Programmer and crack coding interviews and competitons. In this program you will learn Competitive Programming helps you become a great Programmer and crack coding interviews and competitons. In this program you will learn',
-        courseContents: [],
-        price: '1000',
-        courseImage:
-          'https://admiring-ritchie-224d41.netlify.app/81a3666bb7497f4bf6a67c189e4ba378.png',
-        enrolledUsers: 1,
-        watchHours: 50,
-        _id: '61f1d8d3114c333330203b42',
-        courseTitle: 'Backend Development',
-        courseInfo:
-          'Build robust, scalable and secure backend APIs using the most sought after technologies in web development. Design and architect backends for data intensive and real time applications and deploy them on cloud.',
-        timestamp: '2022-01-26T23:27:15.672Z',
-        __v: 0,
-      },
-      timestamp: '2022-01-26T23:27:58.439Z',
-      __v: 0,
-    },
-  ],
-  commentsList: [
-    {
-      _id: 1,
-      initial: 'HS',
-      username: 'Hari Chandana Sapare',
-      comment: 'this video lecture is very good',
-    },
-  ],
+  selectedCourseInfo: [],
+  commentsList: [],
   selectedClassInfo: {},
   selectedMasterclassInfo: detailedMasterClassInfo[0],
-  discussionList: [
-    {
-      id: 1,
-      discussionTitle: 'How to setup ide how to setup ide how to setup ide',
-      discussionInfo:
-        'How to setup ide for practising coding quesions How to setup ide for practising coding quesions How to setup ide for practising coding quesions How to setup ide for practising coding quesions How to setup ide for practising coding quesions How to setup ide for practising coding quesions How to setup ide for practising coding quesions',
-      discussionOwnerName: 'Hari Chandana Sapare',
-      discussionOwnerInitial: 'HS',
-    },
-    {
-      id: 2,
-      discussionTitle: 'How to update ide',
-      discussionInfo:
-        'How to update ide for practising coding quesions.........................',
-      discussionOwnerName: 'Hari Chandana Sapare',
-      discussionOwnerInitial: 'HS',
-    },
-  ],
-  selectedDiscussion: {
-    id: 1,
-    discussionTitle: 'How to setup ide',
-    discussionInfo:
-      'How to setup ide for practising coding quesions.........................',
-    discussionOwnerName: 'Hari Chandana Sapare',
-    discussionOwnerInitial: 'HS',
-  },
-  discussionSolutions: [
-    {
-      id: 1,
-      solutions: [
-        {
-          id: 1,
-          discussionOwnerName: 'Hari Chandana Sapare',
-          discussionOwnerInitial: 'HS',
-          discussionSolution: 'Setup ide in the below way',
-        },
-        {
-          id: 2,
-          discussionOwnerName: 'Hari Chandana Sapare',
-          discussionOwnerInitial: 'HS',
-          discussionSolution: '...............................................',
-        },
-      ],
-    },
-    {
-      id: 2,
-      solutions: [
-        {
-          id: 1,
-          discussionOwnerName: 'XXX YYYYYYYY',
-          discussionOwnerInitial: 'XY',
-          discussionSolution: 'Update ide in the below way',
-        },
-        {
-          id: 2,
-          discussionOwnerName: 'Hari Chandana Sapare',
-          discussionOwnerInitial: 'HS',
-          discussionSolution: '...............................................',
-        },
-      ],
-    },
-  ],
-  selectedDiscussionSolutions: {
-    id: 1,
-    solutions: [
-      {
-        id: 1,
-        discussionOwnerName: 'Hari Chandana Sapare',
-        discussionOwnerInitial: 'HS',
-        discussionSolution: 'Setup ide in the below way',
-      },
-      {
-        id: 2,
-        discussionOwnerName: 'Hari Chandana Sapare',
-        discussionOwnerInitial: 'HS',
-        discussionSolution: '...............................................',
-      },
-    ],
-  },
-  discussionList:[],
-  selectedDiscussion: [],
+  discussionList: [],
   selectedDiscussion: {},
   discussionSolutions: [],
-  selectedDiscussionSolutions:{}
+  selectedDiscussionSolutions: {},
 };
 
 const wholeReducer = (state = initialState, action) =>
@@ -299,12 +189,12 @@ const wholeReducer = (state = initialState, action) =>
         draft.selectedMasterclassInfo = action.selectedMasterclass;
 
         break;
-      case 'UPDATE_SELECTED_COURSE':
+      case 'UPDATE_SELECTED_COURSE':{
         draft.selectedCourseInfo = action.courseinfo;
         const [selectedCourse] = action.courseinfo;
         draft.selectedClassInfo = selectedCourse;
+      }
         break;
-
       case 'ADD_COMMENT':
         {
           const newComment = {
@@ -341,11 +231,12 @@ const wholeReducer = (state = initialState, action) =>
           draft.selectedDiscussionSolutions = solution;
         }
         break;
-        case 'UPDATE_SELECTED_DISCUSSION':{
-          const selectedDiscussionDetails=action.discussioninfo[0]
-          const solutions=action.discussioninfo[1]
-          draft.selectedDiscussion=selectedDiscussionDetails
-          draft.selectedDiscussionSolutions=solutions
+      case 'UPDATE_SELECTED_DISCUSSION':
+        {
+          const selectedDiscussionDetails = action.discussioninfo[0];
+          const solutions = action.discussioninfo[1];
+          draft.selectedDiscussion = selectedDiscussionDetails;
+          draft.selectedDiscussionSolutions = solutions;
         }
         break;
       case 'ADD_SOLUTION':
@@ -392,14 +283,14 @@ const wholeReducer = (state = initialState, action) =>
             if (draft.loggedinUserPurchased.includes(el._id)) {
               return el;
             }
+            return null
           });
           draft.initialEnrolledCourseInfo = enrolledCourses;
           draft.searchResultsEnrolledCourses = enrolledCourses;
         }
         break;
-        case 'FETCH_ALL_DISCUSSIONS':{
-          draft.discussionList=action.discussioninfo;
-        }
+      case 'FETCH_ALL_DISCUSSIONS':
+          draft.discussionList = action.discussioninfo;
         break;
       case 'GET_COMMENTS':
         {
@@ -416,11 +307,7 @@ const wholeReducer = (state = initialState, action) =>
         break;
     }
   });
-/*
-const reducers = combineReducers({
-  initialAllCoursesInfo: appReducer,
-  initialEnrolledCourseInfo: enrolledReducer,
-  masterclassInfo: masterclassReducer,
-});
-*/
-export default wholeReducer;
+
+
+// export default wholeReducer;
+export default persistReducer(persistConfig, wholeReducer);

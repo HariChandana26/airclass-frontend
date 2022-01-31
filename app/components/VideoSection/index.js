@@ -50,32 +50,31 @@ function VideoSection(props) {
     setInputValue('');
   };
   const addComment = async () => {
-    if(!inputValue){
-      setError('Enter your Comment')
-      setSuccess('')
-    }
-    else{
-    const response = await axios({
-      method: 'POST',
-      url: `${URL}/v1/comments/create_newComment/${videoContent._id}`,
-      data: {
-        comment: inputValue,
-        userID: global.loggedinUserId,
-        name: global.loggedinUsername,
-        initialName: global.loggedinUserInitial,
-      },
-    });
-    try {
-      dispatch({
-        type: 'ADD_COMMENT',
-        commentsinfo: response.data,
+    if (!inputValue) {
+      setError('Enter your Comment');
+      setSuccess('');
+    } else {
+      const response = await axios({
+        method: 'POST',
+        url: `${URL}/v1/comments/create_newComment/${videoContent._id}`,
+        data: {
+          comment: inputValue,
+          userID: global.loggedinUserId,
+          name: global.loggedinUsername,
+          initialName: global.loggedinUserInitial,
+        },
       });
-      setError('')
-      setSuccess('Comment added successfully')
-    } catch (error) {
-      console.log(error)
+      try {
+        dispatch({
+          type: 'ADD_COMMENT',
+          commentsinfo: response.data,
+        });
+        setError('');
+        setSuccess('Comment added successfully');
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
     clearCommentInput();
   };
   const likeClass = () =>
@@ -86,7 +85,7 @@ function VideoSection(props) {
 
   const updateInputValue = event => {
     setInputValue(event.target.value);
-    setSuccess('')
+    setSuccess('');
   };
   const changeStyleComments = () => {
     setStyleComments('comments');
@@ -103,6 +102,7 @@ function VideoSection(props) {
   const displaySidebarMenu = () => {
     displaySidebar();
   };
+
   return (
     <div className="video-content">
       <div className="title-box-course">
@@ -169,7 +169,9 @@ function VideoSection(props) {
             <ul className="notes-list">
               {videoContent.notes &&
                 videoContent.notes.map(eachItem => (
-                  <li key={eachItem} className="notes-text">{eachItem}</li>
+                  <li key={eachItem} className="notes-text">
+                    {eachItem}
+                  </li>
                 ))}
             </ul>
           </div>
