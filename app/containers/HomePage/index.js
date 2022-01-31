@@ -3,17 +3,13 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Course from 'components/Course';
 import Masterclass from 'components/Masterclass';
-import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Slider from 'react-slick';
-// import { Redirect } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import LoadingSpinnerComponent from 'components/LoadingIndicator';
-import { trackPromise } from 'react-promise-tracker';
-import { usePromiseTracker } from "react-promise-tracker";
+import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
 import { URL } from '../App/constants';
 
 function Homepage() {
@@ -23,7 +19,8 @@ function Homepage() {
   useEffect(() => {
     const getCourses = () => {
       trackPromise(
-        axios.get(`${URL}/v1/courses`)
+        axios
+          .get(`${URL}/v1/courses`)
           .then(function(response) {
             if (response.statusText === 'OK' && response.status === 200) {
               const resData = response;
@@ -32,51 +29,15 @@ function Homepage() {
                 coursesinfo: resData.data.courses,
               });
             }
-          }).catch(function(error) {
+          })
+          .catch(function(error) {
             console.log(error);
-          }))
+          }),
+      );
     };
 
     getCourses();
   }, []);
-  const config = {
-    dots: true,
-    infinite: false,
-    lazyLoad: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
-  const settings = config;
-
   const isHome = false;
   const { promiseInProgress } = usePromiseTracker();
   const searchedAllCoursesInfo = global.allCoursesInfo;
@@ -104,7 +65,9 @@ function Homepage() {
 
       <div className="body">
         <div className="content">
-          {promiseInProgress ? <LoadingSpinnerComponent/>: 
+          {promiseInProgress ? (
+            <LoadingSpinnerComponent />
+          ) : (
             <div>
               <h3 className="displayname">Hi {global.loggedinUsername},</h3>
               <div className="courses-container">
@@ -124,10 +87,6 @@ function Homepage() {
                     />
                   ))}
                 </div>
-
-                <div className="arrow-container">
-                  <MdOutlineArrowForwardIos className="arrow" />
-                </div>
               </div>
               <div className="courses-container">
                 <div className="courses-box">
@@ -145,9 +104,6 @@ function Homepage() {
                     />
                   ))}
                 </div>
-                <div className="arrow-container">
-                  <MdOutlineArrowForwardIos className="arrow" />
-                </div>
               </div>
               <div className="courses-container">
                 <div className="courses-box">
@@ -161,7 +117,7 @@ function Homepage() {
                 ))}
               </div>
             </div>
-          }
+          )}
         </div>
       </div>
       <Footer />

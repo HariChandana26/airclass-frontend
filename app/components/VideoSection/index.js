@@ -92,15 +92,21 @@ function VideoSection(props) {
     setStyleNotes('notes-hide');
     setStyleNotesContainer('notes-container-hide');
     setStyleCommentsContainer('comments-container');
+    setSuccess('');
+    setError('');
   };
   const changeStyleNotes = () => {
     setStyleNotes('notes');
     setStyleComments('comments-hide');
     setStyleNotesContainer('notes-container');
     setStyleCommentsContainer('comments-container-hide');
+    setSuccess('');
+    setError('');
   };
   const displaySidebarMenu = () => {
     displaySidebar();
+    setSuccess('');
+    setError('');
   };
 
   return (
@@ -178,7 +184,7 @@ function VideoSection(props) {
           <div className={styleCommentsContainer}>
             <input
               type="text"
-              placeholder="Commenting as Hari Chandana Sapare"
+              placeholder="Enter your comments"
               className="comment-input"
               value={inputValue}
               onChange={updateInputValue}

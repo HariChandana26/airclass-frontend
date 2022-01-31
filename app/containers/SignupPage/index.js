@@ -1,15 +1,12 @@
 import './index.css';
 import React, { useState } from 'react';
-import { BsFacebook } from 'react-icons/bs';
-import { FcGoogle } from 'react-icons/fc';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
+import LoadingSpinnerComponent from 'components/LoadingIndicator';
 import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
 import { URL } from '../App/constants';
-import { trackPromise } from 'react-promise-tracker';
-import { usePromiseTracker } from "react-promise-tracker";
-import LoadingSpinnerComponent from 'components/LoadingIndicator';
 
 function SignupPage() {
   const [errorMsg, setError] = useState(null);
@@ -26,40 +23,34 @@ function SignupPage() {
   const updatePassword = event => {
     setPasswordValue(event.target.value);
   };
-  const sleep=(milliseconds) =>{
-    let timeStart = new Date().getTime();
-    while (true) {
-        let elapsedTime = new Date().getTime() - timeStart;
-        if (elapsedTime > milliseconds) {
-            break;
-        }
-    }
-}
   const RegisterUser = () => {
     trackPromise(
-    axios.post(`${URL}/v1/auth/register`,{
-        name: nameValue,
-        email: emailValue,
-        password: passwordValue,
-      })
-      .then(function(response) {
-        if (response.statusText === 'Created' && response.status === 201) {
-          setSuccess('Registered successfully. Please login');
-          setError('');
-        }
-      })
-      .catch(function(error) {
-        if (error.response.status === 401)
-          setError(error.response.data.message);
-        else if (error.response.status === 400)
-          setError(error.response.data.message);
-        else setError('Something went wrong. Please try again later.');
-        setSuccess('');
-      }))
+      axios
+        .post(`${URL}/v1/auth/register`, {
+          name: nameValue,
+          email: emailValue,
+          password: passwordValue,
+        })
+        .then(function(response) {
+          if (response.statusText === 'Created' && response.status === 201) {
+            setSuccess('Registered successfully. Please login');
+            setError('');
+          }
+        })
+        .catch(function(error) {
+          if (error.response.status === 401)
+            setError(error.response.data.message);
+          else if (error.response.status === 400)
+            setError(error.response.data.message);
+          else setError('Something went wrong. Please try again later.');
+          setSuccess('');
+        }),
+    );
   };
-  const { promiseInProgress } = usePromiseTracker()
-  return (
-    promiseInProgress ? <LoadingSpinnerComponent/>: 
+  const { promiseInProgress } = usePromiseTracker();
+  return promiseInProgress ? (
+    <LoadingSpinnerComponent />
+  ) : (
     <>
       <div className="signup-container">
         <div className="login">
@@ -124,11 +115,6 @@ function SignupPage() {
             >
               Register
             </button>
-            <p className="continue-with">or continue with</p>
-            <div className="login-icons">
-              <BsFacebook className="facebook-icon" />
-              <FcGoogle className="google-icon" />
-            </div>
           </div>
         </div>
       </div>
