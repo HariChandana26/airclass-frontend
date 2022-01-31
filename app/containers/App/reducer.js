@@ -81,14 +81,10 @@ export const initialState = {
   loggedinUserRole: 'user',
   loggedinUserId: '',
   loggedinUsername: '',
-  loggedinUserFirstname: '',
-  loggedinUserLastname: '',
+  loggedinUserPassword: '',
   loggedinUserInitial: '',
   loggedinUserEmail: '',
   loggedinUserPurchased: [],
-  loggedinUserMobileNumber: '',
-  loggedinUserDateofBirth: '',
-  loggedinUserOccupation: '',
   initialAllCoursesInfo: [],
   initialEnrolledCourseInfo: [],
   masterclassInfo: detailedMasterClassInfo,
@@ -108,6 +104,9 @@ export const initialState = {
 const wholeReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case 'REGISTER_USER':
+        draft.loggedinUserPassword = action.password;
+        break;
       case 'ENROLL_COURSE':
         draft.initialEnrolledCourseInfo = [
           ...draft.initialEnrolledCourseInfo,
@@ -189,11 +188,12 @@ const wholeReducer = (state = initialState, action) =>
         draft.selectedMasterclassInfo = action.selectedMasterclass;
 
         break;
-      case 'UPDATE_SELECTED_COURSE':{
-        draft.selectedCourseInfo = action.courseinfo;
-        const [selectedCourse] = action.courseinfo;
-        draft.selectedClassInfo = selectedCourse;
-      }
+      case 'UPDATE_SELECTED_COURSE':
+        {
+          draft.selectedCourseInfo = action.courseinfo;
+          const [selectedCourse] = action.courseinfo;
+          draft.selectedClassInfo = selectedCourse;
+        }
         break;
       case 'ADD_COMMENT':
         {
@@ -213,11 +213,9 @@ const wholeReducer = (state = initialState, action) =>
         break;
       case 'UPDATE_PROFILE':
         {
-          const [email, mobile, dateofbirth, occupation] = action.profileinfo;
+          const [email, password] = action.profileinfo;
           draft.loggedinUserEmail = email;
-          draft.loggedinUserMobileNumber = mobile;
-          draft.loggedinUserDateofBirth = dateofbirth;
-          draft.loggedinUserOccupation = occupation;
+          draft.loggedinUserPassword = password;
         }
         break;
       case 'SELECT_DISCUSSION':
@@ -266,14 +264,18 @@ const wholeReducer = (state = initialState, action) =>
         }
         break;
       case 'USER_LOGGEDIN':
-        draft.loggedinUsername = action.userinfo.name;
-        draft.loggedinUserEmail = action.userinfo.email;
-        draft.loggedinUserRole = action.userinfo.role;
-        draft.loggedinUserId = action.userinfo.id;
-        draft.loggedinUserInitial = action.userinfo.initialName;
-        draft.loggedinUserPurchased = action.userinfo.purchasedCourse;
-        draft.initialEnrolledCourseInfo = action.userinfo.purchasedCourse;
-        draft.searchedEnrolledCourses = action.userinfo.purchasedCourse;
+        {
+          const [userdetails, password] = action.userinfo;
+          draft.loggedinUsername = userdetails.name;
+          draft.loggedinUserPassword = password;
+          draft.loggedinUserEmail = userdetails.email;
+          draft.loggedinUserRole = userdetails.role;
+          draft.loggedinUserId = userdetails.id;
+          draft.loggedinUserInitial = userdetails.initialName;
+          draft.loggedinUserPurchased = userdetails.purchasedCourse;
+          draft.initialEnrolledCourseInfo = userdetails.purchasedCourse;
+          draft.searchedEnrolledCourses = userdetails.purchasedCourse;
+        }
         break;
       case 'FETCH_ALL_COURSES':
         {
@@ -283,14 +285,14 @@ const wholeReducer = (state = initialState, action) =>
             if (draft.loggedinUserPurchased.includes(el._id)) {
               return el;
             }
-            return null
+            return null;
           });
           draft.initialEnrolledCourseInfo = enrolledCourses;
           draft.searchResultsEnrolledCourses = enrolledCourses;
         }
         break;
       case 'FETCH_ALL_DISCUSSIONS':
-          draft.discussionList = action.discussioninfo;
+        draft.discussionList = action.discussioninfo;
         break;
       case 'GET_COMMENTS':
         {
@@ -307,7 +309,6 @@ const wholeReducer = (state = initialState, action) =>
         break;
     }
   });
-
 
 // export default wholeReducer;
 export default persistReducer(persistConfig, wholeReducer);

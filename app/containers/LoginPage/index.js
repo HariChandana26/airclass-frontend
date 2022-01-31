@@ -1,16 +1,13 @@
 import './index.css';
 import React, { useState } from 'react';
-import { BsFacebook } from 'react-icons/bs';
-import { FcGoogle } from 'react-icons/fc';
 import { NavLink, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
+import LoadingSpinnerComponent from 'components/LoadingIndicator';
 import loginImage from '../../images/login-register.png';
 import logo from '../../images/logo2.png';
 import { URL } from '../App/constants';
-import { trackPromise } from 'react-promise-tracker';
-import { usePromiseTracker } from "react-promise-tracker";
-import LoadingSpinnerComponent from 'components/LoadingIndicator';
 
 function LoginPage() {
   const [errorMsg, setError] = useState(null);
@@ -27,32 +24,34 @@ function LoginPage() {
 
   const loginUser = () => {
     trackPromise(
-    axios.post(`${URL}/v1/auth/login`,{
-        email: emailValue,
-        password: passwordValue,
-    })
-      .then(function(response) {
-        if (response.statusText === 'OK' && response.status === 200) {
-          history.push('/homepage');
-          dispatch({
-            type: 'USER_LOGGEDIN',
-            userinfo: response.data.user,
-          });
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-        if (error.response.status === 401)
-          setError(error.response.data.message);
-        else if (error.response.status === 400)
-          setError(error.response.data.message);
-        else setError('Something went wrong. Please try again later.');
-      })
-    )
+      axios
+        .post(`${URL}/v1/auth/login`, {
+          email: emailValue,
+          password: passwordValue,
+        })
+        .then(function(response) {
+          if (response.statusText === 'OK' && response.status === 200) {
+            history.push('/homepage');
+            dispatch({
+              type: 'USER_LOGGEDIN',
+              userinfo: [response.data.user, passwordValue],
+            });
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+          if (error.response.status === 401)
+            setError(error.response.data.message);
+          else if (error.response.status === 400)
+            setError(error.response.data.message);
+          else setError('Something went wrong. Please try again later.');
+        }),
+    );
   };
-  const { promiseInProgress } = usePromiseTracker()
-  return (
-    promiseInProgress ? <LoadingSpinnerComponent/>: 
+  const { promiseInProgress } = usePromiseTracker();
+  return promiseInProgress ? (
+    <LoadingSpinnerComponent />
+  ) : (
     <>
       <div className="login-container">
         <div className="login">
@@ -99,16 +98,10 @@ function LoginPage() {
             <button
               type="button"
               className="username login-btn"
-              onClick={()=>loginUser()}
+              onClick={() => loginUser()}
             >
               Login
             </button>
-
-            <p className="continue-with">or continue with</p>
-            <div className="login-icons">
-              <BsFacebook className="facebook-icon" />
-              <FcGoogle className="google-icon" />
-            </div>
           </div>
         </div>
       </div>

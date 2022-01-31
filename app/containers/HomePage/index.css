@@ -76,6 +76,9 @@
     overflow-x: scroll;
     scrollbar-width: none ;
   }
+  ::-webkit-scrollbar {
+    display: none;
+}
   .homepage-loader{
     min-height:100vh;
     align-self:center;
