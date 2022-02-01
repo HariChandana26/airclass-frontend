@@ -33,7 +33,7 @@ function ProfilePage() {
             <div className="profile-course-cards">
               {searchedEnrolledCoursesInfo.map(eachItem => (
                 <Course
-                  key={eachItem.id}
+                  key={eachItem._id}
                   coursedetails={eachItem}
                   isenroll={false}
                 />

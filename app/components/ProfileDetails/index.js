@@ -26,13 +26,12 @@ function ProfileDetails() {
         .then(function(response) {
           console.log('p r');
           console.log(response);
-          if (response.statusText === 'Created' && response.status === 201) {
+          if (response.statusText === 'OK' && response.status === 200) {
             dispatch({
               type: 'UPDATE_PROFILE',
               profileinfo: [name, email, password],
             });
-            console.log('Profile updated successfully, please login again');
-            setSuccess('Profile updated successfully, please login again');
+            setSuccess('Profile updated successfully');
             setError('');
           }
         })
@@ -46,14 +45,6 @@ function ProfileDetails() {
         }),
     );
   };
-  // const updateProfileDetails = (task = [email]) => {
-  //   dispatch({
-  //     type: 'UPDATE_PROFILE',
-  //     profileinfo: task,
-  //   });
-  //   setSuccess('Profile updated successfully');
-  //   // setError("");
-  // };
   const updateName = event => {
     setName(event.target.value);
   };
@@ -64,9 +55,9 @@ function ProfileDetails() {
     setPassword(event.target.value);
   };
   const { promiseInProgress } = usePromiseTracker();
-  return ( 
-    promiseInProgress ?  <LoadingSpinnerComponent />
-      : 
+  return promiseInProgress ? (
+    <LoadingSpinnerComponent />
+  ) : (
     <>
       <div className="details-container">
         <div className="firstname">
