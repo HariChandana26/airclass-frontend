@@ -63,12 +63,11 @@ function Course(props) {
           .get(`${URL}/v1/contents/${coursedetails._id}`)
           .then(function(response) {
             if (response.statusText === 'OK' && response.status === 200) {
-              history.push('/coursepage');
-
               dispatch({
                 type: 'UPDATE_SELECTED_COURSE',
                 courseinfo: response.data,
               });
+              history.push('/coursepage');
             }
           })
           .catch(function(error) {

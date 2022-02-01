@@ -55,8 +55,8 @@ function LoginPage() {
     <>
       <div className="login-container">
         <div className="login">
-          <div className="login-part1">
-            <div className="login-part1-text">
+          <div className="login-section-left">
+            <div className="login-section-left-text">
               <img className="login-logo" src={logo} alt="website-logo" />
               <h1 className="sign-in-to">Sign in to</h1>
               <h1 className="website-name">AIR CLASS</h1>
@@ -73,18 +73,19 @@ function LoginPage() {
             <img src={loginImage} className="login-image" alt="login" />
           </div>
 
-          <div className="login-part2">
-            <h1 className="sign-in">Sign in</h1>
+          <div className="login-section-right">
+            <h1 className="sign-in">Login in</h1>
+            <form>
             <input
               type="text"
-              className="username"
-              placeholder="enter email or username"
+              className="login-input"
+              placeholder="Email"
               value={emailValue}
               onChange={updateEmail}
             />
             <input
               type="password"
-              className="username"
+              className="login-input"
               placeholder="Password"
               value={passwordValue}
               onChange={updatePassword}
@@ -96,12 +97,13 @@ function LoginPage() {
               </>
             )}
             <button
-              type="button"
-              className="username login-btn"
+              type="submit"
+              className="login-input login-btn"
               onClick={() => loginUser()}
             >
               Login
             </button>
+            </form>
           </div>
         </div>
       </div>

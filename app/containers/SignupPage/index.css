@@ -11,7 +11,7 @@
     width:80%;
     height:80%;
 }
-.login-part1{
+.login-section-left{
     display:flex;
     align-items:center;
     justify-content:space-around;
@@ -35,7 +35,7 @@
     margin-bottom:40px;
     margin-top:0px;
 }
-.login-part1-text{
+.login-section-left-text{
     align-self:flex-start;
 }
 .register-msg{
@@ -44,6 +44,8 @@
 }
 .register-here{
     color: #3A69FF;
+    font-size:18px;
+    font-weight:500;
 }
 .nav-link{
     text-decoration: none;
@@ -51,14 +53,14 @@
 .login-image{
     align-self:flex-end;
 }
-.login-part2{
+.login-section-right{
     text-align:center;
     display:flex;
     flex-direction:column;
     align-items:center;
     width:30%;
 }
-.username{
+.signup-input{
     width: 100%;
     height: 48px;
     border-radius: 8px;

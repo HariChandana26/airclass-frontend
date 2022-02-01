@@ -54,8 +54,8 @@ function SignupPage() {
     <>
       <div className="signup-container">
         <div className="login">
-          <div className="login-part1">
-            <div className="login-part1-text">
+          <div className="login-section-left">
+            <div className="login-section-left-text">
               <img className="logo" src={logo} alt="website-logo" />
               <h1 className="sign-in-to">Sign up to</h1>
               <h1 className="website-name">AIR CLASS</h1>
@@ -72,26 +72,26 @@ function SignupPage() {
             <img src={loginImage} className="login-image" alt="login" />
           </div>
 
-          <div className="login-part2">
+          <div className="login-section-right">
             <h1 className="sign-in">Sign Up</h1>
             <input
               type="text"
-              className="username"
+              className="signup-input"
               placeholder="Enter name"
               value={nameValue}
               onChange={updateName}
             />
             <input
               type="text"
-              className="username"
-              placeholder="Enter email"
+              className="signup-input"
+              placeholder="Email"
               value={emailValue}
               onChange={updateEmail}
             />
 
             <input
               type="password"
-              className="username"
+              className="signup-input"
               placeholder="Password"
               value={passwordValue}
               onChange={updatePassword}
@@ -110,7 +110,7 @@ function SignupPage() {
             )}
             <button
               type="button"
-              className="username login-btn"
+              className="signup-input login-btn"
               onClick={RegisterUser}
             >
               Register
