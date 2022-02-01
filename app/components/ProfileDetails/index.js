@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './index.css';
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
-
 import LoadingSpinnerComponent from 'components/LoadingIndicator';
 import axios from 'axios';
 import { URL } from '../../containers/App/constants';
@@ -11,6 +10,7 @@ function ProfileDetails() {
   const initialState = useSelector(state => state);
   const dispatch = useDispatch();
   const { global } = initialState;
+  const [name, setName] = useState(global.loggedinUsername);
   const [email, setEmail] = useState(global.loggedinUserEmail);
   const [password, setPassword] = useState(global.loggedinUserPassword);
   const [success, setSuccess] = useState('');
@@ -19,7 +19,7 @@ function ProfileDetails() {
     trackPromise(
       axios
         .patch(`${URL}/v1/users/${global.loggedinUserId}`, {
-          name: global.loggedinUsername,
+          name,
           email,
           password,
         })
@@ -29,9 +29,10 @@ function ProfileDetails() {
           if (response.statusText === 'Created' && response.status === 201) {
             dispatch({
               type: 'UPDATE_PROFILE',
-              profileinfo: [email, password],
+              profileinfo: [name, email, password],
             });
-            setSuccess('Profile updated successfully');
+            console.log('Profile updated successfully, please login again');
+            setSuccess('Profile updated successfully, please login again');
             setError('');
           }
         })
@@ -53,6 +54,9 @@ function ProfileDetails() {
   //   setSuccess('Profile updated successfully');
   //   // setError("");
   // };
+  const updateName = event => {
+    setName(event.target.value);
+  };
   const updateEmail = event => {
     setEmail(event.target.value);
   };
@@ -60,9 +64,9 @@ function ProfileDetails() {
     setPassword(event.target.value);
   };
   const { promiseInProgress } = usePromiseTracker();
-  return promiseInProgress ? (
-    <LoadingSpinnerComponent />
-  ) : (
+  return ( 
+    promiseInProgress ?  <LoadingSpinnerComponent />
+      : 
     <>
       <div className="details-container">
         <div className="firstname">
@@ -70,7 +74,8 @@ function ProfileDetails() {
           <input
             type="text"
             className="profile-input"
-            value={global.loggedinUsername}
+            value={name}
+            onChange={updateName}
           />
         </div>
         <div className="firstname">

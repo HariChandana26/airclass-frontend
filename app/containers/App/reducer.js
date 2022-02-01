@@ -213,7 +213,8 @@ const wholeReducer = (state = initialState, action) =>
         break;
       case 'UPDATE_PROFILE':
         {
-          const [email, password] = action.profileinfo;
+          const [name, email, password] = action.profileinfo;
+          draft.loggedinUsername = name;
           draft.loggedinUserEmail = email;
           draft.loggedinUserPassword = password;
         }
