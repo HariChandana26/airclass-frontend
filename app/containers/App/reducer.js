@@ -207,9 +207,8 @@ const wholeReducer = (state = initialState, action) =>
         }
         break;
       case 'LIKE_CLASS':
-        draft.selectedClassInfo.classLiked = !draft.selectedClassInfo
+        draft.selectedMasterclassInfo.classLiked = !draft.selectedMasterclassInfo
           .classLiked;
-
         break;
       case 'UPDATE_PROFILE':
         {

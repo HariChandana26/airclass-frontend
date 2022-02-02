@@ -78,21 +78,21 @@ function VideoSection(props) {
         setSuccess('Comment added successfully');
       } catch (error) {
         if (error.response.status === 401)
-          setError(error.response.data.message);
-        else if (error.response.status === 400)
-          setError(error.response.data.message);
-        else setError('Something went wrong. Please try again later.');
-        setSuccess('');
+            setError(error.response.data.message);
+          else if (error.response.status === 400)
+            setError(error.response.data.message);
+          else setError('Something went wrong. Please try again later.');
+          setSuccess('');
       }
     }
     clearCommentInput();
   };
-  const likeClass = () =>
+  const likeClass = () =>{
     dispatch({
       type: 'LIKE_CLASS',
       classLikedInfo: videoContent,
     });
-
+  }
   const updateInputValue = event => {
     setInputValue(event.target.value);
     setSuccess('');
