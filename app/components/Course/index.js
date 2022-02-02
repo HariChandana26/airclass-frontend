@@ -1,5 +1,5 @@
 import './index.css';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -10,6 +10,8 @@ import LoadingSpinnerComponent from 'components/LoadingIndicator';
 import { URL } from '../../containers/App/constants';
 
 function Course(props) {
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const history = useHistory();
   const initialState = useSelector(state => state);
   const { global } = initialState;
@@ -39,16 +41,27 @@ function Course(props) {
                     });
                   }
                 })
-                .catch(function(error) {
-                  console.log(error);
+                .catch(function(err) {
+                  if (err.response.status === 401)
+                    setError(err.response.data.message);
+                  else if (err.response.status === 400)
+                    setError(err.response.data.message);
+                  else
+                    setError('Something went wrong. Please try again later.');
+                  setSuccess('');
                 });
               // )
             };
             getCourseInfo();
           }
         })
-        .catch(function(error) {
-          console.log(error);
+        .catch(function(er) {
+          if (er.response.status === 401)
+            setError(er.response.data.message);
+          else if (er.response.status === 400)
+            setError(er.response.data.message);
+          else setError('Something went wrong. Please try again later.');
+          setSuccess('');
         }),
     );
   };
@@ -71,7 +84,12 @@ function Course(props) {
             }
           })
           .catch(function(error) {
-            console.log(error);
+            if (error.response.status === 401)
+              setError(error.response.data.message);
+            else if (error.response.status === 400)
+              setError(error.response.data.message);
+            else setError('Something went wrong. Please try again later.');
+            setSuccess('');
           }),
       );
     };
@@ -120,6 +138,18 @@ function Course(props) {
 
         {isenroll && enrollbtn}
       </div>
+      {error && (
+        <>
+          <p style={{ color: 'red' }}>{error}</p>
+          <br />
+        </>
+      )}
+      {success && (
+        <>
+          <p style={{ color: 'green' }}>{success}</p>
+          <br />
+        </>
+      )}
     </div>
   );
 }

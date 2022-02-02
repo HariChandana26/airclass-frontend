@@ -24,8 +24,6 @@ function ProfileDetails() {
           password,
         })
         .then(function(response) {
-          console.log('p r');
-          console.log(response);
           if (response.statusText === 'OK' && response.status === 200) {
             dispatch({
               type: 'UPDATE_PROFILE',
@@ -59,6 +57,12 @@ function ProfileDetails() {
     <LoadingSpinnerComponent />
   ) : (
     <>
+      {errorMsg && (
+        <>
+          <small style={{ color: 'red' }}>{errorMsg}</small>
+          <br />
+        </>
+      )}
       <div className="details-container">
         <div className="firstname">
           <h1 className="input-title">Name</h1>

@@ -39,7 +39,6 @@ function LoginPage() {
           }
         })
         .catch(function(error) {
-          console.log(error);
           if (error.response.status === 401)
             setError(error.response.data.message);
           else if (error.response.status === 400)
@@ -74,35 +73,35 @@ function LoginPage() {
           </div>
 
           <div className="login-section-right">
-            <h1 className="sign-in">Login in</h1>
+            <h1 className="sign-in">Login</h1>
             <form>
-            <input
-              type="text"
-              className="login-input"
-              placeholder="Email"
-              value={emailValue}
-              onChange={updateEmail}
-            />
-            <input
-              type="password"
-              className="login-input"
-              placeholder="Password"
-              value={passwordValue}
-              onChange={updatePassword}
-            />
-            {errorMsg && (
-              <>
-                <small style={{ color: 'red' }}>{errorMsg}</small>
-                <br />
-              </>
-            )}
-            <button
-              type="submit"
-              className="login-input login-btn"
-              onClick={() => loginUser()}
-            >
-              Login
-            </button>
+              <input
+                type="text"
+                className="login-input"
+                placeholder="Email"
+                value={emailValue}
+                onChange={updateEmail}
+              />
+              <input
+                type="password"
+                className="login-input"
+                placeholder="Password"
+                value={passwordValue}
+                onChange={updatePassword}
+              />
+              {errorMsg && (
+                <>
+                  <small style={{ color: 'red' }}>{errorMsg}</small>
+                  <br />
+                </>
+              )}
+              <button
+                type="submit"
+                className="login-input login-btn"
+                onClick={() => loginUser()}
+              >
+                Login
+              </button>
             </form>
           </div>
         </div>

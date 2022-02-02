@@ -40,7 +40,12 @@ function VideoSection(props) {
             });
           }
         } catch (error) {
-          console.log(error);
+          if (error.response.status === 401)
+            setError(error.response.data.message);
+          else if (error.response.status === 400)
+            setError(error.response.data.message);
+          else setError('Something went wrong. Please try again later.');
+          setSuccess('');
         }
       }
     };
@@ -72,7 +77,12 @@ function VideoSection(props) {
         setError('');
         setSuccess('Comment added successfully');
       } catch (error) {
-        console.log(error);
+        if (error.response.status === 401)
+          setError(error.response.data.message);
+        else if (error.response.status === 400)
+          setError(error.response.data.message);
+        else setError('Something went wrong. Please try again later.');
+        setSuccess('');
       }
     }
     clearCommentInput();
@@ -221,7 +231,7 @@ function VideoSection(props) {
 
 VideoSection.propTypes = {
   videoContent: PropTypes.object.isRequired,
-  displaySidebar: PropTypes.func.isRequired,
+  displaySidebar: PropTypes.func,
 };
 
 export default VideoSection;

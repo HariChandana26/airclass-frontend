@@ -3,7 +3,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Course from 'components/Course';
 import Masterclass from 'components/Masterclass';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -13,6 +13,7 @@ import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
 import { URL } from '../App/constants';
 
 function Homepage() {
+  const [errorMsg, setError] = useState(null);
   const initialState = useSelector(state => state);
   const { global } = initialState;
   const dispatch = useDispatch();
@@ -31,7 +32,11 @@ function Homepage() {
             }
           })
           .catch(function(error) {
-            console.log(error);
+            if (error.response.status === 401)
+              setError(error.response.data.message);
+            else if (error.response.status === 400)
+              setError(error.response.data.message);
+            else setError('Something went wrong. Please try again later.');
           }),
       );
     };
@@ -61,6 +66,12 @@ function Homepage() {
   }
   return (
     <div className="page">
+      {errorMsg && (
+        <>
+          <small style={{ color: 'red' }}>{errorMsg}</small>
+          <br />
+        </>
+      )}
       <Header isHome={isHome} />
 
       <div className="body">

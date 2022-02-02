@@ -16,8 +16,6 @@ function CoursePage() {
   const [isSidebarVisible, setisSidebarVisible] = useState(true);
   const [courseSidebar, setCourseSidebar] = useState('course-sidebar-display');
   const [menuBox, setMenuBox] = useState(false);
-console.log("selectedCourseInfo")
-console.log(selectedCourseInfo)
   const displaySidebar = () => {
     setisSidebarVisible(!isSidebarVisible);
     setMenuBox(!menuBox);

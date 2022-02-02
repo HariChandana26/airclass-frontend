@@ -13,7 +13,6 @@ import '@szhsin/react-menu/dist/transitions/slide.css';
 function Header(props) {
   const initialState = useSelector(state => state);
   const { global } = initialState;
-
   const { isHome } = props;
   const [searchInput, setsearchInput] = useState('');
   const dispatch = useDispatch();
@@ -28,59 +27,65 @@ function Header(props) {
     });
   };
   return (
-    <header className="header">
-      <div className="header-container">
-        <div className={isHome ? 'logo-search-home' : 'logo-search'}>
-          <img className="header-logo" src={logo} alt="website-logo" />
-          {!isHome && (
-            <div className="searchbox">
-              <IoIosSearch className="search-logo" />
-              <input
-                placeholder="search"
-                className="input"
-                type="search"
-                value={searchInput}
-                onChange={updateSearchValue}
-                onKeyUp={() => searchCourse(searchInput)}
+    <>
+      <header className="header">
+        <div className="header-container">
+          <div className={isHome ? 'logo-search-home' : 'logo-search'}>
+            <img className="header-logo" src={logo} alt="website-logo" />
+            {!isHome && (
+              <div className="searchbox">
+                <IoIosSearch className="search-logo" />
+                <input
+                  placeholder="search"
+                  className="input"
+                  type="search"
+                  value={searchInput}
+                  onChange={updateSearchValue}
+                  onKeyUp={() => searchCourse(searchInput)}
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="header-box">
+            <NavLink className="profilepage-link" to="/discussionforum">
+              <img
+                className="msg-icon"
+                src={discussion}
+                alt="discussion-logo"
               />
-            </div>
-          )}
-        </div>
-
-        <div className="header-box">
-          <NavLink className="profilepage-link" to="/discussionforum">
-            <img className="msg-icon" src={discussion} alt="discussion-logo" />
-          </NavLink>
-
-          {isHome && (
-            <NavLink className="nav-link-home" to="/homepage">
-              <p className="home">Home</p>
             </NavLink>
-          )}
-          <div className="user-details-container">
-            <p className="name">{global.loggedinUsername}</p>
 
-            <Menu
-              menuButton={
-                <MenuButton>
-                  <div className="initial-container">
-                    <p className="initial">{global.loggedinUserInitial}</p>
-                  </div>
-                </MenuButton>
-              }
-              transition
-            >
-              <NavLink className="profilepage-link" to="/profilepage">
-                <MenuItem>PROFILE</MenuItem>
+            {isHome && (
+              <NavLink className="nav-link-home" to="/homepage">
+                <p className="home">Home</p>
               </NavLink>
-              <NavLink className="profilepage-link" to="/login">
-                <MenuItem>LOGOUT</MenuItem>
-              </NavLink>
-            </Menu>
+            )}
+            <div className="user-details-container">
+              <p className="name">{global.loggedinUsername}</p>
+
+              <Menu
+                menuButton={
+                  <MenuButton>
+                    <div className="initial-container">
+                      <p className="initial">{global.loggedinUserInitial}</p>
+                    </div>
+                  </MenuButton>
+                }
+                transition
+              >
+                <NavLink className="profilepage-link" to="/profilepage">
+                  <MenuItem>PROFILE</MenuItem>
+                </NavLink>
+                <NavLink className="profilepage-link" to="/login">
+                  <MenuItem>LOGOUT</MenuItem>
+                </NavLink>
+              </Menu>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
 Header.propTypes = {

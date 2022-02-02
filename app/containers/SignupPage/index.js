@@ -1,6 +1,6 @@
 import './index.css';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
 import LoadingSpinnerComponent from 'components/LoadingIndicator';
@@ -9,6 +9,7 @@ import logo from '../../images/logo2.png';
 import { URL } from '../App/constants';
 
 function SignupPage() {
+  const history = useHistory();
   const [errorMsg, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [nameValue, setNameValue] = useState('');
@@ -35,6 +36,7 @@ function SignupPage() {
           if (response.statusText === 'Created' && response.status === 201) {
             setSuccess('Registered successfully. Please login');
             setError('');
+            // history.push('/homepage')
           }
         })
         .catch(function(error) {
@@ -74,47 +76,49 @@ function SignupPage() {
 
           <div className="login-section-right">
             <h1 className="sign-in">Sign Up</h1>
-            <input
-              type="text"
-              className="signup-input"
-              placeholder="Enter name"
-              value={nameValue}
-              onChange={updateName}
-            />
-            <input
-              type="text"
-              className="signup-input"
-              placeholder="Email"
-              value={emailValue}
-              onChange={updateEmail}
-            />
+            <form>
+              <input
+                type="text"
+                className="signup-input"
+                placeholder="Name"
+                value={nameValue}
+                onChange={updateName}
+              />
+              <input
+                type="text"
+                className="signup-input"
+                placeholder="Email"
+                value={emailValue}
+                onChange={updateEmail}
+              />
 
-            <input
-              type="password"
-              className="signup-input"
-              placeholder="Password"
-              value={passwordValue}
-              onChange={updatePassword}
-            />
-            {success && (
-              <>
-                <small style={{ color: 'green' }}>{success}</small>
-                <br />
-              </>
-            )}
-            {errorMsg && (
-              <>
-                <small style={{ color: 'red' }}>{errorMsg}</small>
-                <br /> <br />
-              </>
-            )}
-            <button
-              type="button"
-              className="signup-input login-btn"
-              onClick={RegisterUser}
-            >
-              Register
-            </button>
+              <input
+                type="password"
+                className="signup-input"
+                placeholder="Password"
+                value={passwordValue}
+                onChange={updatePassword}
+              />
+              {success && (
+                <>
+                  <small style={{ color: 'green' }}>{success}</small>
+                  <br />
+                </>
+              )}
+              {errorMsg && (
+                <>
+                  <small style={{ color: 'red' }}>{errorMsg}</small>
+                  <br /> <br />
+                </>
+              )}
+              <button
+                type="submit"
+                className="signup-input login-btn"
+                onClick={RegisterUser}
+              >
+                Register
+              </button>
+            </form>
           </div>
         </div>
       </div>

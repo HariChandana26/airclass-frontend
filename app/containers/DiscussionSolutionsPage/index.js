@@ -51,7 +51,12 @@ function DiscussionSoultionsPage() {
               setError('')
             }
           }).catch(function(error) {
-            console.log(error);
+            if (error.response.status === 401)
+            setError(error.response.data.message);
+          else if (error.response.status === 400)
+            setError(error.response.data.message);
+          else setError('Something went wrong. Please try again later.');
+          setSuccess('');
           }))
         };
     
@@ -61,8 +66,13 @@ function DiscussionSoultionsPage() {
   const { promiseInProgress } = usePromiseTracker()
   return (
     <>
+    {errorMsg && (
+                <>
+                  <small style={{ color: 'red' }}>{errorMsg}</small>
+                  <br />
+                </>
+              )}
       <Header isHome />
-
       <div className="body">
         <div className="content">
         {promiseInProgress ? <LoadingSpinnerComponent/>: 

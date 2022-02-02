@@ -190,11 +190,9 @@ const wholeReducer = (state = initialState, action) =>
         break;
       case 'UPDATE_SELECTED_COURSE':
         {
-          console.log("in reducer")
           draft.selectedCourseInfo = action.courseinfo;
           const [selectedCourse] = action.courseinfo;
           draft.selectedClassInfo = selectedCourse;
-          console.log(draft)
         }
         break;
       case 'ADD_COMMENT':
