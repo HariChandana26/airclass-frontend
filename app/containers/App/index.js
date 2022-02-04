@@ -37,6 +37,7 @@ export default function App() {
             global.loggedinUserRole === 'user' ? HomePage : HomepageMentor
           }
         />
+        <Route exact path="/homepagementor" component={HomepageMentor} />
         <Route path="/coursepage" component={CoursePage} />
         <Route path="/masterclasspage" component={MasterclassPage} />
         <Route path="/profilepage" component={ProfilePage} />

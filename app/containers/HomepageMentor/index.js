@@ -9,22 +9,24 @@ import { useSelector } from 'react-redux';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Popup from 'reactjs-popup';
+import { NavLink } from 'react-router-dom';
 import AddCoursePopup from '../../components/AddCoursePopup';
-import AddMasterclassPopup from '../../components/AddMasterclassPopup';
 import 'reactjs-popup/dist/index.css';
 
 function HomepageMentor() {
   const courses = useSelector(state => state);
   const { global } = courses;
   const isHome = false;
-  const searchedallcoursesinfo = global.searchResultsAllCourses;
-  const searchedmastercoursesinfo = global.searchResultsMasterClasses;
+  // const searchedallcoursesinfo = global.searchResultsAllCourses;
+  const searchedAllCoursesInfo = global.allCoursesInfo;
+  // const searchedmastercoursesinfo = global.searchResultsMasterClasses;
+  const searchedMasterclassInfo = global.searchResultsMasterClasses;
   let noallresults = null;
   let nomasterclassresults = null;
-  if (searchedallcoursesinfo.length === 0) {
+  if (searchedAllCoursesInfo.length === 0) {
     noallresults = <h1 className="no-search-results">No results found</h1>;
   }
-  if (searchedmastercoursesinfo.length === 0) {
+  if (searchedMasterclassInfo.length === 0) {
     nomasterclassresults = (
       <h1 className="no-search-results">No results found</h1>
     );
@@ -35,7 +37,13 @@ function HomepageMentor() {
       <Header isHome={isHome} />
       <div className="body">
         <div className="content">
-          <h3 className="displayname">Hi Hari Chandana Sapare,</h3>
+          <h3 className="displayname">Hi {global.loggedinUsername},</h3>
+          <p className="mentor">
+            Do you want to be a student again!.
+            <NavLink className="nav-link" to="/homepage">
+              <span> try clicking here</span>
+            </NavLink>
+          </p>
           <div className="courses-container">
             <div className="courses-box">
               <h1 className="courses">Courses</h1>
@@ -74,9 +82,9 @@ function HomepageMentor() {
 
           <div className="courses-display">
             <div className="courses-cards">
-              {searchedallcoursesinfo.map(eachItem => (
+              {searchedAllCoursesInfo.map(eachItem => (
                 <Course
-                  key={eachItem.id}
+                  key={eachItem._id}
                   coursedetails={eachItem}
                   isenroll={false}
                 />
@@ -90,7 +98,7 @@ function HomepageMentor() {
             <div className="courses-box">
               <h1 className="courses">Masterclass Series</h1>
 
-              <Popup
+              {/* <Popup
                 trigger={
                   <button
                     id="enroll-btn"
@@ -122,12 +130,12 @@ function HomepageMentor() {
                     </div>
                   </div>
                 )}
-              </Popup>
+              </Popup> */}
             </div>
           </div>
           {nomasterclassresults}
           <div className="masterclass-container">
-            {searchedmastercoursesinfo.map(eachItem => (
+            {searchedMasterclassInfo.map(eachItem => (
               <Masterclass key={eachItem.id} coursedetails={eachItem} />
             ))}
           </div>

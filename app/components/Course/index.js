@@ -10,7 +10,7 @@ import LoadingSpinnerComponent from 'components/LoadingIndicator';
 import { URL } from '../../containers/App/constants';
 
 function Course(props) {
-  const [error, setError] = useState('');
+  const [errorMsg, setError] = useState('');
   const [success, setSuccess] = useState('');
   const history = useHistory();
   const initialState = useSelector(state => state);
@@ -56,8 +56,7 @@ function Course(props) {
           }
         })
         .catch(function(er) {
-          if (er.response.status === 401)
-            setError(er.response.data.message);
+          if (er.response.status === 401) setError(er.response.data.message);
           else if (er.response.status === 400)
             setError(er.response.data.message);
           else setError('Something went wrong. Please try again later.');
@@ -134,13 +133,15 @@ function Course(props) {
       />
       <div className="course-details">
         <h1 className="course-title">{coursedetails.courseTitle}</h1>
-        <p className="course-info">{coursedetails.courseInfo}</p>
+        <div className="info">
+          <p className="course-info">{coursedetails.courseInfo}</p>
+        </div>
 
         {isenroll && enrollbtn}
       </div>
-      {error && (
+      {errorMsg && (
         <>
-          <p style={{ color: 'red' }}>{error}</p>
+          <p style={{ color: 'red' }}>{errorMsg}</p>
           <br />
         </>
       )}

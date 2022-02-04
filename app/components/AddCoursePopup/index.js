@@ -2,10 +2,12 @@ import './index.css';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageUploading from 'react-images-uploading';
+import axios from 'axios';
+import { trackPromise} from 'react-promise-tracker';
+import { URL } from '../../containers/App/constants';
 
 function AddCoursePopup() {
   const initialState = useSelector(state => state);
-  const { global } = initialState;
   const dispatch = useDispatch();
   const [images, setImages] = React.useState([]);
   const [error, setError] = useState('');
@@ -14,27 +16,90 @@ function AddCoursePopup() {
   const onChange = imageList => {
     setImages(imageList);
   };
-  const addCourse = (task = [images, coursetitleValue, courseinfoValue]) => {
+  const addCourse = () => {
     if (!images || !coursetitleValue || !courseinfoValue) {
       setError('Enter Required details');
       setSuccess('');
     } else {
-      const searchResults = global.initialAllCoursesInfo.filter(
-        el => el.courseTitle.toLowerCase() === coursetitleValue.toLowerCase(),
+      trackPromise(
+        axios
+          .post(`${URL}/v1/courses/create_newCourse`, {
+            courseTitle: coursetitleValue,
+            courseInfo: courseinfoValue,
+            courseImage:
+              'https://admiring-ritchie-224d41.netlify.app/81a3666bb7497f4bf6a67c189e4ba378.png',
+            courseDescription:
+              'In this track, you’ll build robust, scalable and secure backend APIs using the most sought after technologies in web development. You’ll learn to build highly reusable, maintainable and extensible applications. You’ll also architect the...',
+          })
+          .then(function(response) {
+            if (response.statusText === 'Created' && response.status === 201) {
+              dispatch({
+                type: 'ADD_COURSE',
+                newcourseinfo: [
+                  response.data,
+                  coursetitleValue,
+                  courseinfoValue,
+                ],
+              });
+              setSuccess('Course added successfully');
+              setError('');
+              axios
+                .post(
+                  `${URL}/v1/contents/create_newContent/${response.data._id}`,
+                  {
+                    classTitle: 'Introduction to Algorithms',
+                    classDuration: '20min',
+                    classVideo: 'https://www.youtube.com/embed/rL8X2mlNHPM',
+                  },
+                )
+                .then(function(response2) {
+                  if (
+                    response2.statusText === 'OK' &&
+                    response2.status === 200
+                  ) {
+                  }
+                })
+                .catch(function(err) {
+                  if (err.response2.status === 401)
+                    setError(err.response2.data.message);
+                  else if (err.response2.status === 400)
+                    setError(err.response2.data.message);
+                  else
+                    setError('Something went wrong. Please try again later.');
+                });
+            }
+          })
+          .catch(function(error) {
+            if (error.response.status === 401)
+              setError(error.response.data.message);
+            else if (error.response.status === 400)
+              setError(error.response.data.message);
+            else setError('Something went wrong. Please try again later.');
+          }),
       );
-      if (searchResults.length !== 0) {
-        setError('Course already added');
-        setSuccess('');
-      } else {
-        dispatch({
-          type: 'ADD_COURSE',
-          courseinfo: task,
-        });
-        setSuccess('Course added successfully');
-        setError('');
-      }
     }
   };
+  // const addCourse = (task = [images, coursetitleValue, courseinfoValue]) => {
+  //   if (!images || !coursetitleValue || !courseinfoValue) {
+  //     setError('Enter Required details');
+  //     setSuccess('');
+  //   } else {
+  //     // const searchResults = global.initialAllCoursesInfo.filter(
+  //     //   el => el.courseTitle.toLowerCase() === coursetitleValue.toLowerCase(),
+  //     // );
+  //     // if (searchResults.length !== 0) {
+  //     //   setError('Course already added');
+  //     //   setSuccess('');
+  //     // } else {
+  //       dispatch({
+  //         type: 'ADD_COURSE',
+  //         courseinfo: task,
+  //       });
+  //       setSuccess('Course added successfully');
+  //       setError('');
+  //    // }
+  //   }
+  // };
   const [coursetitleValue, setcoursetitleValue] = useState('');
   const [courseinfoValue, setcourseinfoValue] = useState('');
   const updateTitleInput = event => {
@@ -98,7 +163,7 @@ function AddCoursePopup() {
               </button>
               &nbsp;
               {imageList.map((image, index) => (
-                <div className="image-item">
+                <div key={index} className="image-item">
                   <img src={image.data_url} alt="" width="100" />
                   <div className="image-item__btn-wrapper">
                     <button

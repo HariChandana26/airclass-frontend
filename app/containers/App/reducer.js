@@ -150,19 +150,18 @@ const wholeReducer = (state = initialState, action) =>
         break;
       case 'ADD_COURSE':
         {
+          const [courseinfo, title, info] = action.newcourseinfo;
           const newCourseAdded = {
-            id: state.initialAllCoursesInfo.length + 1,
-            courseImage: action.courseinfo[0][0].data_url,
-            courseTitle: action.courseinfo[1],
-            courseInfo: action.courseinfo[2],
+            _id: courseinfo._id,
+            courseImage: courseinfo.courseImage,
+            courseTitle: title,
+            courseInfo: info,
           };
-          const newAllCoursesAfterAdd = [
-            ...state.initialAllCoursesInfo,
+          draft.allCoursesInfo = [...draft.allCoursesInfo, newCourseAdded];
+          draft.initialAllCoursesInfo = [
+            ...draft.initialAllCoursesInfo,
             newCourseAdded,
           ];
-          draft.initialAllCoursesInfo = newAllCoursesAfterAdd;
-
-          draft.searchResultsAllCourses = newAllCoursesAfterAdd;
         }
         break;
       case 'ADD_MASTERCLASS':
@@ -207,9 +206,9 @@ const wholeReducer = (state = initialState, action) =>
         }
         break;
       case 'LIKE_CLASS':
-        draft.selectedMasterclassInfo.classLiked = !draft.selectedMasterclassInfo
-          .classLiked;
-          draft.selectedClassInfo.classLiked = !draft.selectedClassInfo
+        draft.selectedMasterclassInfo.classLiked = !draft
+          .selectedMasterclassInfo.classLiked;
+        draft.selectedClassInfo.classLiked = !draft.selectedClassInfo
           .classLiked;
         break;
       case 'UPDATE_PROFILE':

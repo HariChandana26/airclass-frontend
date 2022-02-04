@@ -39,6 +39,9 @@
     line-height:1.2;
     
 }
+.info{
+ min-height:4.8em;
+}
 .course-info{
     color: #607786;
     font-size:16px;
@@ -48,6 +51,7 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;  
   overflow: hidden;
+  height:4.8
 }
 .enroll{
    margin-top:12px;

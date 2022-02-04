@@ -2,6 +2,7 @@ import './index.css';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Course from 'components/Course';
+import { NavLink } from 'react-router-dom';
 import Masterclass from 'components/Masterclass';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -81,6 +82,12 @@ function Homepage() {
           ) : (
             <div>
               <h3 className="displayname">Hi {global.loggedinUsername},</h3>
+              <p className="mentor">
+                Do you want to be a mentor!.
+                <NavLink className="nav-link" to="/homepagementor">
+                  <span> try clicking here</span>
+                </NavLink>
+              </p>
               <div className="courses-container">
                 <div className="courses-box">
                   <h1 className="courses">Courses</h1>

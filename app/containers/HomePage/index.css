@@ -83,7 +83,10 @@
     min-height:100vh;
     align-self:center;
   }
-
+.mentor{
+  color:rgb(0, 48, 110);
+  margin-top:16px;
+}
  @media screen and (max-width:1024px){
    .body{
     margin-top:60px !important;
