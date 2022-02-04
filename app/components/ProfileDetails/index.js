@@ -76,7 +76,7 @@ function ProfileDetails() {
         <div className="firstname">
           <h1 className="input-title">Email</h1>
           <input
-            type="text"
+            type="email"
             className="profile-input"
             defaultValue={email}
             onChange={updateEmail}
@@ -85,7 +85,7 @@ function ProfileDetails() {
         <div className="firstname">
           <h1 className="input-title">Password</h1>
           <input
-            type="text"
+            type="password"
             className="profile-input"
             defaultValue={password}
             onChange={updatePassword}

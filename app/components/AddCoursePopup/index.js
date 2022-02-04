@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageUploading from 'react-images-uploading';
 import axios from 'axios';
-import { trackPromise} from 'react-promise-tracker';
+import { trackPromise } from 'react-promise-tracker';
 import { URL } from '../../containers/App/constants';
 
 function AddCoursePopup() {
