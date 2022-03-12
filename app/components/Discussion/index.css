@@ -20,8 +20,8 @@
     display: flex;
     margin-left:16px;
     align-items: center;
-    justify-content: center;
-  
+    justify-content: flex-start;
+    width:180px;
   }
   
   .initial-container2 {
@@ -29,8 +29,8 @@
     align-items: center;
     justify-content: center;
     background-color: rgb(27, 43, 80);
-    width: 48px;
-    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
     border-radius: 50%;
     margin-right:12px; 
     
@@ -101,14 +101,15 @@ margin-bottom:20px;
 }
 @media screen and (max-width:1024px){
     .initial-container2 {
-        width: 32px;
-        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
         border-radius: 50%;
         margin-right:8px; 
     }
     .initial2 {
         font-size: 12px;
       }
+      
 }
 @media screen and (max-width:768px){
    .title-box1{

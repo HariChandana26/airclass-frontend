@@ -31,11 +31,11 @@ function LoginPage() {
         })
         .then(function(response) {
           if (response.statusText === 'OK' && response.status === 200) {
-            history.push('/homepage');
             dispatch({
               type: 'USER_LOGGEDIN',
               userinfo: [response.data.user, passwordValue],
             });
+            history.push('/homepage');
           }
         })
         .catch(function(error) {
