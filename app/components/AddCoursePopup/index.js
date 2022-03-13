@@ -7,7 +7,6 @@ import { trackPromise } from 'react-promise-tracker';
 import { URL } from '../../containers/App/constants';
 
 function AddCoursePopup() {
-  const initialState = useSelector(state => state);
   const dispatch = useDispatch();
   const [images, setImages] = React.useState([]);
   const [error, setError] = useState('');
