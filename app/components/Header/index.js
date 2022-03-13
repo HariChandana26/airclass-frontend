@@ -26,6 +26,9 @@ function Header(props) {
       searchinfo: searchInput,
     });
   };
+  const clearCache = () => {
+    localStorage.clear();
+  };
   return (
     <>
       <header className="header">
@@ -78,7 +81,14 @@ function Header(props) {
                   <MenuItem>PROFILE</MenuItem>
                 </NavLink>
                 <NavLink className="profilepage-link" to="/login">
-                  <MenuItem>LOGOUT</MenuItem>
+                  <div
+                    onClick={clearCache}
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={clearCache}
+                  >
+                    <MenuItem>LOGOUT</MenuItem>
+                  </div>
                 </NavLink>
               </Menu>
             </div>

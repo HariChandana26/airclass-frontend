@@ -12,40 +12,32 @@ import HomepageMentor from 'containers/HomepageMentor';
 import LoginPage from 'containers/LoginPage';
 import SignupPage from 'containers/SignupPage';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import CoursePage from 'containers/CoursePage';
 import MasterclassPage from 'containers/MasterclassPage';
 import ProfilePage from 'containers/ProfilePage';
 import DiscussionForum from 'containers/DiscussionForum';
 import DiscussionSolutionsPage from 'containers/DiscussionSolutionsPage';
+import PrivateRoute from './PrivateRouter';
+import NoMatch from '../NoMatch';
 
 export default function App() {
-  const initialState = useSelector(state => state);
-  const { global } = initialState;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/login" component={LoginPage} />
-        <Route
-          exact
-          path={
-            global.loggedinUserRole === 'user' ? '/homepage' : '/homepagementor'
-          }
-          component={
-            global.loggedinUserRole === 'user' ? HomePage : HomepageMentor
-          }
-        />
-        <Route exact path="/homepagementor" component={HomepageMentor} />
-        <Route path="/coursepage" component={CoursePage} />
-        <Route path="/masterclasspage" component={MasterclassPage} />
-        <Route path="/profilepage" component={ProfilePage} />
-        <Route path="/discussionforum" component={DiscussionForum} />
-        <Route
+        <PrivateRoute path="/homepage" component={HomePage} />
+        <PrivateRoute path="/homepagementor" component={HomepageMentor} />
+        <PrivateRoute path="/coursepage" component={CoursePage} />
+        <PrivateRoute path="/masterclasspage" component={MasterclassPage} />
+        <PrivateRoute path="/profilepage" component={ProfilePage} />
+        <PrivateRoute path="/discussionforum" component={DiscussionForum} />
+        <PrivateRoute
           path="/discussionsolutions"
           component={DiscussionSolutionsPage}
         />
+        <Route component={NoMatch} />
       </Switch>
     </BrowserRouter>
   );

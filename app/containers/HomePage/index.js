@@ -17,6 +17,7 @@ function Homepage() {
   const [errorMsg, setError] = useState(null);
   const initialState = useSelector(state => state);
   const { global } = initialState;
+
   const dispatch = useDispatch();
   useEffect(() => {
     const getCourses = () => {
