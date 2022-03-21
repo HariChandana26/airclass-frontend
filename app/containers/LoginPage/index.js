@@ -12,8 +12,8 @@ import { URL } from '../App/constants';
 function LoginPage() {
   const [errorMsg, setError] = useState(null);
   const history = useHistory();
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
+  const [emailValue, setEmailValue] = useState('pesto@pesto.tech');
+  const [passwordValue, setPasswordValue] = useState('pesto123');
   const updateEmail = event => {
     setEmailValue(event.target.value);
   };
