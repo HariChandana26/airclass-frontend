@@ -76,6 +76,16 @@ line-height: 24px;
     padding:0px;
     cursor: pointer;
 }
+.login-btn:hover{
+
+}
+
+.login-btn:hover,
+.login-btn:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
 .continue-with{
     margin-top:36px;
     font-size:12px;
