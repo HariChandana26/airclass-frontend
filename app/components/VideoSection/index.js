@@ -25,6 +25,7 @@ function VideoSection(props) {
     'comments-container-hide',
   );
   const [inputValue, setInputValue] = useState('');
+  console.log(videoContent)
   useEffect(() => {
     const getComments = async () => {
       if (videoContent._id) {
@@ -183,8 +184,8 @@ function VideoSection(props) {
           </div>
           <div className={styleNotesContainer}>
             <ul className="notes-list">
-              {videoContent.notes &&
-                videoContent.notes.map(eachItem => (
+              {videoContent.classNotes &&
+                videoContent.classNotes.map(eachItem => (
                   <li key={eachItem} className="notes-text">
                     {eachItem}
                   </li>
