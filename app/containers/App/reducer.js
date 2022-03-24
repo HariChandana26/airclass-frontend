@@ -21,7 +21,10 @@ const detailedMasterClassInfo = [
     speakerProfession: 'Co-Founder Uhana',
     speakerCollege: 'IIT Madras',
     classVideo: 'https://www.youtube.com/embed/_CTUs_2hq6Y',
-    classNotes: ['5G is the latest generation of mobile internet connectivity'],
+    classNotes: ['5G is the latest generation of mobile internet connectivity',
+    'With 5G wireless networks, performance will increase dramatically, with data moving at faster speeds; as fast as 10 Gbps -- equivalent to wireline speeds.',
+  'The reduction in network response times, meanwhile, heralds other significant advancements',
+  'As a result, 5G architecture holds significant potential for new technologies -- such as remote online surgery -- that embrace machine learning and artificial intelligence, virtual and augmented reality, and the internet of things'],
     comments: [
       {
         initial: 'HS',
@@ -40,7 +43,10 @@ const detailedMasterClassInfo = [
     speakerProfession: 'Micorsoft',
     speakerCollege: 'IIT Guwahati',
     classVideo: 'https://www.youtube.com/embed/EEBQUn313BA',
-    classNotes: ['5G is the latest generation of mobile internet connectivity'],
+    classNotes: ['Product management is a practice',
+    'And its practitioners come from a wide variety of industry backgrounds with experience in multiple disciplines (project manager, designer, developer, user experience, strategist, marketing manager, etc.)', 
+    'It’s this variety of experience that creates a specific mindset; a level of curiosity, empathy, and critical thinking across multiple disciplines and industries',
+  'It’s this mindset that allows product managers to swim upstream on strategy and downstream to execution; to understand, synthesize, and craft the potential from various sources into actual products and services that customers love.'],
     comments: [
       {
         initial: 'HS',
@@ -59,7 +65,9 @@ const detailedMasterClassInfo = [
     speakerProfession: 'Co-Founder Bigbasket',
     speakerCollege: 'IIM CULCATTA',
     classVideo: 'https://www.youtube.com/embed/HIj8wU_rGIU',
-    classNotes: ['5G is the latest generation of mobile internet connectivity'],
+    classNotes: ['Learning coding empowers you to do many things you wouldn’t otherwise be able to do',
+    'These things include hand-crafting your own websites, becoming a career coder or even starting a technology business',
+    'Most importantly, you’ll be able to understand the technology shaping your world'],
     comments: [
       {
         initial: 'HS',

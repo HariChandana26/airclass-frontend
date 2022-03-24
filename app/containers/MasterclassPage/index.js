@@ -8,6 +8,8 @@ function MasterclassPage() {
   const initialState = useSelector(state => state);
   const { global } = initialState;
   const { selectedMasterclassInfo } = global;
+  console.log("selectedMasterclassInfo")
+  console.log(selectedMasterclassInfo)
   return (
     <>
       <Header isHome />
