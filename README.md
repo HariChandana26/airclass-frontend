@@ -20,7 +20,7 @@ We are living in the age of pandemics, where online learning increased significa
 
 4.  [Authors](#authors)
 
-8.  [License](#license)
+5.  [License](#license)
 
 ## **Project Demo**
 
