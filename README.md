@@ -16,15 +16,9 @@ We are living in the age of pandemics, where online learning increased significa
 
 2.  [Installation](#installation)
 
-3.  [Tech Stack](#tech-stack)
+3.  [Technology Stack](#tech-stack)
 
-4.  [Tools](#tools)
-
-5.  [Resources](#resources)
-
-6.  [Developers](#developers)
-
-7.  [UI Screens](#ui-screens)
+4.  [Authors](#authors)
 
 8.  [License](#license)
 
@@ -42,38 +36,19 @@ We are living in the age of pandemics, where online learning increased significa
 
 To get a local copy up and running follow these simple steps.
 
-1.  Clone the repos backend & frontend
+1.  Clone the repo
 
 > git clone https://github.com/HariChandana26/airclass-frontend/
 
-> git clone https://github.com/bhanukirant99/airclass-backend/
+2.  Install NPM packages
+> cd airclass-frontend && npm install
 
-2.  Install NPM packages in both
-
-    > npm install
-
-3.  Add the .env file in the root for backend app.
-
-> GENIUS_TOKEN="Genius_Developers_Token" (Get it from https://docs.genius.com)
-
-> MONGO_URI="mongo_URL"
-
-> JWT_SECRET="jwt_secret_key"
-
-> EMAIL_ID="sender_email_id"
-
-> EMAIL_PASSWORD="sender_email_password"
-
-4.  Run the backend server
-
-> npm run dev
-
-5.  Run the frontend app
-
+3. Run
 > npm start
+
 4.  Open http://localhost:4002 to view it in the browser
 
-### **Tech Stack**
+### **Technology Stack**
 
 -   [React.js](https://reactjs.org/)
 
@@ -81,66 +56,11 @@ To get a local copy up and running follow these simple steps.
 
 -   [Axios](https://axios-http.com/)
 
-
-### **Servers**
--   [Netlify](https://www.netlify.com/)
-
-### **Tools**
-
--   [Figma](https://figma.com/)
-
--   [Draw.io](https://app.diagrams.net/)
-
--   [Github](https://github.com/)
-
-### **Source Code Repo**
-
--   Front End Source Repo -
-    <https://github.com/HariChandana26/airclass-frontend/tree/main>
-
--   Back End Source Repo -
-    <https://github.com/bhanukirant99/airclass-backend/tree/main>
-
-## **Developers**
+## **Authors**
 
 -   Hari Chadana Sapare
 
 -   Bhanu Kiran
-
-## **Mentor**
-
--   Jayesh
-
-## **Resources**
-
--   [PRD](https://docs.google.com/document/d/1h59beyJ2lIIWBvVc5bhbEKLaX9O8CgezDVwhfko7DcA)
-
--   [Wireframes](https://www.figma.com/file/XF4cMLkW5ADXi6g8DmEtbh/air-class)
-
--   [HLD](https://elated-saha-243b5f.netlify.app/cc9b35d2394db9ad7f95f56e7a689f75.png)
-
-## **UI Screens**
-
-### Landing Page
-
-![](https://elated-saha-243b5f.netlify.app/83bdd145153227b59c4af4a0ba7f218e.png)
-
-This is the Landing page of our application. You can navigate to the
-below mentioned links from the homepage.
-
-1. Home (Landing page)
-
-2. Search
-
-3. Login
-
-4. Signup
-
-5. Create Course
-
-6. Enroll Course
-
-7. Access Videos, Notes
 
 ## **License**
 <a href='https://opensource.org/licenses/MIT'>
